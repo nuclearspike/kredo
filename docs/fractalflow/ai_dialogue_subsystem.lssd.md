@@ -339,6 +339,41 @@ flow ai.ask_mode {
 
 # --- 2026-08-10: product ruling owned by this subsystem ------------------
 
+policy policy.commands.unknown_gate_is_refused {
+  label: "An eligibility check that does not exist refuses the command"
+  appliesTo: [@ai.command_registry]
+  rule: "Kiva.Commands.Eligibility answers an unrecognised check name with {:error, {:unknown_eligibility_check, name}}. A build-failing test walks every command in the registry and asserts each name it declares resolves to a real clause."
+  rationale: "The catch-all previously answered :ok, so a gate whose name was misspelled, renamed, or never implemented read as enforced while doing nothing \u2014 which is exactly how approve_loan_listing shipped for months naming a translation gate that never ran. A gate is only as good as the spelling of its name."
+  enforcement: "test/kiva/eligibility_checks_test.exs, proven to fail when a command names a check with no clause."
+  status: observed
+  confidence: 1.0
+}
+
+finding finding.commands.state_gates_are_sparse {
+  claim: "Sixteen of twenty-four commands declare no state preconditions at all, including three high-risk ones (advance_demo_time, set_partner_status, revoke_permission). Role and required-input checks still run, so this is missing state validation rather than missing authorisation."
+  basedOn: [@evidence.commands.eligibility_coverage_audit]
+  scope: ["The command registry as of 2026-08-11"]
+  supports: ["Commands whose handlers mutate without asking whether the target is in a legal state: record_repayment, record_disbursal, approve_translation, approve_message, set_trustee_status"]
+  contradicts: []
+  limitations: ["Which states are legal for each command is a product decision and was NOT invented here. The audit fixed the mechanism (unknown checks refuse) and left the coverage question open."]
+  invalidatedBy: ["A pass that decides and declares the legal precondition for each ungated command, or records that it genuinely has none"]
+  strength: conclusive
+  status: observed
+  confidence: 1.0
+}
+
+evidence evidence.commands.eligibility_coverage_audit {
+  kind: observation
+  occurredAt: "2026-08-11"
+  subject: @ai.command_registry
+  method: "Cross-referenced every eligibility name declared in the registry against the clauses implemented in Kiva.Commands.Eligibility, and read the handlers of the ungated high-risk commands to see whether they guard state themselves."
+  observation: "No declared name was missing an implementation, so no gate was failing open through a typo at audit time. The exposure was structural: the catch-all returned :ok. Eight checks are implemented and all eight are referenced; no dead checks. Sixteen commands declare an empty eligibility list, and the handlers of the high-risk ones (revoke_permission, set_partner_status, advance_demo_time) perform their mutation without a state precondition."
+  provenance: { doc: "session 2026-08-11, requested audit" }
+  scope: ["24 commands"]
+  status: observed
+  confidence: 1.0
+}
+
 decision_record decision.restore_chat_launcher {
   decision: "Chat launcher darkness is a regression, not a decision: the commented-out live_render(ChatLive) in root.html.heex ('hidden for now') was never a product ruling; the chat-first pillar requires the launcher restored on every page that passes live_chat."
   state: active

@@ -73,7 +73,7 @@ msgid "Loans"
 msgstr ""
 
 #: lib/kiva_web/controllers/page_html/home.html.heex:93
-#: lib/kiva_web/live/admin_live.ex:348
+#: lib/kiva_web/live/admin_live.ex:349
 #, elixir-autogen, elixir-format
 msgid "Locale"
 msgstr ""
@@ -107,7 +107,7 @@ msgid "Password"
 msgstr ""
 
 #: lib/kiva_web/controllers/page_html/home.html.heex:91
-#: lib/kiva_web/live/admin_live.ex:536
+#: lib/kiva_web/live/admin_live.ex:537
 #, elixir-autogen, elixir-format
 msgid "Role"
 msgstr ""
@@ -129,7 +129,7 @@ msgstr ""
 msgid "Something went wrong!"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:168
+#: lib/kiva_web/live/admin_live.ex:169
 #, elixir-autogen, elixir-format
 msgid "Staff & admin operations"
 msgstr ""
@@ -147,7 +147,7 @@ msgid "We can't find the internet"
 msgstr ""
 
 #: lib/kiva_web/components/core_components.ex:74
-#: lib/kiva_web/live/admin_live.ex:303
+#: lib/kiva_web/live/admin_live.ex:304
 #: lib/kiva_web/live/developer/app_live.ex:169
 #: lib/kiva_web/live/developer/dashboard_live.ex:129
 #: lib/kiva_web/live/partner_live.ex:270
@@ -262,8 +262,8 @@ msgid "Showing a fallback language"
 msgstr ""
 
 #: lib/kiva_web/i18n_strings.ex:42
-#: lib/kiva_web/live/admin_live.ex:389
-#: lib/kiva_web/live/admin_live.ex:436
+#: lib/kiva_web/live/admin_live.ex:390
+#: lib/kiva_web/live/admin_live.ex:437
 #: lib/kiva_web/live/developer/app_live.ex:114
 #: lib/kiva_web/live/loan_live/index.ex:198
 #: lib/kiva_web/live/loan_live/show.ex:715
@@ -313,22 +313,22 @@ msgstr ""
 msgid "Applied prior terms."
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:365
+#: lib/kiva_web/live/admin_live.ex:366
 #, elixir-autogen, elixir-format
 msgid "Approve"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:266
+#: lib/kiva_web/live/admin_live.ex:267
 #, elixir-autogen, elixir-format
 msgid "Approve & publish"
 msgstr ""
 
-#: lib/kiva_web/live/chat_live.ex:124
+#: lib/kiva_web/live/chat_live.ex:146
 #, elixir-autogen, elixir-format
 msgid "Ask me about loans, how lending works, or say “switch to Spanish”."
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:639
+#: lib/kiva_web/live/admin_live.ex:640
 #, elixir-autogen, elixir-format
 msgid "Audit timeline"
 msgstr ""
@@ -353,7 +353,7 @@ msgstr ""
 msgid "Blockchain attestation"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:296
+#: lib/kiva_web/live/admin_live.ex:297
 #: lib/kiva_web/live/developer/app_live.ex:163
 #: lib/kiva_web/live/developer/dashboard_live.ex:123
 #: lib/kiva_web/live/loan_live/show.ex:380
@@ -406,12 +406,12 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:537
+#: lib/kiva_web/live/admin_live.ex:538
 #, elixir-autogen, elixir-format
 msgid "Direct permission"
 msgstr ""
 
-#: lib/kiva_web/live/chat_live.ex:77
+#: lib/kiva_web/live/chat_live.ex:88
 #, elixir-autogen, elixir-format
 msgid "Done."
 msgstr ""
@@ -441,7 +441,7 @@ msgstr ""
 msgid "Here are your loans in your language."
 msgstr ""
 
-#: lib/kiva_web/live/chat_live.ex:81
+#: lib/kiva_web/live/chat_live.ex:92
 #, elixir-autogen, elixir-format
 msgid "I couldn't complete that"
 msgstr ""
@@ -493,7 +493,7 @@ msgstr ""
 msgid "Loan approved and published."
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:247
+#: lib/kiva_web/live/admin_live.ex:248
 #, elixir-autogen, elixir-format
 msgid "Loan review queue"
 msgstr ""
@@ -531,12 +531,12 @@ msgstr ""
 msgid "Next repayment"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:530
+#: lib/kiva_web/live/admin_live.ex:531
 #, elixir-autogen, elixir-format
 msgid "No direct-grant outliers — everyone is within their role group."
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:250
+#: lib/kiva_web/live/admin_live.ex:251
 #, elixir-autogen, elixir-format
 msgid "No loans awaiting review."
 msgstr ""
@@ -562,7 +562,7 @@ msgstr ""
 msgid "Not ready to submit"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:342
+#: lib/kiva_web/live/admin_live.ex:343
 #, elixir-autogen, elixir-format
 msgid "Nothing awaiting translation review."
 msgstr ""
@@ -573,7 +573,7 @@ msgstr ""
 msgid "Notifications"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:527
+#: lib/kiva_web/live/admin_live.ex:528
 #, elixir-autogen, elixir-format
 msgid "Permission outliers"
 msgstr ""
@@ -584,7 +584,7 @@ msgstr ""
 msgid "Post"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:349
+#: lib/kiva_web/live/admin_live.ex:350
 #, elixir-autogen, elixir-format
 msgid "Preview"
 msgstr ""
@@ -609,7 +609,7 @@ msgstr ""
 msgid "Record next repayment"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:373
+#: lib/kiva_web/live/admin_live.ex:374
 #, elixir-autogen, elixir-format
 msgid "Reject"
 msgstr ""
@@ -638,8 +638,8 @@ msgstr ""
 msgid "Repayment recorded — lenders' balances updated."
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:272
-#: lib/kiva_web/live/admin_live.ex:279
+#: lib/kiva_web/live/admin_live.ex:273
+#: lib/kiva_web/live/admin_live.ex:280
 #, elixir-autogen, elixir-format
 msgid "Request changes"
 msgstr ""
@@ -654,8 +654,8 @@ msgstr ""
 msgid "Review & submit"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:321
-#: lib/kiva_web/live/admin_live.ex:538
+#: lib/kiva_web/live/admin_live.ex:322
+#: lib/kiva_web/live/admin_live.ex:539
 #, elixir-autogen, elixir-format
 msgid "Risk"
 msgstr ""
@@ -753,7 +753,7 @@ msgstr ""
 msgid "Translation rejected."
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:339
+#: lib/kiva_web/live/admin_live.ex:340
 #, elixir-autogen, elixir-format
 msgid "Translation review queue"
 msgstr ""
@@ -763,12 +763,12 @@ msgstr ""
 msgid "Trust & verification"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:347
+#: lib/kiva_web/live/admin_live.ex:348
 #, elixir-autogen, elixir-format
 msgid "Type"
 msgstr ""
 
-#: lib/kiva_web/live/chat_live.ex:153
+#: lib/kiva_web/live/chat_live.ex:176
 #, elixir-autogen, elixir-format
 msgid "Type a message"
 msgstr ""
@@ -778,7 +778,7 @@ msgstr ""
 msgid "Use prior terms"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:535
+#: lib/kiva_web/live/admin_live.ex:536
 #, elixir-autogen, elixir-format
 msgid "User"
 msgstr ""
@@ -937,13 +937,13 @@ msgstr ""
 msgid "A reimagined, multilingual, chat-first lending network. Loans that change lives — $25 at a time."
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:502
+#: lib/kiva_web/live/admin_live.ex:503
 #, elixir-autogen, elixir-format
 msgid "AI moderator"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:231
-#: lib/kiva_web/live/admin_live.ex:567
+#: lib/kiva_web/live/admin_live.ex:232
+#: lib/kiva_web/live/admin_live.ex:568
 #, elixir-autogen, elixir-format
 msgid "AI tool calls"
 msgstr ""
@@ -964,12 +964,12 @@ msgstr ""
 msgid "Address changes"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:180
+#: lib/kiva_web/live/admin_live.ex:181
 #, elixir-autogen, elixir-format
 msgid "Advance a month"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:176
+#: lib/kiva_web/live/admin_live.ex:177
 #, elixir-autogen, elixir-format
 msgid "Advance every active loan one step: fund → disburse → repay → complete."
 msgstr ""
@@ -979,12 +979,12 @@ msgstr ""
 msgid "Advanced the demo"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:577
+#: lib/kiva_web/live/admin_live.ex:578
 #, elixir-autogen, elixir-format
 msgid "Allowed"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:510
+#: lib/kiva_web/live/admin_live.ex:511
 #, elixir-autogen, elixir-format
 msgid "Approve & deliver"
 msgstr ""
@@ -1029,19 +1029,19 @@ msgstr ""
 msgid "Choose a borrower"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:611
+#: lib/kiva_web/live/admin_live.ex:612
 #, elixir-autogen, elixir-format
 msgid "Conversation"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:387
-#: lib/kiva_web/live/admin_live.ex:435
+#: lib/kiva_web/live/admin_live.ex:388
+#: lib/kiva_web/live/admin_live.ex:436
 #: lib/kiva_web/live/portfolio_live.ex:987
 #, elixir-autogen, elixir-format
 msgid "Country"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:627
+#: lib/kiva_web/live/admin_live.ex:628
 #, elixir-autogen, elixir-format
 msgid "DENIED: "
 msgstr ""
@@ -1051,7 +1051,7 @@ msgstr ""
 msgid "Demo data only — no real money moves. Repayments are simulated."
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:174
+#: lib/kiva_web/live/admin_live.ex:175
 #, elixir-autogen, elixir-format
 msgid "Demo time machine"
 msgstr ""
@@ -1061,12 +1061,12 @@ msgstr ""
 msgid "Disbursal recorded — lenders were notified."
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:186
+#: lib/kiva_web/live/admin_live.ex:187
 #, elixir-autogen, elixir-format
 msgid "Distribution analytics"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:485
+#: lib/kiva_web/live/admin_live.ex:486
 #, elixir-autogen, elixir-format
 msgid "Encouragement moderation"
 msgstr ""
@@ -1081,7 +1081,7 @@ msgstr ""
 msgid "Fund a loan on your own or with a team, and send a note of encouragement."
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:210
+#: lib/kiva_web/live/admin_live.ex:211
 #, elixir-autogen, elixir-format
 msgid "Funding raised by sector"
 msgstr ""
@@ -1108,7 +1108,7 @@ msgstr ""
 msgid "In every language"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:600
+#: lib/kiva_web/live/admin_live.ex:601
 #, elixir-autogen, elixir-format
 msgid "Inspect"
 msgstr ""
@@ -1128,12 +1128,12 @@ msgstr ""
 msgid "Lend to"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:200
+#: lib/kiva_web/live/admin_live.ex:201
 #, elixir-autogen, elixir-format
 msgid "Loans by country"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:190
+#: lib/kiva_web/live/admin_live.ex:191
 #, elixir-autogen, elixir-format
 msgid "Loans by status"
 msgstr ""
@@ -1158,22 +1158,22 @@ msgstr ""
 msgid "Message kept blocked."
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:312
+#: lib/kiva_web/live/admin_live.ex:313
 #, elixir-autogen, elixir-format
 msgid "Missing"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:570
+#: lib/kiva_web/live/admin_live.ex:571
 #, elixir-autogen, elixir-format
 msgid "No AI tool calls recorded yet."
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:488
+#: lib/kiva_web/live/admin_live.ex:489
 #, elixir-autogen, elixir-format
 msgid "No held messages — the AI moderator approved everything."
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:664
+#: lib/kiva_web/live/admin_live.ex:665
 #, elixir-autogen, elixir-format
 msgid "No matching events."
 msgstr ""
@@ -1195,7 +1195,7 @@ msgid "Outcome"
 msgstr ""
 
 #: lib/kiva_web/i18n_strings.ex:51
-#: lib/kiva_web/live/admin_live.ex:386
+#: lib/kiva_web/live/admin_live.ex:387
 #: lib/kiva_web/live/portfolio_live.ex:990
 #, elixir-autogen, elixir-format
 msgid "Partner"
@@ -1206,7 +1206,7 @@ msgstr ""
 msgid "Partner status updated."
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:382
+#: lib/kiva_web/live/admin_live.ex:383
 #, elixir-autogen, elixir-format
 msgid "Partners & trustees"
 msgstr ""
@@ -1221,8 +1221,8 @@ msgstr ""
 msgid "Raised for my borrowers"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:424
-#: lib/kiva_web/live/admin_live.ex:470
+#: lib/kiva_web/live/admin_live.ex:425
+#: lib/kiva_web/live/admin_live.ex:471
 #, elixir-autogen, elixir-format
 msgid "Reactivate"
 msgstr ""
@@ -1237,7 +1237,7 @@ msgstr ""
 msgid "Record repayment"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:324
+#: lib/kiva_web/live/admin_live.ex:325
 #, elixir-autogen, elixir-format
 msgid "Repayment"
 msgstr ""
@@ -1254,12 +1254,12 @@ msgstr ""
 msgid "Repayments due"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:308
+#: lib/kiva_web/live/admin_live.ex:309
 #, elixir-autogen, elixir-format
 msgid "Review details"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:557
+#: lib/kiva_web/live/admin_live.ex:558
 #: lib/kiva_web/live/developer/app_live.ex:140
 #, elixir-autogen, elixir-format
 msgid "Revoke"
@@ -1290,55 +1290,55 @@ msgstr ""
 msgid "Start a new loan application for one of your borrowers, or onboard a new one."
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:315
+#: lib/kiva_web/live/admin_live.ex:316
 #, elixir-autogen, elixir-format
 msgid "Story"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:576
+#: lib/kiva_web/live/admin_live.ex:577
 #, elixir-autogen, elixir-format
 msgid "Surface / op"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:415
-#: lib/kiva_web/live/admin_live.ex:461
+#: lib/kiva_web/live/admin_live.ex:416
+#: lib/kiva_web/live/admin_live.ex:462
 #, elixir-autogen, elixir-format
 msgid "Suspend"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:477
+#: lib/kiva_web/live/admin_live.ex:478
 #, elixir-autogen, elixir-format
 msgid "Suspension is a status flag in this demo — it does not cascade to hide existing loans."
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:575
+#: lib/kiva_web/live/admin_live.ex:576
 #, elixir-autogen, elixir-format
 msgid "Tool"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:621
+#: lib/kiva_web/live/admin_live.ex:622
 #, elixir-autogen, elixir-format
 msgid "Tool calls"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:221
+#: lib/kiva_web/live/admin_live.ex:222
 #, elixir-autogen, elixir-format
 msgid "Translation coverage by locale"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:327
+#: lib/kiva_web/live/admin_live.ex:328
 #: lib/kiva_web/live/loan_live/show.ex:792
 #, elixir-autogen, elixir-format
 msgid "Translations"
 msgstr ""
 
 #: lib/kiva_web/components/app_components.ex:365
-#: lib/kiva_web/live/admin_live.ex:388
+#: lib/kiva_web/live/admin_live.ex:389
 #, elixir-autogen, elixir-format
 msgid "Trust model"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:434
+#: lib/kiva_web/live/admin_live.ex:435
 #, elixir-autogen, elixir-format
 msgid "Trustee"
 msgstr ""
@@ -1364,12 +1364,12 @@ msgstr ""
 msgid "Updates from the field"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:517
+#: lib/kiva_web/live/admin_live.ex:518
 #, elixir-autogen, elixir-format
 msgid "Uphold block"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:318
+#: lib/kiva_web/live/admin_live.ex:319
 #, elixir-autogen, elixir-format
 msgid "Use"
 msgstr ""
@@ -1389,17 +1389,17 @@ msgstr ""
 msgid "all passwords are"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:626
+#: lib/kiva_web/live/admin_live.ex:627
 #, elixir-autogen, elixir-format
 msgid "allowed"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:590
+#: lib/kiva_web/live/admin_live.ex:591
 #, elixir-autogen, elixir-format
 msgid "denied"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:234
+#: lib/kiva_web/live/admin_live.ex:235
 #, elixir-autogen, elixir-format
 msgid "none yet"
 msgstr ""
@@ -1409,7 +1409,7 @@ msgstr ""
 msgid "repaid"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:588
+#: lib/kiva_web/live/admin_live.ex:589
 #, elixir-autogen, elixir-format
 msgid "yes"
 msgstr ""
@@ -1701,7 +1701,7 @@ msgstr ""
 msgid "Raised in the demo"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:298
+#: lib/kiva_web/live/admin_live.ex:299
 #, elixir-autogen, elixir-format
 msgid "Send back to partner"
 msgstr ""
@@ -1842,7 +1842,7 @@ msgstr ""
 msgid "repaying"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:645
+#: lib/kiva_web/live/admin_live.ex:646
 #, elixir-autogen, elixir-format
 msgid "Filter by event type…"
 msgstr ""
@@ -1868,7 +1868,7 @@ msgstr ""
 msgid "USD"
 msgstr ""
 
-#: lib/kiva_web/live/admin_live.ex:286
+#: lib/kiva_web/live/admin_live.ex:287
 #, elixir-autogen, elixir-format, fuzzy
 msgid "What needs to change before this can be published?"
 msgstr ""
@@ -3115,8 +3115,8 @@ msgid "Kredo API — agent reference"
 msgstr ""
 
 #: lib/kiva_web/components/layouts.ex:198
-#: lib/kiva_web/live/chat_live.ex:115
-#: lib/kiva_web/live/chat_live.ex:166
+#: lib/kiva_web/live/chat_live.ex:126
+#: lib/kiva_web/live/chat_live.ex:189
 #, elixir-autogen, elixir-format
 msgid "Kredo Assistant"
 msgstr ""
@@ -3144,4 +3144,9 @@ msgstr ""
 #: lib/kiva_web/live/admin_live.ex:153
 #, elixir-autogen, elixir-format
 msgid "Not published — still awaiting translation review in: %{languages}. Approve them in the translation queue first."
+msgstr ""
+
+#: lib/kiva_web/live/chat_live.ex:138
+#, elixir-autogen, elixir-format
+msgid "Offline mode — scripted answers only. Ask me how to connect a model to switch on the full assistant."
 msgstr ""

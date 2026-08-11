@@ -1,7 +1,13 @@
 defmodule Kiva.Commands.Eligibility do
   @moduledoc """
   Named eligibility checks referenced by command specs. Each returns `:ok` or
-  `{:error, reason}`. Unknown checks default to `:ok` (the catch-all clause).
+  `{:error, reason}`.
+
+  An unrecognised name is refused rather than allowed. A gate is only as good as
+  the spelling of its name, and a check that silently passes reads exactly like
+  a check that ran: `approve_loan_listing` shipped for months naming a gate that
+  no clause matched. `eligibility_checks_test.exs` fails the build if a command
+  names a check with no implementation, so this clause should be unreachable.
   """
   alias Kiva.Repo
   alias Kiva.Lending.Loan
@@ -83,7 +89,7 @@ defmodule Kiva.Commands.Eligibility do
     end
   end
 
-  def check(_name, _actor, _params), do: :ok
+  def check(name, _actor, _params), do: {:error, {:unknown_eligibility_check, name}}
 
   defp lend_amount_cents(params) do
     case params["amount_cents"] || params[:amount_cents] do

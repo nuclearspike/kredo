@@ -38,8 +38,8 @@
   </head>
   <body>
     {@inner_content}
-    <%!-- Kredo Assistant launcher (bottom-right chat circle) — hidden for now.
-         Restore by re-adding:
-         {live_render(@conn, KivaWeb.ChatLive, id: "kiva-chat", sticky: true)} --%>
+    <%!-- The assistant rides every page as a sticky child LiveView, so it keeps
+         its conversation across navigation. --%>
+    {live_render(@conn, KivaWeb.ChatLive, id: "kiva-chat", sticky: true)}
   </body>
 </html>

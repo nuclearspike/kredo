@@ -436,6 +436,13 @@ intent intent.admin.whats_waiting for @actor.staff {
 
 # --- 2026-08-10: publication prep (GitHub feasibility follow-through) ----------
 
+decision_record decision.licence_noncommercial {
+  label: "Licensed PolyForm Noncommercial 1.0.0 \u2014 not for sale"
+  status: observed
+  confidence: 1.0
+  summary: "Relicensed from MIT on the owner's instruction that the code must not be sold. PolyForm Noncommercial 1.0.0 is the standard instrument for that: reading, running, modifying, and sharing stay free for any noncommercial purpose, including nonprofits, schools, and research and government institutions, while selling it or using it commercially is not licensed. Note the breadth: it forbids commercial USE, which is wider than forbidding sale alone; a narrower bespoke clause was rejected as legally ambiguous (is hosting a sale? is consulting?). The owner is sole author, so relicensing is his to make; the repository is private and has no other recipients, so no prior MIT grant is outstanding in practice."
+}
+
 decision_record decision.rebrand_kredo {
   decision: "Surface rebrand to Kredo for public release: header/footer/titles, assistant name, developer-docs headings, and gettext catalogs renamed (en/es/de/fr/nl translations transplanted); demo accounts moved from kiva.org / demo.kiva addresses to kredo.test with an idempotent legacy-email migration in priv/repo/seeds.exs. The internal Kiva.*/KivaWeb.* module namespace and the Kiva-compatibility API surface names are deliberately unchanged (they model the real external API; README carries the non-affiliation disclaimer). Planning docs under docs/prd keep the original working title as historical record."
   state: active
@@ -592,7 +599,8 @@ initiative product.restore_chat {
   originRecordedAt: "2026-08-10"
   originRefs: ["@decision.restore_chat_launcher (ai dialogue contract)", "docs/storytime/dashboard_first_person_audit_2026-08-10.md Q4 + H1"]
   definitionOfDone: ["live_render(KivaWeb.ChatLive) restored in root.html.heex", "Launcher present on every page passing live_chat={true}", "Regression test: FAB present on every live_chat page (audit Law-16 note)"]
-  status: committed
-  lastActivity: "2026-08-10"
+  status: delivered
+  lastActivity: "2026-08-11"
+  outcomeNote: "Launcher restored 2026-08-11 and verified in a browser: it opens, holds a conversation, and answers. Delivered with more than the mandate asked for \u2014 with no model connected the assistant now names the environment variables that switch it on, because every reader runs this on their own machine. The FAB-present regression test named in the definition of done is NOT yet written; the setup-hint behaviour is covered by test/kiva/ai/setup_hint_test.exs."
 }
 ```

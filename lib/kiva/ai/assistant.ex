@@ -224,14 +224,41 @@ defmodule Kiva.AI.Assistant do
     }
   end
 
+  # The offline script handles the demo's set pieces. Anything outside it needs a
+  # real model, and on a laptop that means the reader has to connect one, so say
+  # how instead of repeating the menu they just fell off the end of.
   defp fallback(ctx) do
-    %{
-      reply:
-        "I can help you browse loans, explain repayment and trust models, and switch languages. Try “show me loans”, “how does repayment work?”, or “switch to German”.",
-      mode: "ask",
-      action: nil
-    }
+    reply =
+      if Kiva.AI.LLM.needs_setup?() do
+        setup_instructions()
+      else
+        "I can help you browse loans, explain repayment and trust models, and switch languages. Try “show me loans”, “how does repayment work?”, or “switch to German”."
+      end
+
+    %{reply: reply, mode: "ask", action: nil}
     |> tap(fn _ -> ctx end)
+  end
+
+  @doc """
+  What to tell someone whose copy has no model connected. Deliberately concrete:
+  the exact variable, one command, and what changes once it is set.
+  """
+  def setup_instructions do
+    """
+    I'm running without a language model, so I can only handle the scripted demo questions — try “show me loans”, “how does repayment work?”, or “switch to Spanish”.
+
+    To switch on the full assistant, give the app an API key and restart it:
+
+      export OPENAI_API_KEY=sk-...
+      mix phx.server
+
+    Prefer to keep it on your machine? Point it at anything that speaks the OpenAI chat API — LM Studio, Ollama, a gateway — and no key is needed:
+
+      export KIVA_LLM_ENDPOINT=http://127.0.0.1:1234/v1/chat/completions
+      export OPENAI_MODEL=your-local-model
+
+    Nothing else in the demo needs either one.
+    """
   end
 
   # --- GraphQL runner: executes through the role-scoped schema + records it ---

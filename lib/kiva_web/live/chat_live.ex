@@ -1,6 +1,11 @@
 defmodule KivaWeb.ChatLive do
   @moduledoc """
-  The floating page-aware Kredo Assistant, as a **sticky** child LiveView.
+  The floating page-aware Kredo Assistant, as a **sticky** child LiveView, so a
+  conversation survives navigation between pages.
+
+  With no model connected it answers from a deterministic script and says how to
+  connect one (`Kiva.AI.LLM.needs_setup?/0`), rather than degrading silently into
+  a chatbot that cannot explain why it is dull.
 
   Rendered once in the root layout via `live_render(.., sticky: true)`, so it
   survives live navigation within a `live_session` — the conversation, messages,
@@ -37,8 +42,14 @@ defmodule KivaWeb.ChatLive do
       end
 
     {:ok,
-     assign(socket, current_user: user, locale: locale, page: "/", messages: [], open: false),
-     layout: false}
+     assign(socket,
+       current_user: user,
+       locale: locale,
+       page: "/",
+       messages: [],
+       open: false,
+       needs_setup: Kiva.AI.LLM.needs_setup?()
+     ), layout: false}
   end
 
   @impl true
@@ -107,7 +118,7 @@ defmodule KivaWeb.ChatLive do
     <div id="kiva-chat-root" phx-hook="ChatNav" class="fixed bottom-4 right-4 z-50">
       <div
         :if={@open}
-        class="card bg-base-100 border border-base-300 shadow-[0_24px_70px_-10px_rgba(0,0,0,0.45)]! w-[26rem] sm:w-[32rem] mb-2 absolute bottom-20 right-0"
+        class="card bg-base-100 border border-base-300 shadow-[0_24px_70px_-10px_rgba(0,0,0,0.45)]! w-[calc(100vw-2rem)] sm:w-[32rem] max-w-[32rem] mb-2 absolute bottom-20 right-0"
       >
         <div class="card-body p-3 gap-2">
           <div class="flex items-center justify-between">
@@ -119,6 +130,17 @@ defmodule KivaWeb.ChatLive do
             </button>
           </div>
 
+          <%!-- Say up front that no model is connected, so the limitation is
+               discoverable without having to type a question first. --%>
+          <div :if={@needs_setup} class="alert alert-info py-2 px-3 text-xs">
+            <.icon name="hero-information-circle" class="size-4 shrink-0" />
+            <span>
+              {gettext(
+                "Offline mode — scripted answers only. Ask me how to connect a model to switch on the full assistant."
+              )}
+            </span>
+          </div>
+
           <div class="h-80 sm:h-96 overflow-y-auto space-y-2 text-sm pr-1">
             <p :if={@messages == []} class="text-base-content/50">
               {gettext("Ask me about loans, how lending works, or say “switch to Spanish”.")}
@@ -126,6 +148,7 @@ defmodule KivaWeb.ChatLive do
             <div
               :for={m <- @messages}
               class={["chat", (m.role == "user" && "chat-end") || "chat-start"]}
+              id={"chat-msg-#{m.role}-#{:erlang.phash2(m)}"}
             >
               <div class={[
                 "chat-bubble whitespace-pre-line",

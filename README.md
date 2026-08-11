@@ -246,5 +246,10 @@ documents predate a late rename and still use the original working title.
 
 ## License
 
-MIT — see [LICENSE](LICENSE). All demo content (stories, translations,
-portraits) is AI-generated and depicts no real person.
+[PolyForm Noncommercial 1.0.0](LICENSE) — read, run, modify, and share it
+freely for any noncommercial purpose, including study, hobby projects, and use
+by nonprofits, schools, and research or government institutions. **You may not
+sell it or use it commercially.**
+
+All demo content (stories, translations, portraits) is AI-generated and depicts
+no real person.

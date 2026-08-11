@@ -68,8 +68,38 @@ defmodule Kiva.AI.LLM do
     "nl" => "Dutch"
   }
 
-  @doc "True when the LLM backend is enabled (config on) and an API key is reachable."
-  def enabled?, do: Application.get_env(:kiva, :ai_llm_enabled, true) and not is_nil(api_token())
+  # Talking to OpenAI directly is the path for someone running this on a laptop
+  # with nothing else installed; KIVA_LLM_ENDPOINT points at anything else that
+  # speaks the same protocol (LM Studio, Ollama, a gateway).
+  @openai_endpoint "https://api.openai.com/v1/chat/completions"
+
+  @doc """
+  True when someone has actually pointed this app at a model.
+
+  The endpoint and token both have defaults, so their presence proves nothing;
+  what proves it is an explicit environment variable. Without one, the assistant
+  answers from its offline script and offers setup instructions rather than
+  timing out against an endpoint that was never running.
+  """
+  def configured?,
+    do: not disabled_by_config?() and not is_nil(configured_source())
+
+  @doc "True when the app should explain how to connect a model."
+  def needs_setup?, do: not disabled_by_config?() and is_nil(configured_source())
+
+  # Tests and demos switch the model off deliberately; that is not a setup gap.
+  defp disabled_by_config?,
+    do: Application.get_env(:kiva, :ai_llm_enabled, true) == false
+
+  defp configured_source do
+    Enum.find(
+      ~w(OPENAI_API_KEY KIVA_LLM_ENDPOINT LLM_API_TOKEN LLM_API_TOKEN_FILE),
+      &(System.get_env(&1) not in [nil, ""])
+    )
+  end
+
+  @doc "True when the LLM backend is enabled and pointed at a model."
+  def enabled?, do: configured?()
 
   @doc "Answer one conversational turn via the LLM. Returns the reply string, or nil to fall back to the mock."
   def answer(ctx) do
@@ -266,14 +296,24 @@ defmodule Kiva.AI.LLM do
     ]
   end
 
-  defp endpoint, do: System.get_env("KIVA_LLM_ENDPOINT") || @local_endpoint
+  defp endpoint do
+    cond do
+      e = System.get_env("KIVA_LLM_ENDPOINT") -> e
+      System.get_env("OPENAI_API_KEY") -> @openai_endpoint
+      true -> @local_endpoint
+    end
+  end
+
   defp model, do: System.get_env("OPENAI_MODEL") || @default_model
 
   # The endpoint owns the provider keys; the app just presents a bearer token.
   # Configure via LLM_API_TOKEN (the token itself) or LLM_API_TOKEN_FILE (a file
   # holding either the raw token or a `API_TOKEN=...` line). The default
   # matches the default local development token.
-  defp api_token, do: System.get_env("LLM_API_TOKEN") || file_token() || "changeme"
+  defp api_token,
+    do:
+      System.get_env("OPENAI_API_KEY") || System.get_env("LLM_API_TOKEN") || file_token() ||
+        "changeme"
 
   defp file_token do
     with path when is_binary(path) <- System.get_env("LLM_API_TOKEN_FILE"),
