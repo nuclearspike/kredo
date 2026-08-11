@@ -331,6 +331,41 @@ finding finding.portfolio.uncapped_projection_implied_yield {
   confidence: 1.0
 }
 
+policy policy.listing.every_language_before_live {
+  label: "A listing goes live in every language or not at all"
+  appliesTo: [@approve_loan_listing, @loan.lifecycle]
+  rule: "A loan may not enter fundraising until every supported locale has a language-content row AND every non-source row has been reviewed (approved or published). The source row is exempt from the review bar because it is the original rather than a translation; listing review is what approves it, so publishing promotes it from draft to published in the same step. Machine output and needs_review are displayable but are NOT publishable."
+  rationale: "Publishing in a subset of languages puts a borrower's story in front of lenders who cannot read it, and asks them to back a story they were shown only a machine draft of. The registry has declared this gate since the first phase as translations_ready_or_fallback_allowed, but the check returned :ok unconditionally \u2014 a contract obligation that no code enforced. Owner ruling 2026-08-11: make it real."
+  enforcement: "Eligibility check all_locales_translated on @approve_loan_listing, evaluated after partner_review_complete and risk_summary_present so an unsubmitted loan still reports the reason a reviewer expects. Kiva.Lending.approve_listing/2 repeats the check and returns {:error, {:translations_pending, locales}} so no caller can publish around the command layer. The reviewer is shown the outstanding languages by native name. Regression tests: 'a listing cannot go live while a language is unreviewed' (test/kiva/admin_ops_test.exs) and 'approving names the languages that are still unreviewed' (test/kiva_web/live/admin_live_test.exs)."
+  status: observed
+  confidence: 1.0
+}
+
+finding finding.listing.declared_gate_was_never_enforced {
+  claim: "A high-risk command declared an eligibility gate that its implementation answered :ok to unconditionally, so the contract read as enforced while nothing enforced it."
+  basedOn: [@evidence.listing.unreviewed_translations_went_live]
+  scope: ["approve_loan_listing before 2026-08-11"]
+  supports: ["Named eligibility checks need a test each, or the registry becomes decoration \u2014 the module's own docstring says unknown checks default to :ok, which makes a typo in a check name silently permissive"]
+  contradicts: []
+  limitations: ["The other named checks in the registry have not been audited for the same gap"]
+  invalidatedBy: ["all_locales_translated implemented and covered by tests that fail without it"]
+  strength: conclusive
+  status: observed
+  confidence: 1.0
+}
+
+evidence evidence.listing.unreviewed_translations_went_live {
+  kind: measurement
+  occurredAt: "2026-08-11"
+  subject: @loan.lifecycle
+  method: "Read the command registry against its Eligibility implementation; counted live loans against the bar the registry claimed."
+  observation: "The stub returned :ok for every caller, commented 'fallback is allowed in the demo'. 2,396 of 3,992 fundraising loans in the seeded database carry at least one machine or needs_review translation, so the majority of live listings had never met the declared bar. Those rows predate the gate and are left as they are: the rule governs transitions, not history."
+  provenance: { doc: "session 2026-08-11" }
+  scope: ["Seeded demo database at 1.1M loans"]
+  status: observed
+  confidence: 1.0
+}
+
 policy policy.search.word_beginnings_only {
   label: "Loan search matches word beginnings, and one character is not a search"
   appliesTo: [@portfolio.impact, @loan.browse]

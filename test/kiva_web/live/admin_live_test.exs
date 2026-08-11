@@ -125,10 +125,27 @@ defmodule KivaWeb.AdminLiveTest do
     assert html =~ "Translation approved"
   end
 
-  test "staff can approve a loan listing", %{conn: conn, staff: staff} do
+  test "staff can approve a loan listing once every language is reviewed", %{
+    conn: conn,
+    staff: staff,
+    draft: draft
+  } do
+    translate_fully(draft)
     conn = log_in(conn, staff)
     {:ok, view, _} = live(conn, ~p"/admin")
     html = view |> element("button[phx-click='approve_loan']") |> render_click()
-    assert html =~ "approved and published" or html =~ "No loans awaiting review"
+    assert html =~ "approved and published"
+  end
+
+  test "approving names the languages that are still unreviewed", %{conn: conn, staff: staff} do
+    # The submitted loan's machine translations have not been through the queue.
+    conn = log_in(conn, staff)
+    {:ok, view, _} = live(conn, ~p"/admin")
+    html = view |> element("button[phx-click='approve_loan']") |> render_click()
+
+    assert html =~ "still awaiting translation review"
+    refute html =~ "approved and published"
+    # The reviewer is told which languages, in their own names.
+    assert html =~ "Deutsch"
   end
 end

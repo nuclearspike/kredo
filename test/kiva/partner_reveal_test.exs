@@ -36,6 +36,8 @@ defmodule Kiva.PartnerRevealTest do
     draft: draft,
     user: partner_user
   } do
+    translate_fully(draft)
+
     {:ok, _} =
       Commands.execute("approve_loan_listing", staff, %{"loan_id" => to_string(draft.id)})
 

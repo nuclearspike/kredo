@@ -108,7 +108,8 @@ defmodule Kiva.ProvenanceTest do
 
     test "submit + approve leave listing events with the acting user", %{loan: loan, staff: staff} do
       Kiva.LoanApplications.submit_for_review(loan.id)
-      Kiva.Lending.approve_listing(loan.id, staff)
+      translate_fully(loan)
+      {:ok, _} = Kiva.Lending.approve_listing(loan.id, staff)
 
       types = Provenance.timeline(loan.id) |> Enum.map(& &1.event_type)
       assert "listing.submitted" in types

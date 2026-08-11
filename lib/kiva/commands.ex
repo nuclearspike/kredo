@@ -222,8 +222,7 @@ defmodule Kiva.Commands do
       required: ~w(loan_id),
       preview_required: true,
       confirmation_required: true,
-      eligibility:
-        ~w(translations_ready_or_fallback_allowed risk_summary_present partner_review_complete),
+      eligibility: ~w(partner_review_complete risk_summary_present all_locales_translated),
       side_effects: ~w(publish_loan rebuild_public_read_models audit_event)
     },
     "revoke_permission" => %{
@@ -587,8 +586,10 @@ defmodule Kiva.Commands do
   end
 
   defp run_handler("approve_loan_listing", %Accounts.User{} = user, params) do
-    loan = Kiva.Lending.approve_listing(parse_int(params["loan_id"]), user)
-    {:ok, %{target_type: "loan", target_id: loan.id, status: loan.status}}
+    case Kiva.Lending.approve_listing(parse_int(params["loan_id"]), user) do
+      {:ok, loan} -> {:ok, %{target_type: "loan", target_id: loan.id, status: loan.status}}
+      {:error, reason} -> {:error, reason}
+    end
   end
 
   defp run_handler("request_loan_changes", %Accounts.User{} = _user, params) do

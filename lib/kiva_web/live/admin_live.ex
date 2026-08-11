@@ -133,8 +133,27 @@ defmodule KivaWeb.AdminLive do
   defp run(socket, command, params, ok_msg) do
     case Commands.execute(command, socket.assigns.current_user, params) do
       {:ok, _} -> {:noreply, socket |> put_flash(:info, ok_msg) |> load()}
-      {:error, reason} -> {:noreply, put_flash(socket, :error, inspect(reason))}
+      {:error, reason} -> {:noreply, socket |> put_flash(:error, error_message(reason)) |> load()}
     end
+  end
+
+  # A reviewer needs to know which languages are still outstanding, not a
+  # tuple. Anything without a written message falls back to the raw term.
+  defp error_message({:ineligible, _check, {:translations_pending, locales}}),
+    do: translations_pending_message(locales)
+
+  defp error_message({:translations_pending, locales}),
+    do: translations_pending_message(locales)
+
+  defp error_message(reason), do: inspect(reason)
+
+  defp translations_pending_message(locales) do
+    names = Enum.map_join(locales, ", ", &locale_native_name/1)
+
+    gettext(
+      "Not published — still awaiting translation review in: %{languages}. Approve them in the translation queue first.",
+      languages: names
+    )
   end
 
   def render(assigns) do

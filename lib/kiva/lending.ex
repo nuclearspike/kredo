@@ -688,9 +688,66 @@ defmodule Kiva.Lending do
   defp blank?(s) when is_binary(s), do: String.trim(s) == ""
   defp blank?(_), do: false
 
+  @doc """
+  Locales a loan is not yet publishable in: any supported locale with no
+  language-content row, or whose translation has not been reviewed.
+
+  The source row is exempt from the review bar because it is the original, not
+  a translation; its own text is what listing review approves. Returns
+  `{:error, :loan_not_found}` for an unknown loan.
+  """
+  @reviewed_translation_statuses ~w(approved published)
+
+  def untranslated_locales(loan_id) do
+    if Repo.exists?(from l in Loan, where: l.id == ^loan_id) do
+      ready =
+        from(lc in LoanLc,
+          where: lc.loan_id == ^loan_id,
+          select: {lc.locale_code, lc.is_source, lc.translation_status}
+        )
+        |> Repo.all()
+        |> Enum.filter(fn {_code, is_source, status} ->
+          is_source or status in @reviewed_translation_statuses
+        end)
+        |> MapSet.new(fn {code, _, _} -> code end)
+
+      Enum.reject(Kiva.Localization.supported_locales(), &MapSet.member?(ready, &1))
+    else
+      {:error, :loan_not_found}
+    end
+  end
+
+  @doc """
+  Publishes a reviewed listing.
+
+  Refuses while any supported language is still missing or unreviewed: a loan
+  that goes live in one language reaches lenders who cannot read it, and the
+  borrower's story is what they are being asked to back. The command layer
+  gates this too; the check lives here as well so no caller can publish around
+  it.
+  """
   def approve_listing(loan_id, actor \\ nil) do
+    case untranslated_locales(loan_id) do
+      [] -> publish_reviewed_listing(loan_id, actor)
+      {:error, reason} -> {:error, reason}
+      pending -> {:error, {:translations_pending, pending}}
+    end
+  end
+
+  defp publish_reviewed_listing(loan_id, actor) do
     loan = Repo.get!(Loan, loan_id)
     loan = loan |> Ecto.Changeset.change(status: "fundraising") |> Repo.update!()
+
+    # Listing review approves the source text, so it stops being a draft.
+    from(lc in LoanLc,
+      where: lc.loan_id == ^loan.id and lc.is_source and lc.translation_status == "draft"
+    )
+    |> Repo.update_all(
+      set: [
+        translation_status: "published",
+        updated_at: DateTime.utc_now() |> DateTime.truncate(:second)
+      ]
+    )
 
     Audit.record(%{
       event_type: "loan.listing_approved",
@@ -722,7 +779,7 @@ defmodule Kiva.Lending do
       "/loans/#{loan.slug}"
     )
 
-    loan
+    {:ok, loan}
   end
 
   def request_changes(loan_id, reason \\ nil) do

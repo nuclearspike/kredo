@@ -16,8 +16,27 @@ defmodule Kiva.AdminOpsTest do
   end
 
   test "staff can approve the listing (-> fundraising)", %{staff: staff, draft: draft} do
+    translate_fully(draft)
+
     assert {:ok, %{status: "fundraising"}} =
              Commands.execute("approve_loan_listing", staff, %{"loan_id" => to_string(draft.id)})
+  end
+
+  test "a listing cannot go live while a language is unreviewed", %{staff: staff, draft: draft} do
+    translate_fully(draft)
+
+    # Send one language back to machine output: it is displayable but unreviewed.
+    Repo.update_all(
+      from(lc in Kiva.Lending.LoanLc,
+        where: lc.loan_id == ^draft.id and lc.locale_code == "de"
+      ),
+      set: [translation_status: "machine"]
+    )
+
+    assert {:error, {:ineligible, "all_locales_translated", {:translations_pending, ["de"]}}} =
+             Commands.execute("approve_loan_listing", staff, %{"loan_id" => to_string(draft.id)})
+
+    assert Repo.get!(Kiva.Lending.Loan, draft.id).status != "fundraising"
   end
 
   test "approve_loan_listing is blocked for a not-yet-submitted loan", %{

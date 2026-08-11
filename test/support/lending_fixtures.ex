@@ -1,5 +1,6 @@
 defmodule Kiva.LendingFixtures do
   @moduledoc "Builds a fully-localized loan (sector/partner/borrower/loan + LC rows)."
+  import Ecto.Query
   alias Kiva.{Taxonomy, Partners, Lending, Repo}
   alias Kiva.Borrowers.{Borrower, BorrowerLc}
 
@@ -180,6 +181,34 @@ defmodule Kiva.LendingFixtures do
       })
 
     Map.merge(base, %{draft: draft, staff: staff})
+  end
+
+  @doc """
+  Give a loan a reviewed translation in every supported language, which is what
+  the translation review queue produces for a real listing. Publishing is gated
+  on it, so any test that approves a listing needs this first.
+  """
+  def translate_fully(loan) do
+    src =
+      Repo.one!(from lc in Kiva.Lending.LoanLc, where: lc.loan_id == ^loan.id and lc.is_source)
+
+    for locale <- Kiva.Localization.supported_locales(), locale != src.locale_code do
+      Lending.upsert_loan_lc(%{
+        loan_id: loan.id,
+        locale_code: locale,
+        is_source: false,
+        source_locale_code: src.locale_code,
+        title: src.title,
+        short_description: src.short_description,
+        borrower_story: src.borrower_story,
+        loan_use: src.loan_use,
+        repayment_summary: src.repayment_summary,
+        risk_summary_public: src.risk_summary_public,
+        translation_status: "approved"
+      })
+    end
+
+    loan
   end
 
   defp uniq, do: System.unique_integer([:positive])

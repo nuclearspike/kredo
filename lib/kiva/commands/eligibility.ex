@@ -49,8 +49,17 @@ defmodule Kiva.Commands.Eligibility do
       else: {:error, :missing_risk_summary}
   end
 
-  # Fallback is allowed in the demo, so a published source always satisfies this.
-  def check("translations_ready_or_fallback_allowed", _actor, _params), do: :ok
+  # A listing goes live in every supported language or not at all: publishing
+  # one that only reads in some of them puts a borrower's story in front of
+  # lenders who cannot read it. The error names the locales still outstanding
+  # so the reviewer knows what to clear.
+  def check("all_locales_translated", _actor, params) do
+    case Kiva.Lending.untranslated_locales(loan_id(params)) do
+      [] -> :ok
+      {:error, reason} -> {:error, reason}
+      pending -> {:error, {:translations_pending, pending}}
+    end
+  end
 
   # New lending (basket adds and lends) only flows into fundraising loans.
   def check("loan_fundraising", _actor, params) do
