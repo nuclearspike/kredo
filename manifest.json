@@ -1,0 +1,77 @@
+{
+  "name": "kiva_lssd_demo_planning_bundle",
+  "created": "2026-06-26",
+  "purpose": "PRD + implementation guide + FractalFlow seed docs for a multilingual chat-first Kiva-like demo",
+  "primary_stack": [
+    "Elixir",
+    "Phoenix",
+    "LiveView",
+    "Ecto",
+    "Postgres",
+    "Absinthe GraphQL"
+  ],
+  "locales": [
+    "en",
+    "de",
+    "es",
+    "fr",
+    "nl"
+  ],
+  "demo_accounts": [
+    {
+      "email": "borrower@kredo.test",
+      "password": "password",
+      "role": "borrower"
+    },
+    {
+      "email": "lender@kredo.test",
+      "password": "password",
+      "role": "lender"
+    },
+    {
+      "email": "partner@kredo.test",
+      "password": "password",
+      "role": "partner"
+    },
+    {
+      "email": "admin@kredo.test",
+      "password": "password",
+      "role": "admin"
+    }
+  ],
+  "files": [
+    "00_product_vision_prd.md",
+    "01_agent_handoff_lssd.md",
+    "02_system_tree_and_subsystems.md",
+    "03_data_model_and_localization.md",
+    "04_ai_chat_first_architecture.md",
+    "05_graphql_surfaces_and_api_contracts.md",
+    "06_permissions_trust_and_risk.md",
+    "07_storytime_actor_stage_specs.md",
+    "08_partner_chat_loan_application.md",
+    "09_lender_discovery_teams_messages.md",
+    "10_borrower_portal_native_language.md",
+    "11_admin_staff_and_translation_ops.md",
+    "12_trust_networks_blockchain_and_alternative_underwriting.md",
+    "13_analytics_distribution_graphs.md",
+    "14_demo_seed_data.md",
+    "15_roadmap_and_work_packages.md",
+    "16_cool_expansion_ideas.md",
+    "17_acceptance_tests_and_story_specs.md",
+    "README.md",
+    "fractalflow/ai_dialogue_subsystem.lssd.md",
+    "fractalflow/kiva_future_demo_product.lssd.md",
+    "fractalflow/lending_teams_subsystem.lssd.md",
+    "fractalflow/loan_lifecycle_subsystem.lssd.md",
+    "fractalflow/localization_subsystem.lssd.md",
+    "fractalflow/permissions_trust_subsystem.lssd.md",
+    "prompts/chatbot_system_prompt_templates.md",
+    "prompts/coding_agent_master_prompt.md",
+    "schemas/analytics_events.yaml",
+    "schemas/command_registry.yaml",
+    "schemas/database_model.yaml",
+    "schemas/graphql_surface_map.yaml",
+    "schemas/translation_matrix.yaml",
+    "source_notes.md"
+  ]
+}

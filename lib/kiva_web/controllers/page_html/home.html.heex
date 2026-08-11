@@ -1,0 +1,107 @@
+<Layouts.app flash={@flash} current_user={@current_user} locale={@locale}>
+  <section class="rounded-3xl bg-gradient-to-b from-primary/12 via-base-100 to-base-100 border border-base-200 px-6 py-14 sm:py-20 text-center">
+    <span class="badge badge-lg bg-primary/10 text-primary border-0 font-medium mb-5">
+      {gettext("Kredo Demo")}
+    </span>
+    <h1 class="font-display text-4xl sm:text-5xl font-semibold text-secondary text-balance max-w-3xl mx-auto leading-tight">
+      {gettext("Loans that change lives — in every language")}
+    </h1>
+    <p class="mt-5 text-lg text-base-content/70 max-w-2xl mx-auto">
+      {gettext(
+        "Borrowers, lenders, partners and staff — connected through trust, capital and encouragement. Lend as little as $25 and watch it ripple."
+      )}
+    </p>
+    <div class="mt-8 flex gap-3 justify-center flex-wrap">
+      <.link href={~p"/loans"} class="btn btn-primary btn-lg">
+        {gettext("Browse loans")} <.icon name="hero-arrow-right" class="size-4" />
+      </.link>
+      <.link :if={!@current_user} href={~p"/login"} class="btn btn-lg btn-ghost">
+        {gettext("Sign in")}
+      </.link>
+    </div>
+    <p class="mt-5 text-sm text-base-content/50">
+      {gettext("Viewing in")} <span class="font-semibold">{current_locale_name(@locale)}</span>
+    </p>
+  </section>
+
+  <section :if={@featured != []} class="mt-10">
+    <div class="flex items-end justify-between">
+      <h2 class="font-display text-2xl font-semibold text-secondary">
+        {gettext("Borrowers fundraising now")}
+      </h2>
+      <.link href={~p"/loans"} class="link link-primary text-sm font-medium">
+        {gettext("See all")}
+      </.link>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+      <.loan_card :for={item <- @featured} item={item} locale={@locale} />
+    </div>
+  </section>
+
+  <section class="mt-12">
+    <h2 class="font-display text-2xl font-semibold text-secondary text-center">
+      {gettext("How it works")}
+    </h2>
+    <div class="grid sm:grid-cols-3 gap-4 mt-5">
+      <div class="card bg-base-100 border border-base-200">
+        <div class="card-body items-center text-center gap-2">
+          <div class="rounded-full bg-primary/10 p-3">
+            <.icon name="hero-magnifying-glass" class="size-6 text-primary" />
+          </div>
+          <h3 class="font-semibold">{gettext("Choose a borrower")}</h3>
+          <p class="text-sm text-base-content/60">
+            {gettext("Browse real stories across sectors and countries — in your language.")}
+          </p>
+        </div>
+      </div>
+      <div class="card bg-base-100 border border-base-200">
+        <div class="card-body items-center text-center gap-2">
+          <div class="rounded-full bg-accent/10 p-3">
+            <.icon name="hero-heart" class="size-6 text-accent" />
+          </div>
+          <h3 class="font-semibold">{gettext("Lend $25")}</h3>
+          <p class="text-sm text-base-content/60">
+            {gettext("Fund a loan on your own or with a team, and send a note of encouragement.")}
+          </p>
+        </div>
+      </div>
+      <div class="card bg-base-100 border border-base-200">
+        <div class="card-body items-center text-center gap-2">
+          <div class="rounded-full bg-primary/10 p-3">
+            <.icon name="hero-arrow-path" class="size-6 text-primary" />
+          </div>
+          <h3 class="font-semibold">{gettext("Get repaid, relend")}</h3>
+          <p class="text-sm text-base-content/60">
+            {gettext("As the borrower repays, your balance grows back — ready to lend again.")}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <details class="collapse collapse-arrow bg-base-200 mt-12">
+    <summary class="collapse-title font-medium">
+      {gettext("Demo accounts")} — {gettext("all passwords are")} <code>password</code>
+    </summary>
+    <div class="collapse-content">
+      <div class="overflow-x-auto">
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th>{gettext("Role")}</th>
+              <th>{gettext("Email")}</th>
+              <th>{gettext("Locale")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr :for={acct <- demo_accounts()}>
+              <td><span class="badge badge-neutral badge-sm">{acct.role}</span></td>
+              <td><code>{acct.email}</code></td>
+              <td>{acct.locale}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+</Layouts.app>

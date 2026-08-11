@@ -1,0 +1,73 @@
+version: 0.1.0
+commands:
+  set_locale:
+    risk: low
+    actors: [public, borrower, lender, partner, staff, admin]
+    required_inputs: [locale_code]
+    confirmation_required: false
+    side_effects: [update_session_locale, maybe_update_user_preference]
+
+  create_lending_team:
+    risk: medium
+    actors: [lender]
+    required_inputs: [source_locale_code, name, tagline, description, visibility]
+    optional_inputs: [image_url, welcome_post]
+    preview_required: true
+    confirmation_required: true
+    side_effects: [create_team, create_team_lc_source, create_translation_requests, audit_event]
+
+  submit_encouragement_message:
+    risk: medium
+    actors: [lender]
+    required_inputs: [loan_id, body, source_locale_code]
+    preview_required: true
+    confirmation_required: true
+    side_effects: [create_message, run_moderation, create_translations_if_approved, notify_borrower_if_visible, audit_event]
+
+  start_loan_application:
+    risk: low
+    actors: [partner]
+    required_inputs: []
+    confirmation_required: false
+    side_effects: [create_or_resume_draft]
+
+  apply_reuse_suggestion:
+    risk: low
+    actors: [partner]
+    required_inputs: [loan_draft_id, field_key, suggested_value]
+    confirmation_required: false
+    side_effects: [update_draft_field, audit_event]
+
+  submit_loan_for_review:
+    risk: high
+    actors: [partner]
+    required_inputs: [loan_draft_id]
+    preview_required: true
+    confirmation_required: true
+    eligibility_checks: [draft_complete, partner_owns_draft, required_lc_source_exists]
+    side_effects: [change_status_to_submitted, create_staff_review_task, create_translation_jobs, audit_event]
+
+  approve_translation:
+    risk: medium
+    actors: [staff, admin]
+    required_inputs: [lc_entity_type, lc_id]
+    preview_required: false
+    confirmation_required: false
+    side_effects: [mark_translation_approved, rebuild_read_model, audit_event]
+
+  approve_loan_listing:
+    risk: high
+    actors: [staff, admin]
+    required_inputs: [loan_id]
+    preview_required: true
+    confirmation_required: true
+    eligibility_checks: [translations_ready_or_fallback_allowed, risk_summary_present, partner_review_complete]
+    side_effects: [publish_loan, rebuild_public_read_models, audit_event]
+
+  revoke_permission:
+    risk: high
+    actors: [admin]
+    required_inputs: [user_id, permission_key]
+    preview_required: true
+    confirmation_required: true
+    side_effects: [remove_permission, audit_event, invalidate_sessions_if_needed]

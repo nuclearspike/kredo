@@ -1,0 +1,67 @@
+version: 0.1.0
+status: asserted
+notes: "Implementation contract for Ecto/Postgres schema planning."
+
+tables:
+  users:
+    columns: [id, email, encrypted_password, display_name, default_locale_code, inserted_at, updated_at]
+    indexes: [email_unique]
+  roles:
+    columns: [id, key, label, inserted_at, updated_at]
+  permissions:
+    columns: [id, key, label, risk_level, inserted_at, updated_at]
+  permission_groups:
+    columns: [id, key, label]
+  user_permission_groups:
+    columns: [user_id, permission_group_id]
+  locales:
+    columns: [code, english_name, native_name, enabled, fallback_code, text_direction]
+
+  borrowers:
+    columns: [id, user_id, public_id, country_code, preferred_locale_code, partner_id, inserted_at, updated_at]
+  borrowers_lc:
+    columns: [id, borrower_id, locale_code, is_source, source_locale_code, display_name, public_bio, business_summary, translation_status, version, source_hash]
+    unique: [borrower_id, locale_code, version]
+
+  partners:
+    columns: [id, slug, country_code, default_locale_code, status, trust_model, inserted_at, updated_at]
+  partners_lc:
+    columns: [id, partner_id, locale_code, is_source, name, summary, profile, translation_status, version, source_hash]
+
+  loans:
+    columns: [id, slug, status, partner_id, country_code, sector_id, activity_id, trust_model, loan_amount_cents, funded_amount_cents, currency_code, disbursal_status, disbursed_at, repayment_term_months, repayment_frequency, source_locale_code, canonical_content_lc_id, inserted_at, updated_at]
+  loans_lc:
+    columns: [id, loan_id, locale_code, is_source, source_locale_code, title, short_description, borrower_story, loan_use, repayment_summary, risk_summary_public, translation_status, version, source_hash, translated_from_lc_id]
+
+  repayment_schedules:
+    columns: [id, loan_id, schedule_type, starts_on, term_months, frequency]
+  repayment_schedule_items:
+    columns: [id, repayment_schedule_id, due_on, amount_cents, status, paid_on]
+
+  lending_teams:
+    columns: [id, slug, owner_user_id, visibility, image_url, image_source, default_locale_code, member_count, total_lent_cents]
+  lending_teams_lc:
+    columns: [id, lending_team_id, locale_code, is_source, name, tagline, description, welcome_post_template, translation_status, version]
+
+  team_posts:
+    columns: [id, lending_team_id, author_user_id, moderation_status, source_locale_code, inserted_at]
+  team_posts_lc:
+    columns: [id, team_post_id, locale_code, is_source, body, translation_status, version, source_hash]
+
+  messages:
+    columns: [id, thread_id, sender_user_id, recipient_scope, moderation_status, source_locale_code, inserted_at]
+  messages_lc:
+    columns: [id, message_id, locale_code, is_source, body, translation_status, version, source_hash]
+
+  ai_conversations:
+    columns: [id, user_id, actor_role, locale_code, page_context_json, inserted_at, updated_at]
+  ai_tool_calls:
+    columns: [id, ai_conversation_id, tool_type, schema_surface, operation_name, allowed, denial_reason, request_hash, response_hash, inserted_at]
+  ai_action_previews:
+    columns: [id, ai_conversation_id, command_key, target_type, target_id, preview_json, risk_level, confirmed_at, executed_at]
+
+  translation_requests:
+    columns: [id, entity_type, entity_id, source_locale_code, target_locale_code, status, requested_by_user_id, inserted_at, updated_at]
+
+  audit_events:
+    columns: [id, actor_user_id, actor_role, event_type, target_type, target_id, summary, metadata_json, inserted_at]

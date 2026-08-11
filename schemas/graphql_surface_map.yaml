@@ -1,0 +1,96 @@
+version: 0.1.0
+schema_surfaces:
+  PublicGraphQL:
+    actors: [public, lender, borrower, partner, staff, admin]
+    allowed_queries:
+      - localizedLoanSearch
+      - localizedLoanProfile
+      - localizedPartnerProfile
+      - localizedLendingTeamProfile
+      - sectors
+      - activities
+      - tags
+      - faqEntries
+    forbidden:
+      - borrowerPrivateData
+      - adminRiskNotes
+      - permissionAssignments
+
+  LenderGraphQL:
+    actors: [lender]
+    extends: PublicGraphQL
+    allowed_queries:
+      - myLenderProfile
+      - myPortfolio
+      - myTeams
+      - savedSearches
+      - basket
+    allowed_commands:
+      - create_lending_team
+      - edit_owned_lending_team
+      - submit_encouragement_message
+      - add_loan_to_basket
+      - complete_demo_lend
+
+  BorrowerGraphQL:
+    actors: [borrower]
+    allowed_queries:
+      - myBorrowerPortal
+      - myLoans
+      - myRepaymentSchedule
+      - myEncouragementMessages
+      - borrowerFaq
+    forbidden:
+      - lenderPrivateData
+      - adminRiskNotes
+      - partnerInternalNotes
+
+  PartnerGraphQL:
+    actors: [partner]
+    allowed_queries:
+      - myPartnerProfile
+      - myBorrowers
+      - partnerBorrower
+      - partnerBorrowerRepeatLoan
+      - myLoanDrafts
+      - myLoanReviewStatuses
+    allowed_commands:
+      - start_loan_application
+      - save_loan_draft
+      - submit_loan_for_review
+      - upload_mock_photo_url
+      - post_borrower_update
+
+  StaffGraphQL:
+    actors: [staff, admin]
+    allowed_queries:
+      - loanReviewQueue
+      - translationQueue
+      - moderationQueue
+      - partnerSummaries
+      - trustReviewQueue
+      - permissionOutliersReadOnly
+      - aiToolCallSummaries
+    allowed_commands:
+      - approve_translation
+      - reject_translation
+      - approve_message
+      - reject_message
+      - request_loan_changes
+      - approve_loan_listing
+
+  AdminGraphQL:
+    actors: [admin]
+    separate_schema: true
+    allowed_queries:
+      - permissionGraph
+      - permissionOutliers
+      - aiToolCalls
+      - auditEvents
+      - seedState
+      - schemaAccessLogs
+    allowed_commands:
+      - manage_permission_group
+      - revoke_permission
+      - manage_locale
+      - reset_demo_seed_state

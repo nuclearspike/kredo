@@ -1,0 +1,35 @@
+version: 0.1.0
+events:
+  locale_selected:
+    actor_scope: all
+    properties: [locale_code, previous_locale_code, route]
+  loan_card_viewed:
+    actor_scope: public_lender
+    properties: [loan_id, locale_code, position, filter_hash]
+  loan_profile_viewed:
+    actor_scope: public_lender
+    properties: [loan_id, locale_code]
+  chat_question_asked:
+    actor_scope: all
+    properties: [actor_role, route, question_family, locale_code]
+  chat_command_previewed:
+    actor_scope: all
+    properties: [actor_role, command_key, risk_level]
+  chat_command_confirmed:
+    actor_scope: all
+    properties: [actor_role, command_key]
+  partner_loan_draft_started:
+    actor_scope: partner
+    properties: [partner_id, source_locale_code]
+  partner_loan_submitted:
+    actor_scope: partner
+    properties: [loan_id, partner_id]
+  encouragement_message_submitted:
+    actor_scope: lender
+    properties: [loan_id, source_locale_code, moderation_status]
+  translation_requested:
+    actor_scope: all
+    properties: [entity_type, entity_id, source_locale_code, target_locale_code]
+  permission_outlier_detected:
+    actor_scope: admin
+    properties: [user_id, permission_key, outlier_type, severity]

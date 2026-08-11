@@ -1,0 +1,52 @@
+<Layouts.app flash={@flash} current_user={@current_user} locale={@locale}>
+  <div class="mx-auto max-w-md mt-6">
+    <div class="text-center mb-6">
+      <h1 class="font-display text-3xl font-semibold text-secondary">
+        {gettext("Welcome back")}
+      </h1>
+      <p class="text-base-content/70 mt-1">
+        {gettext("Sign in to lend — or try a demo account below. All passwords are")} <code>password</code>.
+      </p>
+    </div>
+
+    <div class="card bg-base-100 border border-base-200">
+      <div class="card-body gap-4">
+        <div :if={@error_message} class="alert alert-error">
+          <.icon name="hero-exclamation-circle" class="size-5" /> {@error_message}
+        </div>
+
+        <.form
+          :let={f}
+          for={%{}}
+          as={:user}
+          action={~p"/login"}
+          class="space-y-4"
+          onsubmit="this.querySelector('button').setAttribute('disabled','disabled')"
+        >
+          <.input field={f[:email]} type="email" label={gettext("Email")} required value="" />
+          <.input
+            field={f[:password]}
+            type="password"
+            label={gettext("Password")}
+            required
+            value=""
+          />
+          <.button class="btn btn-primary w-full">{gettext("Sign in")}</.button>
+        </.form>
+
+        <div class="divider text-sm text-base-content/50">{gettext("Or try a demo account")}</div>
+        <div class="grid grid-cols-1 gap-2">
+          <button
+            :for={acct <- demo_accounts()}
+            type="button"
+            class="btn btn-outline btn-sm justify-between"
+            onclick={"document.querySelector('input[name=\"user[email]\"]').value='#{acct.email}';document.querySelector('input[name=\"user[password]\"]').value='password';"}
+          >
+            <span class="badge badge-neutral">{acct.role}</span>
+            <span>{acct.email}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layouts.app>

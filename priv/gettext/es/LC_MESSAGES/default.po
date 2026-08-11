@@ -1,0 +1,3134 @@
+msgid ""
+msgstr ""
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: lib/kiva_web/components/core_components.ex:368
+#, elixir-autogen, elixir-format
+msgid "Actions"
+msgstr "Acciones"
+
+#: lib/kiva_web/i18n_strings.ex:53
+#: lib/kiva_web/live/admin_live.ex:14
+#, elixir-autogen, elixir-format
+msgid "Admin"
+msgstr "Administración"
+
+#: lib/kiva_web/live/faq_live.ex:44
+#, elixir-autogen, elixir-format
+msgid "Answers in your language. Where a translation is missing we show the original and offer an instant machine translation."
+msgstr "Respuestas en tu idioma. Cuando falta una traducción, mostramos el original y ofrecemos una traducción automática instantánea."
+
+#: lib/kiva_web/components/layouts.ex:237
+#: lib/kiva_web/components/layouts.ex:249
+#, elixir-autogen, elixir-format
+msgid "Attempting to reconnect"
+msgstr "Intentando reconectar"
+
+#: lib/kiva_web/components/layouts.ex:128
+#: lib/kiva_web/controllers/page_html/home.html.heex:16
+#: lib/kiva_web/live/basket_live.ex:72
+#: lib/kiva_web/live/portfolio_live.ex:424
+#, elixir-autogen, elixir-format
+msgid "Browse loans"
+msgstr "Explorar préstamos"
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:84
+#, elixir-autogen, elixir-format
+msgid "Demo accounts"
+msgstr "Cuentas de demostración"
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:92
+#: lib/kiva_web/controllers/session_html/new.html.heex:26
+#, elixir-autogen, elixir-format
+msgid "Email"
+msgstr "Correo electrónico"
+
+#: lib/kiva_web/components/layouts.ex:63
+#: lib/kiva_web/components/layouts.ex:134
+#: lib/kiva_web/live/faq_live.ex:27
+#: lib/kiva_web/live/faq_live.ex:41
+#, elixir-autogen, elixir-format
+msgid "Help & FAQ"
+msgstr "Ayuda y preguntas frecuentes"
+
+#: lib/kiva_web/components/layouts.ex:162
+#: lib/kiva_web/components/layouts.ex:206
+#, elixir-autogen, elixir-format
+msgid "Language"
+msgstr "Idioma"
+
+#: lib/kiva_web/components/layouts.ex:30
+#: lib/kiva_web/live/loan_live/index.ex:11
+#, elixir-autogen, elixir-format
+msgid "Loans"
+msgstr "Préstamos"
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:93
+#: lib/kiva_web/live/admin_live.ex:330
+#, elixir-autogen, elixir-format
+msgid "Locale"
+msgstr "Idioma"
+
+#: lib/kiva_web/components/layouts.ex:93
+#, elixir-autogen, elixir-format
+msgid "My dashboard"
+msgstr "Mi panel"
+
+#: lib/kiva_web/live/portal_live.ex:12
+#: lib/kiva_web/live/portal_live.ex:39
+#, elixir-autogen, elixir-format
+msgid "My portal"
+msgstr "Mi portal"
+
+#: lib/kiva_web/components/layouts.ex:201
+#, elixir-autogen, elixir-format
+msgid "Page-aware help is coming online. Soon you can ask questions and take safe actions here — in your language."
+msgstr "La ayuda contextual estará disponible pronto. Pronto podrás hacer preguntas y realizar acciones seguras aquí, en tu idioma."
+
+#: lib/kiva_web/live/partner/repayments_live.ex:62
+#: lib/kiva_web/live/partner_live.ex:16
+#: lib/kiva_web/live/partner_live.ex:183
+#, elixir-autogen, elixir-format
+msgid "Partner workspace"
+msgstr "Espacio del socio"
+
+#: lib/kiva_web/controllers/session_html/new.html.heex:30
+#, elixir-autogen, elixir-format
+msgid "Password"
+msgstr "Contraseña"
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:91
+#: lib/kiva_web/live/admin_live.ex:518
+#, elixir-autogen, elixir-format
+msgid "Role"
+msgstr "Rol"
+
+#: lib/kiva_web/components/layouts.ex:100
+#: lib/kiva_web/controllers/page_html/home.html.heex:19
+#: lib/kiva_web/controllers/session_html/new.html.heex:34
+#, elixir-autogen, elixir-format
+msgid "Sign in"
+msgstr "Iniciar sesión"
+
+#: lib/kiva_web/components/layouts.ex:95
+#, elixir-autogen, elixir-format
+msgid "Sign out"
+msgstr "Cerrar sesión"
+
+#: lib/kiva_web/components/layouts.ex:244
+#, elixir-autogen, elixir-format
+msgid "Something went wrong!"
+msgstr "¡Algo salió mal!"
+
+#: lib/kiva_web/live/admin_live.ex:150
+#, elixir-autogen, elixir-format
+msgid "Staff & admin operations"
+msgstr "Operaciones de personal y administración"
+
+#: lib/kiva_web/live/faq_live.ex:65
+#: lib/kiva_web/live/loan_live/show.ex:469
+#: lib/kiva_web/live/team_live/show.ex:176
+#, elixir-autogen, elixir-format
+msgid "Translate to"
+msgstr "Traducir a"
+
+#: lib/kiva_web/components/layouts.ex:232
+#, elixir-autogen, elixir-format
+msgid "We can't find the internet"
+msgstr "No encontramos Internet"
+
+#: lib/kiva_web/components/core_components.ex:74
+#: lib/kiva_web/live/admin_live.ex:285
+#: lib/kiva_web/live/developer/app_live.ex:169
+#: lib/kiva_web/live/developer/dashboard_live.ex:129
+#: lib/kiva_web/live/partner_live.ex:270
+#: lib/kiva_web/live/team_live/index.ex:121
+#, elixir-autogen, elixir-format
+msgid "close"
+msgstr "cerrar"
+
+#: lib/kiva_web/live/faq_live.ex:91
+#, elixir-autogen, elixir-format
+msgid "human"
+msgstr "humano"
+
+#: lib/kiva_web/live/faq_live.ex:85
+#: lib/kiva_web/live/portal_live.ex:86
+#: lib/kiva_web/live/team_live/show.ex:168
+#, elixir-autogen, elixir-format
+msgid "machine · review pending"
+msgstr "automático · revisión pendiente"
+
+#: lib/kiva_web/live/faq_live.ex:82
+#, elixir-autogen, elixir-format
+msgid "showing"
+msgstr "mostrando"
+
+#: lib/kiva_web/live/loan_live/show.ex:196
+#: lib/kiva_web/live/partner_live/show.ex:34
+#, elixir-autogen, elixir-format
+msgid "All loans"
+msgstr "Todos los préstamos"
+
+#: lib/kiva_web/live/loan_live/index.ex:229
+#: lib/kiva_web/live/portfolio_live.ex:951
+#, elixir-autogen, elixir-format
+msgid "All sectors"
+msgstr "Todos los sectores"
+
+#: lib/kiva_web/live/loan_live/show.ex:337
+#: lib/kiva_web/live/loan_live/show.ex:714
+#: lib/kiva_web/live/partner_live.ex:371
+#, elixir-autogen, elixir-format
+msgid "Amount"
+msgstr "Monto"
+
+#: lib/kiva_web/live/loan_live/show.ex:479
+#: lib/kiva_web/live/partner_live.ex:442
+#, elixir-autogen, elixir-format
+msgid "Borrower story"
+msgstr "Historia del prestatario"
+
+#: lib/kiva_web/live/loan_live/show.ex:713
+#, elixir-autogen, elixir-format
+msgid "Due"
+msgstr "Vencimiento"
+
+#: lib/kiva_web/live/loan_live/show.ex:484
+#: lib/kiva_web/live/partner_live.ex:448
+#, elixir-autogen, elixir-format
+msgid "How the loan will be used"
+msgstr "Cómo se utilizará el préstamo"
+
+#: lib/kiva_web/components/app_components.ex:353
+#: lib/kiva_web/live/loan_live/show.ex:306
+#, elixir-autogen, elixir-format
+msgid "Loan amount"
+msgstr "Monto del préstamo"
+
+#: lib/kiva_web/live/loan_live/show.ex:11
+#, elixir-autogen, elixir-format
+msgid "Loan not found."
+msgstr "Préstamo no encontrado."
+
+#: lib/kiva_web/live/partner_live/show.ex:60
+#, elixir-autogen, elixir-format
+msgid "Loans from this partner"
+msgstr "Préstamos de este socio"
+
+#: lib/kiva_web/live/partner_live/show.ex:61
+#, elixir-autogen, elixir-format
+msgid "No active loans."
+msgstr "No hay préstamos activos."
+
+#: lib/kiva_web/live/loan_live/index.ex:254
+#: lib/kiva_web/live/portfolio_live.ex:1084
+#, elixir-autogen, elixir-format
+msgid "No loans match your filters."
+msgstr "No hay préstamos que coincidan con tus filtros."
+
+#: lib/kiva_web/live/partner_live/show.ex:12
+#, elixir-autogen, elixir-format
+msgid "Partner not found."
+msgstr "Socio no encontrado."
+
+#: lib/kiva_web/live/loan_live/show.ex:705
+#, elixir-autogen, elixir-format
+msgid "Repayment schedule"
+msgstr "Calendario de pagos"
+
+#: lib/kiva_web/live/loan_live/show.ex:489
+#, elixir-autogen, elixir-format
+msgid "Risk & trust"
+msgstr "Riesgo y confianza"
+
+#: lib/kiva_web/live/loan_live/index.ex:246
+#, elixir-autogen, elixir-format
+msgid "Search"
+msgstr "Buscar"
+
+#: lib/kiva_web/components/app_components.ex:41
+#, elixir-autogen, elixir-format
+msgid "Showing a fallback language"
+msgstr "Mostrando un idioma de respaldo"
+
+#: lib/kiva_web/i18n_strings.ex:42
+#: lib/kiva_web/live/admin_live.ex:371
+#: lib/kiva_web/live/admin_live.ex:418
+#: lib/kiva_web/live/developer/app_live.ex:114
+#: lib/kiva_web/live/loan_live/index.ex:195
+#: lib/kiva_web/live/loan_live/show.ex:715
+#: lib/kiva_web/live/portfolio_live.ex:988
+#, elixir-autogen, elixir-format
+msgid "Status"
+msgstr "Estado"
+
+#: lib/kiva_web/components/app_components.ex:360
+#: lib/kiva_web/live/loan_live/show.ex:312
+#: lib/kiva_web/live/partner_live.ex:385
+#, elixir-autogen, elixir-format
+msgid "Term"
+msgstr "Plazo"
+
+#: lib/kiva_web/components/app_components.ex:361
+#: lib/kiva_web/live/loan_live/show.ex:314
+#: lib/kiva_web/live/partner_live.ex:361
+#: lib/kiva_web/live/partner_live.ex:386
+#, elixir-autogen, elixir-format
+msgid "months"
+msgstr "meses"
+
+#: lib/kiva_web/components/app_components.ex:187
+#: lib/kiva_web/components/app_components.ex:213
+#, elixir-autogen, elixir-format
+msgid "of"
+msgstr "de"
+
+#: lib/kiva_web/live/loan_live/show.ex:355
+#, elixir-autogen, elixir-format
+msgid "Add to basket"
+msgstr "Agregar a la cesta"
+
+#: lib/kiva_web/live/loan_live/show.ex:113
+#, elixir-autogen, elixir-format
+msgid "Added to your basket."
+msgstr "Agregado a tu cesta."
+
+#: lib/kiva_web/live/team_live/show.ex:71
+#, elixir-autogen, elixir-format
+msgid "All teams"
+msgstr "Todos los equipos"
+
+#: lib/kiva_web/live/partner_live.ex:127
+#, elixir-autogen, elixir-format
+msgid "Applied prior terms."
+msgstr "Se aplicaron los términos anteriores."
+
+#: lib/kiva_web/live/admin_live.ex:347
+#, elixir-autogen, elixir-format
+msgid "Approve"
+msgstr "Aprobar"
+
+#: lib/kiva_web/live/admin_live.ex:248
+#, elixir-autogen, elixir-format
+msgid "Approve & publish"
+msgstr "Aprobar y publicar"
+
+#: lib/kiva_web/live/chat_live.ex:124
+#, elixir-autogen, elixir-format
+msgid "Ask me about loans, how lending works, or say “switch to Spanish”."
+msgstr "Pregúntame sobre préstamos, cómo funciona el préstamo o di “cambiar a español”."
+
+#: lib/kiva_web/live/admin_live.ex:621
+#, elixir-autogen, elixir-format
+msgid "Audit timeline"
+msgstr "Cronología de auditoría"
+
+#: lib/kiva_web/live/team_live/index.ex:55
+#, elixir-autogen, elixir-format
+msgid "Available to relend"
+msgstr "Disponible para reemprestar"
+
+#: lib/kiva_web/live/partner_live.ex:353
+#, elixir-autogen, elixir-format
+msgid "Back"
+msgstr "Atrás"
+
+#: lib/kiva_web/live/basket_live.ex:8
+#, elixir-autogen, elixir-format
+msgid "Basket"
+msgstr "Cesta"
+
+#: lib/kiva_web/live/loan_live/show.ex:530
+#, elixir-autogen, elixir-format
+msgid "Blockchain attestation"
+msgstr "Verificación en blockchain"
+
+#: lib/kiva_web/live/admin_live.ex:278
+#: lib/kiva_web/live/developer/app_live.ex:163
+#: lib/kiva_web/live/developer/dashboard_live.ex:123
+#: lib/kiva_web/live/loan_live/show.ex:380
+#: lib/kiva_web/live/partner_live.ex:263
+#: lib/kiva_web/live/team_live/index.ex:114
+#, elixir-autogen, elixir-format
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: lib/kiva_web/live/partner_live.ex:148
+#, elixir-autogen, elixir-format
+msgid "Complete all required fields."
+msgstr "Completa todos los campos obligatorios."
+
+#: lib/kiva_web/live/loan_live/show.ex:377
+#, elixir-autogen, elixir-format
+msgid "Confirm"
+msgstr "Confirmar"
+
+#: lib/kiva_web/live/loan_live/show.ex:364
+#, elixir-autogen, elixir-format
+msgid "Confirm your lending"
+msgstr "Confirma tu préstamo"
+
+#: lib/kiva_web/live/partner_live.ex:337
+#, elixir-autogen, elixir-format
+msgid "Continue"
+msgstr "Continuar"
+
+#: lib/kiva_web/live/team_live/index.ex:71
+#: lib/kiva_web/live/team_live/index.ex:78
+#, elixir-autogen, elixir-format
+msgid "Create a lending team"
+msgstr "Crear un equipo de préstamos"
+
+#: lib/kiva_web/live/team_live/index.ex:116
+#, elixir-autogen, elixir-format
+msgid "Create team"
+msgstr "Crear equipo"
+
+#: lib/kiva_web/live/basket_live.ex:113
+#: lib/kiva_web/live/loan_live/show.ex:373
+#, elixir-autogen, elixir-format
+msgid "Demo — no real money moves. Repayments are simulated."
+msgstr "Demo — no se transfiere dinero real. Los reembolsos son simulados."
+
+#: lib/kiva_web/live/developer/view.ex:119
+#: lib/kiva_web/live/team_live/index.ex:108
+#, elixir-autogen, elixir-format
+msgid "Description"
+msgstr "Descripción"
+
+#: lib/kiva_web/live/admin_live.ex:519
+#, elixir-autogen, elixir-format
+msgid "Direct permission"
+msgstr "Permiso directo"
+
+#: lib/kiva_web/live/chat_live.ex:77
+#, elixir-autogen, elixir-format
+msgid "Done."
+msgstr "Listo."
+
+#: lib/kiva_web/live/partner_live.ex:108
+#, elixir-autogen, elixir-format
+msgid "Draft saved."
+msgstr "Borrador guardado."
+
+#: lib/kiva_web/live/partner_live.ex:315
+#, elixir-autogen, elixir-format
+msgid "Drafts & submissions"
+msgstr "Borradores y envíos"
+
+#: lib/kiva_web/live/loan_live/show.ex:543
+#, elixir-autogen, elixir-format
+msgid "Encouragement"
+msgstr "Animo"
+
+#: lib/kiva_web/live/loan_live/show.ex:501
+#, elixir-autogen, elixir-format
+msgid "Endorsements"
+msgstr "Recomendaciones"
+
+#: lib/kiva_web/live/portal_live.ex:47
+#, elixir-autogen, elixir-format
+msgid "Here are your loans in your language."
+msgstr "Aquí están tus préstamos en tu idioma."
+
+#: lib/kiva_web/live/chat_live.ex:81
+#, elixir-autogen, elixir-format
+msgid "I couldn't complete that"
+msgstr "No pude completar esa acción"
+
+#: lib/kiva_web/live/team_live/index.ex:90
+#, elixir-autogen, elixir-format
+msgid "Invite only"
+msgstr "Solo por invitación"
+
+#: lib/kiva_web/live/loan_live/show.ex:350
+#, elixir-autogen, elixir-format
+msgid "Just me"
+msgstr "Solo yo"
+
+#: lib/kiva_web/live/loan_live/show.ex:212
+#, elixir-autogen, elixir-format
+msgid "Lend again"
+msgstr "Prestar de nuevo"
+
+#: lib/kiva_web/live/basket_live.ex:108
+#, elixir-autogen, elixir-format
+msgid "Lend all"
+msgstr "Prestar todo"
+
+#: lib/kiva_web/live/loan_live/show.ex:358
+#, elixir-autogen, elixir-format
+msgid "Lend now"
+msgstr "Prestar ahora"
+
+#: lib/kiva_web/live/loan_live/show.ex:347
+#, elixir-autogen, elixir-format
+msgid "Lend with a team"
+msgstr "Prestar con un equipo"
+
+#: lib/kiva_web/components/layouts.ex:131
+#: lib/kiva_web/live/team_live/index.ex:8
+#: lib/kiva_web/live/team_live/index.ex:38
+#, elixir-autogen, elixir-format
+msgid "Lending teams"
+msgstr "Equipos de préstamos"
+
+#: lib/kiva_web/live/team_live/show.ex:103
+#, elixir-autogen, elixir-format
+msgid "Lent through this team"
+msgstr "Prestado a través de este equipo"
+
+#: lib/kiva_web/live/admin_live.ex:38
+#, elixir-autogen, elixir-format
+msgid "Loan approved and published."
+msgstr "Préstamo aprobado y publicado."
+
+#: lib/kiva_web/live/admin_live.ex:229
+#, elixir-autogen, elixir-format
+msgid "Loan review queue"
+msgstr "Cola de revisión de préstamos"
+
+#: lib/kiva_web/live/portfolio_live.ex:475
+#, elixir-autogen, elixir-format
+msgid "Loans supported"
+msgstr "Préstamos apoyados"
+
+#: lib/kiva_web/live/team_live/show.ex:118
+#, elixir-autogen, elixir-format
+msgid "Message board"
+msgstr "Muro de mensajes"
+
+#: lib/kiva_web/live/portal_live.ex:76
+#, elixir-autogen, elixir-format
+msgid "Messages of encouragement"
+msgstr "Mensajes de ánimo"
+
+#: lib/kiva_web/components/layouts.ex:40
+#: lib/kiva_web/live/portfolio_live.ex:31
+#: lib/kiva_web/live/portfolio_live.ex:409
+#: lib/kiva_web/live/portfolio_live.ex:457
+#, elixir-autogen, elixir-format
+msgid "My impact"
+msgstr "Mi impacto"
+
+#: lib/kiva_web/live/partner_live.ex:291
+#, elixir-autogen, elixir-format
+msgid "New loan"
+msgstr "Nuevo préstamo"
+
+#: lib/kiva_web/live/portal_live.ex:68
+#, elixir-autogen, elixir-format
+msgid "Next repayment"
+msgstr "Próximo pago"
+
+#: lib/kiva_web/live/admin_live.ex:512
+#, elixir-autogen, elixir-format
+msgid "No direct-grant outliers — everyone is within their role group."
+msgstr "No hay valores atípicos en las donaciones directas — todos están dentro de su grupo de roles."
+
+#: lib/kiva_web/live/admin_live.ex:232
+#, elixir-autogen, elixir-format
+msgid "No loans awaiting review."
+msgstr "No hay préstamos pendientes de revisión."
+
+#: lib/kiva_web/live/loan_live/show.ex:557
+#: lib/kiva_web/live/portal_live.ex:77
+#, elixir-autogen, elixir-format
+msgid "No messages yet."
+msgstr "Aún no hay mensajes."
+
+#: lib/kiva_web/live/notifications_live.ex:38
+#, elixir-autogen, elixir-format
+msgid "No notifications yet. Lend to a loan, then watch it fund and repay."
+msgstr "Aún no hay notificaciones. Apoya un préstamo y observa cómo se financia y se paga."
+
+#: lib/kiva_web/live/team_live/show.ex:129
+#, elixir-autogen, elixir-format
+msgid "No posts yet."
+msgstr "Aún no hay publicaciones."
+
+#: lib/kiva_web/live/partner_live.ex:147
+#, elixir-autogen, elixir-format
+msgid "Not ready to submit"
+msgstr "No listo para enviar"
+
+#: lib/kiva_web/live/admin_live.ex:324
+#, elixir-autogen, elixir-format
+msgid "Nothing awaiting translation review."
+msgstr "Nada pendiente de revisión de traducción."
+
+#: lib/kiva_web/live/notifications_live.ex:12
+#: lib/kiva_web/live/notifications_live.ex:34
+#, elixir-autogen, elixir-format
+msgid "Notifications"
+msgstr "Notificaciones"
+
+#: lib/kiva_web/live/admin_live.ex:509
+#, elixir-autogen, elixir-format
+msgid "Permission outliers"
+msgstr "Casos atípicos de permisos"
+
+#: lib/kiva_web/live/loan_live/show.ex:448
+#: lib/kiva_web/live/team_live/show.ex:126
+#, elixir-autogen, elixir-format
+msgid "Post"
+msgstr "Publicación"
+
+#: lib/kiva_web/live/admin_live.ex:331
+#, elixir-autogen, elixir-format
+msgid "Preview"
+msgstr "Vista previa"
+
+#: lib/kiva_web/live/team_live/index.ex:89
+#, elixir-autogen, elixir-format
+msgid "Private"
+msgstr "Privado"
+
+#: lib/kiva_web/live/team_live/index.ex:88
+#, elixir-autogen, elixir-format
+msgid "Public"
+msgstr "Público"
+
+#: lib/kiva_web/live/partner_live.ex:454
+#, elixir-autogen, elixir-format
+msgid "Public risk summary"
+msgstr "Resumen de riesgos público"
+
+#: lib/kiva_web/live/loan_live/show.ex:413
+#, elixir-autogen, elixir-format
+msgid "Record next repayment"
+msgstr "Registrar próximo pago"
+
+#: lib/kiva_web/live/admin_live.ex:355
+#, elixir-autogen, elixir-format
+msgid "Reject"
+msgstr "Rechazar"
+
+#: lib/kiva_web/live/team_live/index.ex:64
+#, elixir-autogen, elixir-format
+msgid "Relend →"
+msgstr "Reloan →"
+
+#: lib/kiva_web/components/app_components.ex:183
+#, elixir-autogen, elixir-format
+msgid "Repaid"
+msgstr "Pagado"
+
+#: lib/kiva_web/live/portfolio_live.ex:529
+#: lib/kiva_web/live/portfolio_live.ex:1026
+#: lib/kiva_web/live/portfolio_live.ex:1063
+#: lib/kiva_web/live/portfolio_live.ex:1113
+#: lib/kiva_web/live/team_live/index.ex:51
+#, elixir-autogen, elixir-format
+msgid "Repaid to you"
+msgstr "Pagado a ti"
+
+#: lib/kiva_web/live/loan_live/show.ex:92
+#, elixir-autogen, elixir-format
+msgid "Repayment recorded — lenders' balances updated."
+msgstr "Pago registrado — se actualizaron los saldos de los prestamistas."
+
+#: lib/kiva_web/live/admin_live.ex:254
+#: lib/kiva_web/live/admin_live.ex:261
+#, elixir-autogen, elixir-format
+msgid "Request changes"
+msgstr "Solicitar cambios"
+
+#: lib/kiva_web/live/partner_live.ex:359
+#, elixir-autogen, elixir-format
+msgid "Reuse suggestion"
+msgstr "Reutilizar sugerencia"
+
+#: lib/kiva_web/live/partner_live.ex:463
+#, elixir-autogen, elixir-format
+msgid "Review & submit"
+msgstr "Revisar y enviar"
+
+#: lib/kiva_web/live/admin_live.ex:303
+#: lib/kiva_web/live/admin_live.ex:520
+#, elixir-autogen, elixir-format
+msgid "Risk"
+msgstr "Riesgo"
+
+#: lib/kiva_web/live/partner_live.ex:459
+#, elixir-autogen, elixir-format
+msgid "Save draft"
+msgstr "Guardar borrador"
+
+#: lib/kiva_web/live/partner_live.ex:248
+#: lib/kiva_web/live/partner_live.ex:397
+#: lib/kiva_web/live/portfolio_live.ex:989
+#, elixir-autogen, elixir-format
+msgid "Sector"
+msgstr "Sector"
+
+#: lib/kiva_web/live/loan_live/show.ex:554
+#, elixir-autogen, elixir-format
+msgid "Send"
+msgstr "Enviar"
+
+#: lib/kiva_web/live/partner_live.ex:432
+#, elixir-autogen, elixir-format
+msgid "Short description"
+msgstr "Descripción breve"
+
+#: lib/kiva_web/live/partner_live.ex:408
+#, elixir-autogen, elixir-format
+msgid "Source language"
+msgstr "Idioma de origen"
+
+#: lib/kiva_web/live/partner_live.ex:465
+#, elixir-autogen, elixir-format
+msgid "Submit for staff review"
+msgstr "Enviar para revisión del equipo"
+
+#: lib/kiva_web/live/partner_live.ex:138
+#, elixir-autogen, elixir-format
+msgid "Submitted for staff review. Translation jobs queued."
+msgstr "Enviado para revisión del equipo. Trabajos de traducción en cola."
+
+#: lib/kiva_web/live/team_live/index.ex:103
+#, elixir-autogen, elixir-format
+msgid "Tagline"
+msgstr "Eslogan"
+
+#: lib/kiva_web/live/team_live/index.ex:83
+#, elixir-autogen, elixir-format
+msgid "Team name"
+msgstr "Nombre del equipo"
+
+#: lib/kiva_web/live/team_live/show.ex:11
+#, elixir-autogen, elixir-format
+msgid "Team not found."
+msgstr "Equipo no encontrado."
+
+#: lib/kiva_web/components/layouts.ex:33
+#, elixir-autogen, elixir-format
+msgid "Teams"
+msgstr "Equipos"
+
+#: lib/kiva_web/live/loan_live/show.ex:203
+#, elixir-autogen, elixir-format
+msgid "Thank you for lending"
+msgstr "Gracias por tu préstamo"
+
+#: lib/kiva_web/live/loan_live/show.ex:98
+#, elixir-autogen, elixir-format
+msgid "This loan is already fully repaid."
+msgstr "Este préstamo ya está completamente pagado."
+
+#: lib/kiva_web/live/partner_live.ex:422
+#, elixir-autogen, elixir-format
+msgid "Title"
+msgstr "Título"
+
+#: lib/kiva_web/live/basket_live.ex:105
+#, elixir-autogen, elixir-format
+msgid "Total"
+msgstr "Total"
+
+#: lib/kiva_web/live/portfolio_live.ex:469
+#: lib/kiva_web/live/team_live/index.ex:47
+#, elixir-autogen, elixir-format
+msgid "Total lent"
+msgstr "Total prestado"
+
+#: lib/kiva_web/live/admin_live.ex:56
+#, elixir-autogen, elixir-format
+msgid "Translation approved."
+msgstr "Traducción aprobada."
+
+#: lib/kiva_web/live/admin_live.ex:65
+#, elixir-autogen, elixir-format
+msgid "Translation rejected."
+msgstr "Traducción rechazada."
+
+#: lib/kiva_web/live/admin_live.ex:321
+#, elixir-autogen, elixir-format
+msgid "Translation review queue"
+msgstr "Cola de revisión de traducciones"
+
+#: lib/kiva_web/live/loan_live/show.ex:494
+#, elixir-autogen, elixir-format
+msgid "Trust & verification"
+msgstr "Confianza y verificación"
+
+#: lib/kiva_web/live/admin_live.ex:329
+#, elixir-autogen, elixir-format
+msgid "Type"
+msgstr "Tipo"
+
+#: lib/kiva_web/live/chat_live.ex:153
+#, elixir-autogen, elixir-format
+msgid "Type a message"
+msgstr "Escribe un mensaje"
+
+#: lib/kiva_web/live/partner_live.ex:364
+#, elixir-autogen, elixir-format
+msgid "Use prior terms"
+msgstr "Usar términos anteriores"
+
+#: lib/kiva_web/live/admin_live.ex:517
+#, elixir-autogen, elixir-format
+msgid "User"
+msgstr "Usuario"
+
+#: lib/kiva_web/live/loan_live/show.ex:511
+#, elixir-autogen, elixir-format
+msgid "Verification checks"
+msgstr "Verificaciones"
+
+#: lib/kiva_web/live/notifications_live.ex:55
+#, elixir-autogen, elixir-format
+msgid "View"
+msgstr "Ver"
+
+#: lib/kiva_web/live/loan_live/show.ex:211
+#, elixir-autogen, elixir-format
+msgid "View my impact"
+msgstr "Ver mi impacto"
+
+#: lib/kiva_web/live/portal_live.ex:47
+#, elixir-autogen, elixir-format
+msgid "Welcome"
+msgstr "Bienvenido"
+
+#: lib/kiva_web/live/loan_live/show.ex:551
+#, elixir-autogen, elixir-format
+msgid "Write a kind message…"
+msgstr "Escribe un mensaje amable…"
+
+#: lib/kiva_web/live/team_live/show.ex:123
+#, elixir-autogen, elixir-format
+msgid "Write an encouragement…"
+msgstr "Escribe un mensaje de ánimo…"
+
+#: lib/kiva_web/live/portfolio_live.ex:421
+#, elixir-autogen, elixir-format
+msgid "You haven't lent yet. Find a borrower to support."
+msgstr "Aún no has prestado. Encuentra un prestatario para apoyar."
+
+#: lib/kiva_web/live/portfolio_live.ex:1025
+#: lib/kiva_web/live/portfolio_live.ex:1060
+#: lib/kiva_web/live/portfolio_live.ex:1111
+#, elixir-autogen, elixir-format
+msgid "You lent"
+msgstr "Prestaste"
+
+#: lib/kiva_web/live/basket_live.ex:32
+#, elixir-autogen, elixir-format
+msgid "You lent to %{count} loans! 🎉"
+msgstr "¡Prestaste a %{count} préstamos! 🎉"
+
+#: lib/kiva_web/live/loan_live/show.ex:206
+#, elixir-autogen, elixir-format
+msgid "You moved"
+msgstr "Te mudaste"
+
+#: lib/kiva_web/live/loan_live/show.ex:366
+#, elixir-autogen, elixir-format
+msgid "You'll lend"
+msgstr "Prestarás"
+
+#: lib/kiva_web/live/portal_live.ex:43
+#, elixir-autogen, elixir-format
+msgid "Your account is not linked to a borrower profile yet."
+msgstr "Tu cuenta aún no está vinculada a un perfil de prestatario."
+
+#: lib/kiva_web/live/partner/repayments_live.ex:68
+#: lib/kiva_web/live/partner_live.ex:187
+#, elixir-autogen, elixir-format
+msgid "Your account is not linked to a lending partner."
+msgstr "Tu cuenta no está vinculada a un socio de préstamos."
+
+#: lib/kiva_web/live/basket_live.ex:70
+#, elixir-autogen, elixir-format
+msgid "Your basket is empty."
+msgstr "Tu cesta está vacía."
+
+#: lib/kiva_web/live/loan_live/show.ex:45
+#, elixir-autogen, elixir-format
+msgid "Your encouragement was sent and translated for the borrower."
+msgstr "Tu mensaje de ánimo fue enviado y traducido para el prestatario."
+
+#: lib/kiva_web/live/basket_live.ex:64
+#, elixir-autogen, elixir-format
+msgid "Your lending basket"
+msgstr "Tu cesta de préstamos"
+
+#: lib/kiva_web/live/team_live/index.ex:43
+#, elixir-autogen, elixir-format
+msgid "Your lendings"
+msgstr "Tus préstamos"
+
+#: lib/kiva_web/components/app_components.ex:60
+#: lib/kiva_web/components/app_components.ex:147
+#: lib/kiva_web/live/loan_live/show.ex:301
+#, elixir-autogen, elixir-format
+msgid "days left"
+msgstr "días restantes"
+
+#: lib/kiva_web/live/loan_live/show.ex:206
+#, elixir-autogen, elixir-format
+msgid "from"
+msgstr "de"
+
+#: lib/kiva_web/i18n_strings.ex:84
+#: lib/kiva_web/live/loan_live/show.ex:206
+#, elixir-autogen, elixir-format
+msgid "funded"
+msgstr "financiado"
+
+#: lib/kiva_web/components/app_components.ex:57
+#: lib/kiva_web/components/app_components.ex:144
+#: lib/kiva_web/live/loan_live/show.ex:291
+#, elixir-autogen, elixir-format
+msgid "lenders"
+msgstr "prestamistas"
+
+#: lib/kiva_web/live/team_live/index.ex:153
+#, elixir-autogen, elixir-format
+msgid "lent"
+msgstr "prestado"
+
+#: lib/kiva_web/live/team_live/show.ex:106
+#, elixir-autogen, elixir-format
+msgid "lent across"
+msgstr "prestado en"
+
+#: lib/kiva_web/live/team_live/show.ex:106
+#, elixir-autogen, elixir-format
+msgid "loans"
+msgstr "préstamos"
+
+#: lib/kiva_web/live/team_live/index.ex:149
+#: lib/kiva_web/live/team_live/show.ex:96
+#, elixir-autogen, elixir-format
+msgid "members"
+msgstr "miembros"
+
+#: lib/kiva_web/live/portfolio_live.ex:1119
+#, elixir-autogen, elixir-format
+msgid "repayments"
+msgstr "reembolsos"
+
+#: lib/kiva_web/live/loan_live/show.ex:370
+#, elixir-autogen, elixir-format
+msgid "to"
+msgstr "a"
+
+#: lib/kiva_web/live/loan_live/show.ex:537
+#, elixir-autogen, elixir-format
+msgid "verified"
+msgstr "verificado"
+
+#: lib/kiva_web/components/layouts.ex:119
+#, elixir-autogen, elixir-format
+msgid "A reimagined, multilingual, chat-first lending network. Loans that change lives — $25 at a time."
+msgstr "Una red de préstamos reimaginada, multilingüe y centrada en chat. Préstamos que cambian vidas — $25 a la vez."
+
+#: lib/kiva_web/live/admin_live.ex:484
+#, elixir-autogen, elixir-format
+msgid "AI moderator"
+msgstr "Moderador de IA"
+
+#: lib/kiva_web/live/admin_live.ex:213
+#: lib/kiva_web/live/admin_live.ex:549
+#, elixir-autogen, elixir-format
+msgid "AI tool calls"
+msgstr "Llamadas a herramientas de IA"
+
+#: lib/kiva_web/live/loan_live/index.ex:184
+#: lib/kiva_web/live/partner_live.ex:198
+#, elixir-autogen, elixir-format
+msgid "Active loans"
+msgstr "Préstamos activos"
+
+#: lib/kiva_web/live/partner_live.ex:265
+#, elixir-autogen, elixir-format
+msgid "Add borrower"
+msgstr "Agregar prestatario"
+
+#: lib/kiva_web/live/partner_live.ex:336
+#, elixir-autogen, elixir-format
+msgid "Address changes"
+msgstr "Cambios de dirección"
+
+#: lib/kiva_web/live/admin_live.ex:162
+#, elixir-autogen, elixir-format
+msgid "Advance a month"
+msgstr "Anticipar un mes"
+
+#: lib/kiva_web/live/admin_live.ex:158
+#, elixir-autogen, elixir-format
+msgid "Advance every active loan one step: fund → disburse → repay → complete."
+msgstr "Avanzar cada préstamo activo un paso: financiar → desembolsar → reembolsar → completar."
+
+#: lib/kiva_web/live/admin_live.ex:72
+#, elixir-autogen, elixir-format
+msgid "Advanced the demo"
+msgstr "Avanzó la demostración"
+
+#: lib/kiva_web/live/admin_live.ex:559
+#, elixir-autogen, elixir-format
+msgid "Allowed"
+msgstr "Permitido"
+
+#: lib/kiva_web/live/admin_live.ex:492
+#, elixir-autogen, elixir-format
+msgid "Approve & deliver"
+msgstr "Aprobar y entregar"
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:75
+#, elixir-autogen, elixir-format
+msgid "As the borrower repays, your balance grows back — ready to lend again."
+msgstr "A medida que el prestatario reembolsa, tu saldo se recupera — listo para prestar de nuevo."
+
+#: lib/kiva_web/live/partner_live.ex:86
+#, elixir-autogen, elixir-format
+msgid "Borrower added."
+msgstr "Prestatario añadido."
+
+#: lib/kiva_web/live/partner_live.ex:238
+#, elixir-autogen, elixir-format
+msgid "Borrower name"
+msgstr "Nombre del prestatario"
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:30
+#, elixir-autogen, elixir-format
+msgid "Borrowers fundraising now"
+msgstr "Prestatarios recaudando fondos ahora"
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:10
+#, elixir-autogen, elixir-format
+msgid "Borrowers, lenders, partners and staff — connected through trust, capital and encouragement. Lend as little as $25 and watch it ripple."
+msgstr "Prestatarios, prestamistas, socios y personal — conectados por la confianza, el capital y el apoyo. Presta desde tan solo 25 $ y observa cómo se expande."
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:53
+#, elixir-autogen, elixir-format
+msgid "Browse real stories across sectors and countries — in your language."
+msgstr "Explora historias reales en diversos sectores y países — en tu idioma."
+
+#: lib/kiva_web/live/admin_live.ex:47
+#, elixir-autogen, elixir-format
+msgid "Changes requested — the partner was notified."
+msgstr "Cambios solicitados — se notificó al socio."
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:51
+#, elixir-autogen, elixir-format
+msgid "Choose a borrower"
+msgstr "Elegir un prestatario"
+
+#: lib/kiva_web/live/admin_live.ex:593
+#, elixir-autogen, elixir-format
+msgid "Conversation"
+msgstr "Conversación"
+
+#: lib/kiva_web/live/admin_live.ex:369
+#: lib/kiva_web/live/admin_live.ex:417
+#: lib/kiva_web/live/portfolio_live.ex:987
+#, elixir-autogen, elixir-format
+msgid "Country"
+msgstr "País"
+
+#: lib/kiva_web/live/admin_live.ex:609
+#, elixir-autogen, elixir-format
+msgid "DENIED: "
+msgstr "RECHAZADO: "
+
+#: lib/kiva_web/components/layouts.ex:147
+#, elixir-autogen, elixir-format
+msgid "Demo data only — no real money moves. Repayments are simulated."
+msgstr "Solo datos de demostración — no se mueve dinero real. Los reembolsos son simulados."
+
+#: lib/kiva_web/live/admin_live.ex:156
+#, elixir-autogen, elixir-format
+msgid "Demo time machine"
+msgstr "Máquina del tiempo de demostración"
+
+#: lib/kiva_web/live/loan_live/show.ex:75
+#, elixir-autogen, elixir-format
+msgid "Disbursal recorded — lenders were notified."
+msgstr "Desembolso registrado — se notificó a los prestamistas."
+
+#: lib/kiva_web/live/admin_live.ex:168
+#, elixir-autogen, elixir-format
+msgid "Distribution analytics"
+msgstr "Análisis de distribución"
+
+#: lib/kiva_web/live/admin_live.ex:467
+#, elixir-autogen, elixir-format
+msgid "Encouragement moderation"
+msgstr "Moderación de mensajes de ánimo"
+
+#: lib/kiva_web/components/layouts.ex:125
+#, elixir-autogen, elixir-format
+msgid "Explore"
+msgstr "Explorar"
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:64
+#, elixir-autogen, elixir-format
+msgid "Fund a loan on your own or with a team, and send a note of encouragement."
+msgstr "Financia un préstamo de forma individual o en equipo, y envía un mensaje de ánimo."
+
+#: lib/kiva_web/live/admin_live.ex:192
+#, elixir-autogen, elixir-format
+msgid "Funding raised by sector"
+msgstr "Fondos recaudados por sector"
+
+#: lib/kiva_web/i18n_strings.ex:43
+#: lib/kiva_web/live/loan_live/index.ex:200
+#: lib/kiva_web/live/partner_live.ex:208
+#, elixir-autogen, elixir-format
+msgid "Fundraising"
+msgstr "Recaudación de fondos"
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:73
+#, elixir-autogen, elixir-format
+msgid "Get repaid, relend"
+msgstr "Recibe el pago, vuelve a prestar"
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:43
+#, elixir-autogen, elixir-format
+msgid "How it works"
+msgstr "Cómo funciona"
+
+#: lib/kiva_web/components/layouts.ex:144
+#, elixir-autogen, elixir-format
+msgid "In every language"
+msgstr "En todos los idiomas"
+
+#: lib/kiva_web/live/admin_live.ex:582
+#, elixir-autogen, elixir-format
+msgid "Inspect"
+msgstr "Revisar"
+
+#: lib/kiva_web/components/app_components.ex:67
+#, elixir-autogen, elixir-format
+msgid "Lend"
+msgstr "Prestar"
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:62
+#, elixir-autogen, elixir-format
+msgid "Lend $25"
+msgstr "Presta $25"
+
+#: lib/kiva_web/live/loan_live/show.ex:393
+#, elixir-autogen, elixir-format
+msgid "Lend to"
+msgstr "Prestar a"
+
+#: lib/kiva_web/live/admin_live.ex:182
+#, elixir-autogen, elixir-format
+msgid "Loans by country"
+msgstr "Préstamos por país"
+
+#: lib/kiva_web/live/admin_live.ex:172
+#, elixir-autogen, elixir-format
+msgid "Loans by status"
+msgstr "Préstamos por estado"
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:7
+#, elixir-autogen, elixir-format
+msgid "Loans that change lives — in every language"
+msgstr "Préstamos que cambian vidas — en todos los idiomas"
+
+#: lib/kiva_web/live/portfolio_live.ex:917
+#, elixir-autogen, elixir-format
+msgid "Loans you've touched"
+msgstr "Préstamos que has apoyado"
+
+#: lib/kiva_web/live/admin_live.ex:115
+#, elixir-autogen, elixir-format
+msgid "Message approved and delivered to the borrower."
+msgstr "Mensaje aprobado y entregado al prestatario."
+
+#: lib/kiva_web/live/admin_live.ex:119
+#, elixir-autogen, elixir-format
+msgid "Message kept blocked."
+msgstr "Mensaje mantenido bloqueado."
+
+#: lib/kiva_web/live/admin_live.ex:294
+#, elixir-autogen, elixir-format
+msgid "Missing"
+msgstr "Falta"
+
+#: lib/kiva_web/live/admin_live.ex:552
+#, elixir-autogen, elixir-format
+msgid "No AI tool calls recorded yet."
+msgstr "Aún no se han registrado llamadas a herramientas de IA."
+
+#: lib/kiva_web/live/admin_live.ex:470
+#, elixir-autogen, elixir-format
+msgid "No held messages — the AI moderator approved everything."
+msgstr "No hay mensajes retenidos — el moderador de IA aprobó todo."
+
+#: lib/kiva_web/live/admin_live.ex:645
+#, elixir-autogen, elixir-format
+msgid "No matching events."
+msgstr "No hay eventos coincidentes."
+
+#: lib/kiva_web/live/loan_live/show.ex:451
+#, elixir-autogen, elixir-format
+msgid "No updates yet."
+msgstr "Aún no hay actualizaciones."
+
+#: lib/kiva_web/controllers/session_html/new.html.heex:37
+#, elixir-autogen, elixir-format
+msgid "Or try a demo account"
+msgstr "O prueba una cuenta de demostración"
+
+#: lib/kiva_web/live/loan_live/show.ex:441
+#: lib/kiva_web/live/loan_live/show.ex:460
+#, elixir-autogen, elixir-format
+msgid "Outcome"
+msgstr "Resultado"
+
+#: lib/kiva_web/i18n_strings.ex:51
+#: lib/kiva_web/live/admin_live.ex:368
+#: lib/kiva_web/live/portfolio_live.ex:990
+#, elixir-autogen, elixir-format
+msgid "Partner"
+msgstr "Socio"
+
+#: lib/kiva_web/live/admin_live.ex:97
+#, elixir-autogen, elixir-format
+msgid "Partner status updated."
+msgstr "Estado del socio actualizado."
+
+#: lib/kiva_web/live/admin_live.ex:364
+#, elixir-autogen, elixir-format
+msgid "Partners & trustees"
+msgstr "Socios y administradores"
+
+#: lib/kiva_web/live/admin_live.ex:88
+#, elixir-autogen, elixir-format
+msgid "Permission revoked."
+msgstr "Permiso revocado."
+
+#: lib/kiva_web/live/partner_live.ex:202
+#, elixir-autogen, elixir-format
+msgid "Raised for my borrowers"
+msgstr "Recaudado para mis prestatarios"
+
+#: lib/kiva_web/live/admin_live.ex:406
+#: lib/kiva_web/live/admin_live.ex:452
+#, elixir-autogen, elixir-format
+msgid "Reactivate"
+msgstr "Reactivar"
+
+#: lib/kiva_web/live/loan_live/show.ex:425
+#, elixir-autogen, elixir-format
+msgid "Record disbursal"
+msgstr "Registrar desembolso"
+
+#: lib/kiva_web/live/partner/repayments_live.ex:107
+#, elixir-autogen, elixir-format
+msgid "Record repayment"
+msgstr "Registrar reembolso"
+
+#: lib/kiva_web/live/admin_live.ex:306
+#, elixir-autogen, elixir-format
+msgid "Repayment"
+msgstr "Reembolso"
+
+#: lib/kiva_web/live/partner/repayments_live.ex:31
+#, elixir-autogen, elixir-format
+msgid "Repayment recorded — lenders were notified."
+msgstr "Reembolso registrado — se notificó a los prestamistas."
+
+#: lib/kiva_web/live/partner/repayments_live.ex:13
+#: lib/kiva_web/live/partner/repayments_live.ex:64
+#: lib/kiva_web/live/partner_live.ex:212
+#, elixir-autogen, elixir-format
+msgid "Repayments due"
+msgstr "Reembolsos por vencer"
+
+#: lib/kiva_web/live/admin_live.ex:290
+#, elixir-autogen, elixir-format
+msgid "Review details"
+msgstr "Revisar detalles"
+
+#: lib/kiva_web/live/admin_live.ex:539
+#: lib/kiva_web/live/developer/app_live.ex:140
+#, elixir-autogen, elixir-format
+msgid "Revoke"
+msgstr "Revocar"
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:33
+#, elixir-autogen, elixir-format
+msgid "See all"
+msgstr "Ver todo"
+
+#: lib/kiva_web/live/loan_live/show.ex:445
+#, elixir-autogen, elixir-format
+msgid "Share progress with lenders…"
+msgstr "Compartir el progreso con los prestamistas…"
+
+#: lib/kiva_web/live/partner_live.ex:258
+#, elixir-autogen, elixir-format
+msgid "Short bio"
+msgstr "Biografía corta"
+
+#: lib/kiva_web/controllers/session_html/new.html.heex:8
+#, elixir-autogen, elixir-format
+msgid "Sign in to lend — or try a demo account below. All passwords are"
+msgstr "Inicia sesión para prestar — o prueba una cuenta de demostración a continuación. Todas las contraseñas son"
+
+#: lib/kiva_web/live/partner_live.ex:193
+#, elixir-autogen, elixir-format
+msgid "Start a new loan application for one of your borrowers, or onboard a new one."
+msgstr "Inicia una nueva solicitud de préstamo para uno de tus prestatarios o da de alta a uno nuevo."
+
+#: lib/kiva_web/live/admin_live.ex:297
+#, elixir-autogen, elixir-format
+msgid "Story"
+msgstr "Historia"
+
+#: lib/kiva_web/live/admin_live.ex:558
+#, elixir-autogen, elixir-format
+msgid "Surface / op"
+msgstr "Superficie / op"
+
+#: lib/kiva_web/live/admin_live.ex:397
+#: lib/kiva_web/live/admin_live.ex:443
+#, elixir-autogen, elixir-format
+msgid "Suspend"
+msgstr "Suspender"
+
+#: lib/kiva_web/live/admin_live.ex:459
+#, elixir-autogen, elixir-format
+msgid "Suspension is a status flag in this demo — it does not cascade to hide existing loans."
+msgstr "La suspensión es una marca de estado en esta demo — no se propaga para ocultar los préstamos existentes."
+
+#: lib/kiva_web/live/admin_live.ex:557
+#, elixir-autogen, elixir-format
+msgid "Tool"
+msgstr "Herramienta"
+
+#: lib/kiva_web/live/admin_live.ex:603
+#, elixir-autogen, elixir-format
+msgid "Tool calls"
+msgstr "Llamadas a herramientas"
+
+#: lib/kiva_web/live/admin_live.ex:203
+#, elixir-autogen, elixir-format
+msgid "Translation coverage by locale"
+msgstr "Cobertura de traducción por localización"
+
+#: lib/kiva_web/live/admin_live.ex:309
+#: lib/kiva_web/live/loan_live/show.ex:792
+#, elixir-autogen, elixir-format
+msgid "Translations"
+msgstr "Traducciones"
+
+#: lib/kiva_web/components/app_components.ex:365
+#: lib/kiva_web/live/admin_live.ex:370
+#, elixir-autogen, elixir-format
+msgid "Trust model"
+msgstr "Modelo de confianza"
+
+#: lib/kiva_web/live/admin_live.ex:416
+#, elixir-autogen, elixir-format
+msgid "Trustee"
+msgstr "Garante"
+
+#: lib/kiva_web/live/admin_live.ex:106
+#, elixir-autogen, elixir-format
+msgid "Trustee status updated."
+msgstr "Estado del garante actualizado."
+
+#: lib/kiva_web/live/loan_live/show.ex:440
+#: lib/kiva_web/live/loan_live/show.ex:460
+#, elixir-autogen, elixir-format
+msgid "Update"
+msgstr "Actualización"
+
+#: lib/kiva_web/live/loan_live/show.ex:169
+#, elixir-autogen, elixir-format
+msgid "Update posted — lenders were notified."
+msgstr "Actualización publicada — se notificó a los prestamistas."
+
+#: lib/kiva_web/live/loan_live/show.ex:433
+#, elixir-autogen, elixir-format
+msgid "Updates from the field"
+msgstr "Actualizaciones desde el terreno"
+
+#: lib/kiva_web/live/admin_live.ex:499
+#, elixir-autogen, elixir-format
+msgid "Uphold block"
+msgstr "Bloque de garantía"
+
+#: lib/kiva_web/live/admin_live.ex:300
+#, elixir-autogen, elixir-format
+msgid "Use"
+msgstr "Usar"
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:23
+#, elixir-autogen, elixir-format
+msgid "Viewing in"
+msgstr "Viendo en"
+
+#: lib/kiva_web/controllers/session_html/new.html.heex:5
+#, elixir-autogen, elixir-format
+msgid "Welcome back"
+msgstr "Bienvenido de nuevo"
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:84
+#, elixir-autogen, elixir-format
+msgid "all passwords are"
+msgstr "todas las contraseñas son"
+
+#: lib/kiva_web/live/admin_live.ex:608
+#, elixir-autogen, elixir-format
+msgid "allowed"
+msgstr "permitido"
+
+#: lib/kiva_web/live/admin_live.ex:572
+#, elixir-autogen, elixir-format
+msgid "denied"
+msgstr "denegado"
+
+#: lib/kiva_web/live/admin_live.ex:216
+#, elixir-autogen, elixir-format
+msgid "none yet"
+msgstr "ninguno aún"
+
+#: lib/kiva_web/live/partner/repayments_live.ex:97
+#, elixir-autogen, elixir-format
+msgid "repaid"
+msgstr "Repagado"
+
+#: lib/kiva_web/live/admin_live.ex:570
+#, elixir-autogen, elixir-format
+msgid "yes"
+msgstr "Sí"
+
+#: lib/kiva_web/i18n_strings.ex:103
+#, elixir-autogen, elixir-format
+msgid "A loan you supported is now fully funded."
+msgstr "Un préstamo que apoyaste ahora está completamente financiado."
+
+#: lib/kiva_web/i18n_strings.ex:107
+#, elixir-autogen, elixir-format
+msgid "A loan you supported received a repayment — your balance to relend grew."
+msgstr "Un préstamo que apoyaste recibió un pago — tu saldo para volver a prestar creció."
+
+#: lib/kiva_web/i18n_strings.ex:68
+#, elixir-autogen, elixir-format
+msgid "Approved through community endorsements rather than formal credit history."
+msgstr "Aprobado mediante aval comunitario en lugar de historial crediticio formal."
+
+#: lib/kiva_web/i18n_strings.ex:75
+#, elixir-autogen, elixir-format
+msgid "Awaiting disbursal"
+msgstr "Pendiente de desembolso"
+
+#: lib/kiva_web/i18n_strings.ex:67
+#, elixir-autogen, elixir-format
+msgid "Backed by a community trustee who vouches for the borrower."
+msgstr "Respaldado por un fideicomisario comunitario que avala al prestatario."
+
+#: lib/kiva_web/i18n_strings.ex:61
+#, elixir-autogen, elixir-format
+msgid "Blockchain-attested"
+msgstr "Atestiguado en blockchain"
+
+#: lib/kiva_web/i18n_strings.ex:112
+#, elixir-autogen, elixir-format
+msgid "Changes requested on your loan"
+msgstr "Cambios solicitados en tu préstamo"
+
+#: lib/kiva_web/i18n_strings.ex:70
+#, elixir-autogen, elixir-format
+msgid "Combines partner facilitation with community trust signals."
+msgstr "Combina la facilitación de socios con señales de confianza comunitaria."
+
+#: lib/kiva_web/i18n_strings.ex:58
+#, elixir-autogen, elixir-format
+msgid "Direct"
+msgstr "Directo"
+
+#: lib/kiva_web/i18n_strings.ex:76
+#, elixir-autogen, elixir-format
+msgid "Disbursed"
+msgstr "Desembolsado"
+
+#: lib/kiva_web/i18n_strings.ex:102
+#, elixir-autogen, elixir-format
+msgid "Fully funded! 🎉"
+msgstr "¡Completamente financiado! 🎉"
+
+#: lib/kiva_web/i18n_strings.ex:14
+#, elixir-autogen, elixir-format
+msgid "Guatemala"
+msgstr "Guatemala"
+
+#: lib/kiva_web/i18n_strings.ex:62
+#, elixir-autogen, elixir-format
+msgid "Hybrid"
+msgstr "Híbrido"
+
+#: lib/kiva_web/i18n_strings.ex:15
+#, elixir-autogen, elixir-format
+msgid "Kenya"
+msgstr "Kenia"
+
+#: lib/kiva_web/i18n_strings.ex:69
+#, elixir-autogen, elixir-format
+msgid "Loan integrity recorded with a tamper-evident attestation."
+msgstr "Integridad del préstamo registrada con una constancia a prueba de manipulaciones."
+
+#: lib/kiva_web/i18n_strings.ex:66
+#, elixir-autogen, elixir-format
+msgid "Made directly to the borrower with social underwriting."
+msgstr "Entregado directamente al prestatario con aval social."
+
+#: lib/kiva_web/i18n_strings.ex:65
+#, elixir-autogen, elixir-format
+msgid "Managed by a local field partner who disburses funds and collects repayment."
+msgstr "Gestionado por un socio local que desembolsa los fondos y cobra el reembolso."
+
+#: lib/kiva_web/i18n_strings.ex:17
+#, elixir-autogen, elixir-format
+msgid "Netherlands"
+msgstr "Países Bajos"
+
+#: lib/kiva_web/i18n_strings.ex:108
+#, elixir-autogen, elixir-format
+msgid "Outcome on a loan you supported 🌱"
+msgstr "Resultado de un préstamo que apoyaste 🌱"
+
+#: lib/kiva_web/i18n_strings.ex:57
+#, elixir-autogen, elixir-format
+msgid "Partner-facilitated"
+msgstr "Facilitado por un socio"
+
+#: lib/kiva_web/i18n_strings.ex:74
+#, elixir-autogen, elixir-format
+msgid "Post-disbursed"
+msgstr "Post-desembolso"
+
+#: lib/kiva_web/i18n_strings.ex:73
+#, elixir-autogen, elixir-format
+msgid "Pre-disbursed"
+msgstr "Pre-desembolso"
+
+#: lib/kiva_web/i18n_strings.ex:106
+#, elixir-autogen, elixir-format
+msgid "Repayment received"
+msgstr "Pago recibido"
+
+#: lib/kiva_web/i18n_strings.ex:60
+#, elixir-autogen, elixir-format
+msgid "Social underwriting"
+msgstr "Aval social"
+
+#: lib/kiva_web/i18n_strings.ex:113
+#, elixir-autogen, elixir-format
+msgid "Staff requested changes before this loan can be published."
+msgstr "El personal solicitó cambios antes de que este préstamo pueda publicarse."
+
+#: lib/kiva_web/i18n_strings.ex:105
+#, elixir-autogen, elixir-format
+msgid "The funds you helped provide were disbursed."
+msgstr "Los fondos que ayudaste a proporcionar fueron desembolsados."
+
+#: lib/kiva_web/i18n_strings.ex:59
+#, elixir-autogen, elixir-format
+msgid "Trustee-backed"
+msgstr "Respaldado por un fideicomisario"
+
+#: lib/kiva_web/i18n_strings.ex:16
+#, elixir-autogen, elixir-format
+msgid "United States"
+msgstr "Estados Unidos"
+
+#: lib/kiva_web/i18n_strings.ex:109
+#, elixir-autogen, elixir-format
+msgid "Update on a loan you supported"
+msgstr "Actualización sobre un préstamo que apoyaste"
+
+#: lib/kiva_web/i18n_strings.ex:110
+#, elixir-autogen, elixir-format
+msgid "Your loan is live! 🎉"
+msgstr "¡Tu préstamo ya está activo! 🎉"
+
+#: lib/kiva_web/i18n_strings.ex:104
+#, elixir-autogen, elixir-format
+msgid "Your loan reached the borrower 💸"
+msgstr "Tu préstamo llegó al prestatario 💸"
+
+#: lib/kiva_web/i18n_strings.ex:111
+#, elixir-autogen, elixir-format
+msgid "Your loan was approved and is now fundraising."
+msgstr "Tu préstamo fue aprobado y ahora está en campaña de financiación."
+
+#: lib/kiva_web/i18n_strings.ex:95
+#: lib/kiva_web/live/developer/app_live.ex:126
+#, elixir-autogen, elixir-format
+msgid "active"
+msgstr "activo"
+
+#: lib/kiva_web/i18n_strings.ex:89
+#, elixir-autogen, elixir-format
+msgid "approved"
+msgstr "aprobado"
+
+#: lib/kiva_web/i18n_strings.ex:90
+#, elixir-autogen, elixir-format
+msgid "blocked"
+msgstr "bloqueado"
+
+#: lib/kiva_web/i18n_strings.ex:82
+#, elixir-autogen, elixir-format
+msgid "changes requested"
+msgstr "cambios solicitados"
+
+#: lib/kiva_web/i18n_strings.ex:85
+#, elixir-autogen, elixir-format
+msgid "completed"
+msgstr "completado"
+
+#: lib/kiva_web/i18n_strings.ex:79
+#, elixir-autogen, elixir-format
+msgid "draft"
+msgstr "borrador"
+
+#: lib/kiva_web/i18n_strings.ex:99
+#, elixir-autogen, elixir-format
+msgid "endorsed"
+msgstr "respaldado"
+
+#: lib/kiva_web/i18n_strings.ex:98
+#, elixir-autogen, elixir-format
+msgid "failed"
+msgstr "fallido"
+
+#: lib/kiva_web/i18n_strings.ex:91
+#, elixir-autogen, elixir-format
+msgid "flagged"
+msgstr "señalado"
+
+#: lib/kiva_web/i18n_strings.ex:83
+#, elixir-autogen, elixir-format
+msgid "fundraising"
+msgstr "recaudación de fondos"
+
+#: lib/kiva_web/i18n_strings.ex:93
+#, elixir-autogen, elixir-format
+msgid "machine"
+msgstr "automático"
+
+#: lib/kiva_web/i18n_strings.ex:94
+#, elixir-autogen, elixir-format
+msgid "needs review"
+msgstr "necesita revisión"
+
+#: lib/kiva_web/i18n_strings.ex:87
+#, elixir-autogen, elixir-format
+msgid "paid"
+msgstr "pagado"
+
+#: lib/kiva_web/i18n_strings.ex:97
+#, elixir-autogen, elixir-format
+msgid "passed"
+msgstr "validado"
+
+#: lib/kiva_web/i18n_strings.ex:88
+#, elixir-autogen, elixir-format
+msgid "pending"
+msgstr "pendiente"
+
+#: lib/kiva_web/i18n_strings.ex:92
+#, elixir-autogen, elixir-format
+msgid "rejected"
+msgstr "rechazado"
+
+#: lib/kiva_web/i18n_strings.ex:86
+#, elixir-autogen, elixir-format
+msgid "scheduled"
+msgstr "programado"
+
+#: lib/kiva_web/i18n_strings.ex:81
+#, elixir-autogen, elixir-format
+msgid "staff review"
+msgstr "revisión del personal"
+
+#: lib/kiva_web/i18n_strings.ex:80
+#, elixir-autogen, elixir-format
+msgid "submitted to staff"
+msgstr "enviado al personal"
+
+#: lib/kiva_web/i18n_strings.ex:96
+#, elixir-autogen, elixir-format
+msgid "suspended"
+msgstr "suspendido"
+
+#: lib/kiva_web/live/loan_live/index.ex:173
+#, elixir-autogen, elixir-format
+msgid "Choose a borrower whose story moves you. Every loan is backed by trust."
+msgstr "Elige a un prestatario cuya historia te inspire. Cada préstamo está respaldado por la confianza."
+
+#: lib/kiva_web/live/loan_live/index.ex:188
+#, elixir-autogen, elixir-format
+msgid "Languages"
+msgstr "Idiomas"
+
+#: lib/kiva_web/live/loan_live/index.ex:170
+#, elixir-autogen, elixir-format
+msgid "Lending that builds resilient communities."
+msgstr "Préstamos que construyen comunidades resilientes."
+
+#: lib/kiva_web/live/partner_live.ex:223
+#: lib/kiva_web/live/partner_live.ex:229
+#, elixir-autogen, elixir-format
+msgid "Onboard a new borrower"
+msgstr "Incorporar a un nuevo prestatario"
+
+#: lib/kiva_web/live/loan_live/index.ex:180
+#, elixir-autogen, elixir-format
+msgid "Raised in the demo"
+msgstr "Recaudado en la demo"
+
+#: lib/kiva_web/live/admin_live.ex:280
+#, elixir-autogen, elixir-format
+msgid "Send back to partner"
+msgstr "Enviar de vuelta al socio"
+
+#: lib/kiva_web/i18n_strings.ex:46
+#: lib/kiva_web/live/loan_live/index.ex:205
+#, elixir-autogen, elixir-format
+msgid "All"
+msgstr "Todos"
+
+#: lib/kiva_web/i18n_strings.ex:35
+#, elixir-autogen, elixir-format
+msgid "Behind on payments"
+msgstr "Atrasado en pagos"
+
+#: lib/kiva_web/i18n_strings.ex:26
+#, elixir-autogen, elixir-format
+msgid "Bolivia"
+msgstr "Bolivia"
+
+#: lib/kiva_web/i18n_strings.ex:22
+#, elixir-autogen, elixir-format
+msgid "Cambodia"
+msgstr "Camboya"
+
+#: lib/kiva_web/i18n_strings.ex:44
+#: lib/kiva_web/live/loan_live/index.ex:202
+#, elixir-autogen, elixir-format
+msgid "Completed"
+msgstr "Completado"
+
+#: lib/kiva_web/i18n_strings.ex:36
+#: lib/kiva_web/live/loan_live/index.ex:204
+#, elixir-autogen, elixir-format
+msgid "Defaulted"
+msgstr "Impagado"
+
+#: lib/kiva_web/i18n_strings.ex:45
+#: lib/kiva_web/live/loan_live/index.ex:203
+#, elixir-autogen, elixir-format
+msgid "Delinquent"
+msgstr "En mora"
+
+#: lib/kiva_web/i18n_strings.ex:37
+#, elixir-autogen, elixir-format
+msgid "Draft"
+msgstr "Borrador"
+
+#: lib/kiva_web/i18n_strings.ex:27
+#, elixir-autogen, elixir-format
+msgid "Ecuador"
+msgstr "Ecuador"
+
+#: lib/kiva_web/components/app_components.ex:329
+#: lib/kiva_web/i18n_strings.ex:32
+#, elixir-autogen, elixir-format
+msgid "Funded"
+msgstr "Financiado"
+
+#: lib/kiva_web/i18n_strings.ex:19
+#, elixir-autogen, elixir-format
+msgid "Jordan"
+msgstr "Jordania"
+
+#: lib/kiva_web/i18n_strings.ex:23
+#, elixir-autogen, elixir-format
+msgid "Nicaragua"
+msgstr "Nicaragua"
+
+#: lib/kiva_web/i18n_strings.ex:18
+#, elixir-autogen, elixir-format
+msgid "Peru"
+msgstr "Perú"
+
+#: lib/kiva_web/i18n_strings.ex:21
+#, elixir-autogen, elixir-format
+msgid "Philippines"
+msgstr "Filipinas"
+
+#: lib/kiva_web/i18n_strings.ex:34
+#, elixir-autogen, elixir-format
+msgid "Repaid in full"
+msgstr "Pagado en su totalidad"
+
+#: lib/kiva_web/i18n_strings.ex:33
+#: lib/kiva_web/live/loan_live/index.ex:201
+#, elixir-autogen, elixir-format
+msgid "Repaying"
+msgstr "Pagando"
+
+#: lib/kiva_web/i18n_strings.ex:28
+#, elixir-autogen, elixir-format
+msgid "Rwanda"
+msgstr "Ruanda"
+
+#: lib/kiva_web/i18n_strings.ex:24
+#, elixir-autogen, elixir-format
+msgid "Senegal"
+msgstr "Senegal"
+
+#: lib/kiva_web/i18n_strings.ex:29
+#, elixir-autogen, elixir-format
+msgid "Tajikistan"
+msgstr "Tayikistán"
+
+#: lib/kiva_web/i18n_strings.ex:20
+#, elixir-autogen, elixir-format
+msgid "Uganda"
+msgstr "Uganda"
+
+#: lib/kiva_web/i18n_strings.ex:25
+#, elixir-autogen, elixir-format
+msgid "Vietnam"
+msgstr "Vietnam"
+
+#: lib/kiva_web/live/team_live/show.ex:37
+#, elixir-autogen, elixir-format
+msgid "You need to be signed in to post here."
+msgstr "Debes iniciar sesión para publicar aquí."
+
+#: lib/kiva_web/i18n_strings.ex:39
+#, elixir-autogen, elixir-format
+msgid "defaulted"
+msgstr "incumplido"
+
+#: lib/kiva_web/i18n_strings.ex:38
+#, elixir-autogen, elixir-format
+msgid "delinquent"
+msgstr "en mora"
+
+#: lib/kiva_web/i18n_strings.ex:41
+#, elixir-autogen, elixir-format
+msgid "funded disbursed"
+msgstr "desembolsado"
+
+#: lib/kiva_web/i18n_strings.ex:40
+#, elixir-autogen, elixir-format
+msgid "repaying"
+msgstr "en proceso de pago"
+
+#: lib/kiva_web/live/admin_live.ex:626
+#, elixir-autogen, elixir-format
+msgid "Filter by event type…"
+msgstr "Filtrar por tipo de evento..."
+
+#: lib/kiva_web/live/partner_live.ex:253
+#, elixir-autogen, elixir-format
+msgid "Photo URL"
+msgstr "URL de la foto"
+
+#: lib/kiva_web/live/loan_live/show.ex:396
+#, elixir-autogen, elixir-format
+msgid "Sign in as a lender to lend."
+msgstr "Inicie sesión como prestador para prestar."
+
+#: lib/kiva_web/live/faq_live.ex:20
+#: lib/kiva_web/live/team_live/show.ex:48
+#, elixir-autogen, elixir-format
+msgid "Translation generated — machine, pending review."
+msgstr "Traducción generada – máquina, pendiente de revisión."
+
+#: lib/kiva_web/live/partner_live.ex:372
+#, elixir-autogen, elixir-format
+msgid "USD"
+msgstr "USD"
+
+#: lib/kiva_web/live/admin_live.ex:268
+#, elixir-autogen, elixir-format
+msgid "What needs to change before this can be published?"
+msgstr "¿Qué necesita cambiar antes de que se pueda publicar?"
+
+#: lib/kiva_web/live/loan_live/index.ex:289
+#: lib/kiva_web/live/partner/repayments_live.ex:128
+#: lib/kiva_web/live/partner_live.ex:310
+#: lib/kiva_web/live/portfolio_live.ex:1153
+#, elixir-autogen, elixir-format
+msgid "Next"
+msgstr "Siguiente"
+
+#: lib/kiva_web/live/loan_live/index.ex:282
+#: lib/kiva_web/live/partner/repayments_live.ex:118
+#: lib/kiva_web/live/partner_live.ex:303
+#: lib/kiva_web/live/portfolio_live.ex:1146
+#, elixir-autogen, elixir-format
+msgid "Prev"
+msgstr "Anterior"
+
+#: lib/kiva_web/live/team_live/show.ex:146
+#, elixir-autogen, elixir-format
+msgid "A member"
+msgstr "Miembro"
+
+#: lib/kiva_web/i18n_strings.ex:50
+#, elixir-autogen, elixir-format
+msgid "Borrower"
+msgstr "Prestatario"
+
+#: lib/kiva_web/live/team_live/show.ex:151
+#, elixir-autogen, elixir-format
+msgid "Captain"
+msgstr "Capitán"
+
+#: lib/kiva_web/live/team_live/show.ex:162
+#, elixir-autogen, elixir-format
+msgid "Joined"
+msgstr "Se unió"
+
+#: lib/kiva_web/i18n_strings.ex:49
+#, elixir-autogen, elixir-format
+msgid "Lender"
+msgstr "Prestador"
+
+#: lib/kiva_web/i18n_strings.ex:52
+#, elixir-autogen, elixir-format
+msgid "Staff"
+msgstr "Personal"
+
+#: lib/kiva_web/i18n_strings.ex:54
+#, elixir-autogen, elixir-format
+msgid "Visitor"
+msgstr "Visitante"
+
+#: lib/kiva_web/live/developer/dashboard_live.ex:81
+#, elixir-autogen, elixir-format
+msgid "%{count} API key"
+msgid_plural "%{count} API keys"
+msgstr[0] "%{count} clave API"
+msgstr[1] "%{count} claves API"
+
+#: lib/kiva_web/live/developers_live.ex:128
+#, elixir-autogen, elixir-format
+msgid "A complete, copy-pasteable Markdown reference for LLM agents and coding assistants. Append ?locale= to translate it."
+msgstr "Una referencia completa en Markdown lista para copiar y pegar, para agentes LLM y asistentes de programación. Añade ?locale= para traducirla."
+
+#: lib/kiva_web/developer/docs.ex:101
+#, elixir-autogen, elixir-format
+msgid "A single localized loan profile by slug."
+msgstr "Un único perfil de préstamo localizado por slug."
+
+#: lib/kiva_web/live/developers_live.ex:34
+#: lib/kiva_web/live/developers_live.ex:125
+#, elixir-autogen, elixir-format
+msgid "AI agents (Markdown)"
+msgstr "Agentes de IA (Markdown)"
+
+#: lib/kiva_web/live/developer/query_builder_component.ex:102
+#, elixir-autogen, elixir-format
+msgid "AI is offline — here's a matching example from the docs."
+msgstr "La IA está fuera de línea: aquí tienes un ejemplo equivalente de la documentación."
+
+#: lib/kiva_web/live/developer/query_builder_component.ex:61
+#: lib/kiva_web/live/developers_live.ex:33
+#, elixir-autogen, elixir-format
+msgid "AI query builder"
+msgstr "Generador de consultas con IA"
+
+#: lib/kiva_web/live/developer/view.ex:164
+#, elixir-autogen, elixir-format
+msgid "API key"
+msgstr "Clave de API"
+
+#: lib/kiva_web/live/developer/app_live.ex:42
+#, elixir-autogen, elixir-format
+msgid "API key revoked."
+msgstr "Clave de API revocada."
+
+#: lib/kiva_web/live/developer/app_live.ex:98
+#, elixir-autogen, elixir-format
+msgid "API keys"
+msgstr "Claves de API"
+
+#: lib/kiva_web/developer/docs.ex:328
+#, elixir-autogen, elixir-format
+msgid "API keys (Platform API)"
+msgstr "Claves de API (Platform API)"
+
+#: lib/kiva_web/developer/docs.ex:70
+#: lib/kiva_web/developer/docs.ex:265
+#, elixir-autogen, elixir-format
+msgid "Account email"
+msgstr "Correo electrónico de la cuenta"
+
+#: lib/kiva_web/developer/docs.ex:71
+#: lib/kiva_web/developer/docs.ex:266
+#, elixir-autogen, elixir-format
+msgid "Account password"
+msgstr "Contraseña de la cuenta"
+
+#: lib/kiva_web/live/developer/app_live.ex:62
+#, elixir-autogen, elixir-format
+msgid "All applications"
+msgstr "Todas las aplicaciones"
+
+#: lib/kiva_web/live/developer/query_builder_component.ex:80
+#, elixir-autogen, elixir-format
+msgid "Any surface"
+msgstr "Cualquier superficie"
+
+#: lib/kiva_web/live/developer/dashboard_live.ex:22
+#, elixir-autogen, elixir-format
+msgid "Application created."
+msgstr "Aplicación creada."
+
+#: lib/kiva_web/live/developer/dashboard_live.ex:101
+#, elixir-autogen, elixir-format
+msgid "Application name"
+msgstr "Nombre de la aplicación"
+
+#: lib/kiva_web/live/developer/app_live.ex:14
+#, elixir-autogen, elixir-format
+msgid "Application not found."
+msgstr "Aplicación no encontrada."
+
+#: lib/kiva_web/developer/docs.ex:296
+#: lib/kiva_web/live/developers_live.ex:26
+#, elixir-autogen, elixir-format
+msgid "Authentication"
+msgstr "Autenticación"
+
+#: lib/kiva_web/developer/docs.ex:248
+#, elixir-autogen, elixir-format
+msgid "Batch loan detail by id(s) (comma-separated, up to 100)."
+msgstr "Detalle de préstamos por lotes según id(s) (separados por comas, hasta 100)."
+
+#: lib/kiva_web/live/developers_live.ex:72
+#, elixir-autogen, elixir-format
+msgid "Become a developer"
+msgstr "Conviértete en desarrollador"
+
+#: lib/kiva_web/live/developer/query_builder_component.ex:88
+#, elixir-autogen, elixir-format
+msgid "Build it"
+msgstr "Construirla"
+
+#: lib/kiva_web/live/developer/query_builder_component.ex:88
+#, elixir-autogen, elixir-format
+msgid "Building…"
+msgstr "Construyendo…"
+
+#: lib/kiva_web/live/developer/app_live.ex:72
+#, elixir-autogen, elixir-format
+msgid "Client ID (app ID)"
+msgstr "Client ID (app_id)"
+
+#: lib/kiva_web/live/developer/app_live.ex:76
+#, elixir-autogen, elixir-format
+msgid "Client secret"
+msgstr "Client secret"
+
+#: lib/kiva_web/live/developer/view.ex:60
+#, elixir-autogen, elixir-format
+msgid "Copy"
+msgstr "Copiar"
+
+#: lib/kiva_web/live/developer/view.ex:17
+#, elixir-autogen, elixir-format
+msgid "Copy this now — for security, you won't be able to see it again."
+msgstr "Cópialo ahora: por seguridad, no podrás volver a verlo."
+
+#: lib/kiva_web/live/developer/app_live.ex:165
+#: lib/kiva_web/live/developer/dashboard_live.ex:125
+#, elixir-autogen, elixir-format
+msgid "Create"
+msgstr "Crear"
+
+#: lib/kiva_web/live/developer/app_live.ex:153
+#, elixir-autogen, elixir-format
+msgid "Create API key"
+msgstr "Crear clave de API"
+
+#: lib/kiva_web/developer/docs.ex:330
+#, elixir-autogen, elixir-format
+msgid "Create an application in your dashboard, then mint an API key. Send it as a bearer token or in the X-API-Key header. The key is shown once — store it securely."
+msgstr "Crea una aplicación en tu panel y luego genera una clave de API. Envíala como bearer token o en el encabezado X-API-Key. La clave se muestra una sola vez: guárdala de forma segura."
+
+#: lib/kiva_web/live/developer/dashboard_live.ex:57
+#: lib/kiva_web/live/developer/dashboard_live.ex:95
+#, elixir-autogen, elixir-format
+msgid "Create application"
+msgstr "Crear aplicación"
+
+#: lib/kiva_web/live/developer/app_live.ex:100
+#, elixir-autogen, elixir-format
+msgid "Create key"
+msgstr "Crear clave"
+
+#: lib/kiva_web/live/developer/app_live.ex:112
+#, elixir-autogen, elixir-format
+msgid "Created"
+msgstr "Creada"
+
+#: lib/kiva_web/live/developer/query_builder_component.ex:64
+#, elixir-autogen, elixir-format
+msgid "Describe what you want in any language and get a ready-to-run request. Examples are shown, never executed."
+msgstr "Describe lo que quieres en cualquier idioma y obtén una solicitud lista para ejecutar. Los ejemplos se muestran, nunca se ejecutan."
+
+#: lib/kiva_web/live/developer/dashboard_live.ex:106
+#, elixir-autogen, elixir-format
+msgid "Description (optional)"
+msgstr "Descripción (opcional)"
+
+#: lib/kiva_web/controllers/developer_controller.ex:19
+#, elixir-autogen, elixir-format
+msgid "Developer access enabled. Welcome to the developer portal."
+msgstr "Acceso de desarrollador habilitado. Bienvenido al portal para desarrolladores."
+
+#: lib/kiva_web/live/developer/dashboard_live.ex:10
+#: lib/kiva_web/live/developer/dashboard_live.ex:41
+#, elixir-autogen, elixir-format
+msgid "Developer dashboard"
+msgstr "Panel de desarrollador"
+
+#: lib/kiva_web/components/layouts.ex:70
+#: lib/kiva_web/components/layouts.ex:138
+#: lib/kiva_web/live/developers_live.ex:15
+#, elixir-autogen, elixir-format
+msgid "Developers"
+msgstr "Desarrolladores"
+
+#: lib/kiva_web/live/developer/view.ex:23
+#, elixir-autogen, elixir-format
+msgid "Done"
+msgstr "Listo"
+
+#: lib/kiva_web/developer/docs.ex:298
+#: lib/kiva_web/live/developers_live.ex:32
+#, elixir-autogen, elixir-format
+msgid "Errors"
+msgstr "Errores"
+
+#: lib/kiva_web/developer/docs.ex:352
+#, elixir-autogen, elixir-format
+msgid "Every read endpoint is localized. Request a language with the locale parameter (REST query string or GraphQL argument)."
+msgstr "Todos los endpoints de lectura están localizados. Solicita un idioma con el parámetro locale (cadena de consulta REST o argumento GraphQL)."
+
+#: lib/kiva_web/developer/docs.ex:68
+#, elixir-autogen, elixir-format
+msgid "Exchange email + password for a bearer token used by the `me` endpoints."
+msgstr "Intercambia correo electrónico + contraseña por un bearer token usado por los endpoints `me`."
+
+#: lib/kiva_web/developer/docs.ex:88
+#: lib/kiva_web/live/portfolio_live.ex:925
+#, elixir-autogen, elixir-format
+msgid "Filter by status"
+msgstr "Filtrar por estado"
+
+#: lib/kiva_web/developer/docs.ex:99
+#, elixir-autogen, elixir-format
+msgid "Get a loan"
+msgstr "Obtener un préstamo"
+
+#: lib/kiva_web/developer/docs.ex:257
+#, elixir-autogen, elixir-format
+msgid "Get an access token"
+msgstr "Obtener un token de acceso"
+
+#: lib/kiva_web/live/developers_live.ex:64
+#, elixir-autogen, elixir-format
+msgid "Go to dashboard"
+msgstr "Ir al panel"
+
+#: lib/kiva_web/developer/docs.ex:89
+#, elixir-autogen, elixir-format
+msgid "ISO country filter"
+msgstr "Filtro de país ISO"
+
+#: lib/kiva_web/live/developer/view.ex:118
+#, elixir-autogen, elixir-format
+msgid "In"
+msgstr "En"
+
+#: lib/kiva_web/live/developer/app_live.ex:111
+#, elixir-autogen, elixir-format
+msgid "Key"
+msgstr "Clave"
+
+#: lib/kiva_web/live/developers_live.ex:29
+#, elixir-autogen, elixir-format
+msgid "Kiva GraphQL"
+msgstr "Kiva GraphQL"
+
+#: lib/kiva_web/live/developers_live.ex:30
+#, elixir-autogen, elixir-format
+msgid "Kiva Legacy REST"
+msgstr "Kiva Legacy REST"
+
+#: lib/kiva_web/developer/docs.ex:40
+#, elixir-autogen, elixir-format
+msgid "Kiva Legacy REST (v1)"
+msgstr "Kiva Legacy REST (v1)"
+
+#: lib/kiva_web/developer/docs.ex:34
+#, elixir-autogen, elixir-format
+msgid "Kiva Modern GraphQL"
+msgstr "Kiva Modern GraphQL"
+
+#: lib/kiva_web/developer/docs.ex:315
+#, elixir-autogen, elixir-format
+msgid "Kiva Modern GraphQL (/graphql) and Kiva Legacy REST (/v1) — drop-in compatible with the real Kiva API, authenticated with OAuth2."
+msgstr "Kiva Modern GraphQL (/graphql) y Kiva Legacy REST (/v1): compatibles de forma directa con la API real de Kiva, autenticadas con OAuth2."
+
+#: lib/kiva_web/developer/docs.ex:376
+#, elixir-autogen, elixir-format
+msgid "Kiva legacy endpoints use the upstream envelope {\"code\": \"org.kiva.<Type>\", \"message\": …}."
+msgstr "Los endpoints legacy de Kiva usan el envoltorio de origen {\"code\": \"org.kiva.<Type>\", \"message\": …}."
+
+#: lib/kiva_web/developer/docs.ex:36
+#, elixir-autogen, elixir-format
+msgid "Kiva-compatible GraphQL (lend / my / shop). Authenticate with OAuth2."
+msgstr "GraphQL compatible con Kiva (lend / my / shop). Autentícate con OAuth2."
+
+#: lib/kiva_web/developer/docs.ex:43
+#, elixir-autogen, elixir-format
+msgid "Kiva-compatible legacy REST with .json endpoints. OAuth2 for my/* routes."
+msgstr "REST legacy compatible con Kiva con endpoints .json. OAuth2 para las rutas my/*."
+
+#: lib/kiva_web/developer/docs.ex:194
+#, elixir-autogen, elixir-format
+msgid "Kiva-compatible loan search returning the LoanBasic collection."
+msgstr "Búsqueda de préstamos compatible con Kiva que devuelve la colección LoanBasic."
+
+#: lib/kiva_web/live/developer/app_live.ex:158
+#, elixir-autogen, elixir-format
+msgid "Label (optional), e.g. production"
+msgstr "Etiqueta (opcional), p. ej. production"
+
+#: lib/kiva_web/developer/docs.ex:102
+#: lib/kiva_web/developer/docs.ex:125
+#, elixir-autogen, elixir-format
+msgid "Language code"
+msgstr "Código de idioma"
+
+#: lib/kiva_web/developer/docs.ex:87
+#, elixir-autogen, elixir-format
+msgid "Language code (en/es/de/fr/nl)"
+msgstr "Código de idioma (en/es/de/fr/nl)"
+
+#: lib/kiva_web/live/developer/app_live.ex:113
+#, elixir-autogen, elixir-format
+msgid "Last used"
+msgstr "Último uso"
+
+#: lib/kiva_web/developer/docs.ex:233
+#, elixir-autogen, elixir-format
+msgid "Legacy loan search with the {paging, loans:[]} envelope."
+msgstr "Búsqueda de préstamos legacy con el envoltorio {paging, loans:[]}."
+
+#: lib/kiva_web/developer/docs.ex:135
+#, elixir-autogen, elixir-format
+msgid "Lending totals: count, amount lent, and amount returned."
+msgstr "Totales de préstamos: cantidad, monto prestado y monto devuelto."
+
+#: lib/kiva_web/developer/docs.ex:80
+#, elixir-autogen, elixir-format
+msgid "List loans"
+msgstr "Listar préstamos"
+
+#: lib/kiva_web/developer/docs.ex:246
+#, elixir-autogen, elixir-format
+msgid "Loan detail"
+msgstr "Detalle del préstamo"
+
+#: lib/kiva_web/developer/docs.ex:124
+#, elixir-autogen, elixir-format
+msgid "Loans you have funded (lendings) and, for borrowers, your own loans."
+msgstr "Préstamos que has financiado (lendings) y, para prestatarios, tus propios préstamos."
+
+#: lib/kiva_web/developer/docs.ex:297
+#: lib/kiva_web/live/developers_live.ex:31
+#, elixir-autogen, elixir-format
+msgid "Localization"
+msgstr "Localización"
+
+#: lib/kiva_web/developer/docs.ex:152
+#, elixir-autogen, elixir-format
+msgid "Localized loan cards via GraphQL."
+msgstr "Tarjetas de préstamo localizadas a través de GraphQL."
+
+#: lib/kiva_web/developer/docs.ex:83
+#, elixir-autogen, elixir-format
+msgid "Localized loan cards. Borrower photos are only returned while a loan is fundraising."
+msgstr "Tarjetas de préstamo localizadas. Las fotos del prestatario solo se devuelven mientras un préstamo está en estado fundraising."
+
+#: lib/kiva_web/live/developers_live.ex:75
+#, elixir-autogen, elixir-format
+msgid "Log in for API access"
+msgstr "Inicia sesión para acceder a la API"
+
+#: lib/kiva_web/developer/docs.ex:65
+#, elixir-autogen, elixir-format
+msgid "Log in for a token"
+msgstr "Inicia sesión para obtener un token"
+
+#: lib/kiva_web/developer/docs.ex:387
+#, elixir-autogen, elixir-format
+msgid "Machine-readable reference for the three public API surfaces. Base URL: "
+msgstr "Referencia legible por máquina para las tres superficies de API públicas. URL base: "
+
+#: lib/kiva_web/live/developer/dashboard_live.ex:85
+#: lib/kiva_web/live/partner_live.ex:216
+#, elixir-autogen, elixir-format
+msgid "Manage"
+msgstr "Gestionar"
+
+#: lib/kiva_web/live/developer/app_live.ex:110
+#, elixir-autogen, elixir-format
+msgid "Name"
+msgstr "Nombre"
+
+#: lib/kiva_web/live/developer/app_live.ex:104
+#, elixir-autogen, elixir-format
+msgid "No API keys yet."
+msgstr "Aún no hay claves de API."
+
+#: lib/kiva_web/live/developer/dashboard_live.ex:66
+#, elixir-autogen, elixir-format
+msgid "No applications yet. Create one to get an app ID and API keys."
+msgstr "Aún no hay aplicaciones. Crea una para obtener un app_id y claves de API."
+
+#: lib/kiva_web/live/developer/app_live.ex:89
+#, elixir-autogen, elixir-format
+msgid "None registered."
+msgstr "Ninguna registrada."
+
+#: lib/kiva_web/live/developer/app_live.ex:69
+#, elixir-autogen, elixir-format
+msgid "OAuth client"
+msgstr "Cliente OAuth"
+
+#: lib/kiva_web/live/developer/dashboard_live.ex:117
+#, elixir-autogen, elixir-format
+msgid "OAuth redirect URIs — one per line (optional)"
+msgstr "URIs de redirección OAuth: una por línea (opcional)"
+
+#: lib/kiva_web/live/developer/view.ex:165
+#, elixir-autogen, elixir-format
+msgid "OAuth2"
+msgstr "OAuth2"
+
+#: lib/kiva_web/developer/docs.ex:335
+#, elixir-autogen, elixir-format
+msgid "OAuth2 (Kiva-compatible API)"
+msgstr "OAuth2 (API compatible con Kiva)"
+
+#: lib/kiva_web/developer/docs.ex:260
+#, elixir-autogen, elixir-format
+msgid "OAuth2 token endpoint. Password grant shown; authorization_code and refresh_token are also supported. Supply client_id + client_secret for a registered app."
+msgstr "Endpoint de token OAuth2. Se muestra el flujo password grant; también se admiten authorization_code y refresh_token. Proporciona client_id + client_secret para una aplicación registrada."
+
+#: lib/kiva_web/live/developers_live.ex:133
+#, elixir-autogen, elixir-format
+msgid "Open raw agents.md"
+msgstr "Abrir agents.md sin formato"
+
+#: lib/kiva_web/developer/docs.ex:30
+#, elixir-autogen, elixir-format
+msgid "Our bespoke GraphQL surface (viewer, loans, and your own data)."
+msgstr "Nuestra superficie GraphQL a medida (viewer, loans y tus propios datos)."
+
+#: lib/kiva_web/developer/docs.ex:24
+#, elixir-autogen, elixir-format
+msgid "Our bespoke JSON API. Authenticate with an API key."
+msgstr "Nuestra API JSON a medida. Autentícate con una clave de API."
+
+#: lib/kiva_web/developer/docs.ex:295
+#: lib/kiva_web/live/developers_live.ex:25
+#, elixir-autogen, elixir-format
+msgid "Overview"
+msgstr "Resumen"
+
+#: lib/kiva_web/developer/docs.ex:237
+#, elixir-autogen, elixir-format
+msgid "Page size"
+msgstr "Tamaño de página"
+
+#: lib/kiva_web/live/developer/view.ex:117
+#, elixir-autogen, elixir-format
+msgid "Parameter"
+msgstr "Parámetro"
+
+#: lib/kiva_web/developer/docs.ex:28
+#: lib/kiva_web/live/developers_live.ex:28
+#, elixir-autogen, elixir-format
+msgid "Platform GraphQL"
+msgstr "Platform GraphQL"
+
+#: lib/kiva_web/live/developers_live.ex:27
+#, elixir-autogen, elixir-format
+msgid "Platform REST"
+msgstr "Platform REST"
+
+#: lib/kiva_web/developer/docs.ex:312
+#, elixir-autogen, elixir-format
+msgid "Platform REST (/api/v2) and Platform GraphQL (/api/graphql) — our modern API, authenticated with API keys you create below."
+msgstr "Platform REST (/api/v2) y Platform GraphQL (/api/graphql): nuestra API moderna, autenticada con claves de API que crees a continuación."
+
+#: lib/kiva_web/developer/docs.ex:22
+#, elixir-autogen, elixir-format
+msgid "Platform REST (v2)"
+msgstr "Platform REST (v2)"
+
+#: lib/kiva_web/developer/docs.ex:372
+#, elixir-autogen, elixir-format
+msgid "Platform endpoints return errors as {\"errors\": {\"detail\": …}} with a 4xx status (401 unauthorized, 404 not found, 422 invalid)."
+msgstr "Los endpoints de Platform devuelven los errores como {\"errors\": {\"detail\": …}} con un estado 4xx (401 unauthorized, 404 not found, 422 invalid)."
+
+#: lib/kiva_web/controllers/developer_controller.ex:12
+#, elixir-autogen, elixir-format
+msgid "Please sign in to enable developer access."
+msgstr "Inicia sesión para habilitar el acceso de desarrollador."
+
+#: lib/kiva_web/live/developer/dashboard_live.ex:69
+#, elixir-autogen, elixir-format
+msgid "Read the API docs"
+msgstr "Lee la documentación de la API"
+
+#: lib/kiva_web/live/developer/app_live.ex:84
+#, elixir-autogen, elixir-format
+msgid "Redirect URIs"
+msgstr "URIs de redirección"
+
+#: lib/kiva_web/developer/docs.ex:358
+#, elixir-autogen, elixir-format
+msgid "Resolution order: explicit locale parameter, then session, then your account default, then English."
+msgstr "Orden de resolución: parámetro locale explícito, luego la sesión, luego el valor predeterminado de tu cuenta y por último el inglés."
+
+#: lib/kiva_web/live/developer/app_live.ex:138
+#, elixir-autogen, elixir-format
+msgid "Revoke this key? Apps using it will stop working."
+msgstr "¿Revocar esta clave? Las aplicaciones que la usen dejarán de funcionar."
+
+#: lib/kiva_web/live/developer/app_live.ex:79
+#, elixir-autogen, elixir-format
+msgid "Rotate secret"
+msgstr "Rotar secret"
+
+#: lib/kiva_web/developer/docs.ex:150
+#: lib/kiva_web/developer/docs.ex:231
+#, elixir-autogen, elixir-format
+msgid "Search loans"
+msgstr "Buscar préstamos"
+
+#: lib/kiva_web/developer/docs.ex:90
+#, elixir-autogen, elixir-format
+msgid "Search text"
+msgstr "Texto de búsqueda"
+
+#: lib/kiva_web/developer/docs.ex:343
+#, elixir-autogen, elixir-format
+msgid "Secrets (client secret, API key) are displayed only once at creation. Rotate the client secret from the app page if it leaks."
+msgstr "Los secretos (client secret, clave de API) se muestran una sola vez en el momento de la creación. Rota el client secret desde la página de la aplicación si se filtra."
+
+#: lib/kiva_web/live/developer/app_live.ex:77
+#, elixir-autogen, elixir-format
+msgid "Shown once at creation."
+msgstr "Se muestra una sola vez en el momento de la creación."
+
+#: lib/kiva_web/developer/docs.ex:357
+#, elixir-autogen, elixir-format
+msgid "Supported languages: en, es, de, fr, nl."
+msgstr "Idiomas admitidos: en, es, de, fr, nl."
+
+#: lib/kiva/ai/docs_assistant.ex:33
+#, elixir-autogen, elixir-format
+msgid "The AI builder is offline; this is a matching example from the docs."
+msgstr "El generador con IA está fuera de línea; este es un ejemplo equivalente de la documentación."
+
+#: lib/kiva_web/developer/docs.ex:170
+#, elixir-autogen, elixir-format
+msgid "The `me` query returns your loans, teams, and portfolio. Works with an API key."
+msgstr "La consulta `me` devuelve tus préstamos, equipos y portafolio. Funciona con una clave de API."
+
+#: lib/kiva_web/developer/docs.ex:211
+#, elixir-autogen, elixir-format
+msgid "The authenticated lender profile. Requires an OAuth2 access token."
+msgstr "El perfil del prestamista autenticado. Requiere un token de acceso OAuth2."
+
+#: lib/kiva_web/developer/docs.ex:283
+#, elixir-autogen, elixir-format
+msgid "The authenticated lender. Requires an OAuth2 bearer token."
+msgstr "El prestamista autenticado. Requiere un bearer token de OAuth2."
+
+#: lib/kiva_web/developer/docs.ex:112
+#, elixir-autogen, elixir-format
+msgid "The authenticated user behind the API key."
+msgstr "El usuario autenticado detrás de la clave de API."
+
+#: lib/kiva_web/developer/docs.ex:320
+#, elixir-autogen, elixir-format
+msgid "This is a demo: data is simulated and no real money moves. Rate limits may apply in production."
+msgstr "Esto es una demostración: los datos son simulados y no se mueve dinero real. En producción pueden aplicarse límites de uso."
+
+#: lib/kiva_web/live/developers_live.ex:54
+#, elixir-autogen, elixir-format
+msgid "Three public APIs — our modern Platform API plus a drop-in Kiva-compatible API. Create an app, get keys, and build."
+msgstr "Tres API públicas: nuestra moderna Platform API más una API compatible con Kiva de integración directa. Crea una aplicación, obtén claves y construye."
+
+#: lib/kiva_web/developer/docs.ex:361
+#, elixir-autogen, elixir-format
+msgid "Unsupported or missing values fall back to English; translated content falls back per-field when a translation is absent."
+msgstr "Los valores no admitidos o ausentes recurren al inglés; el contenido traducido recurre campo por campo cuando falta una traducción."
+
+#: lib/kiva_web/live/developer/dashboard_live.ex:112
+#, elixir-autogen, elixir-format
+msgid "Website (optional)"
+msgstr "Sitio web (opcional)"
+
+#: lib/kiva_web/live/developer/view.ex:31
+#, elixir-autogen, elixir-format
+msgid "Your API key"
+msgstr "Tu clave de API"
+
+#: lib/kiva_web/developer/docs.ex:110
+#, elixir-autogen, elixir-format
+msgid "Your account"
+msgstr "Tu cuenta"
+
+#: lib/kiva_web/developer/docs.ex:337
+#, elixir-autogen, elixir-format
+msgid "Your application doubles as an OAuth2 client: its app ID is the client_id and it has a client secret plus registered redirect URIs. Exchange credentials for an access token, then call the my/* and shop subtrees."
+msgstr "Tu aplicación funciona también como cliente OAuth2: su app_id es el client_id y tiene un client secret más URIs de redirección registradas. Intercambia las credenciales por un token de acceso y luego llama a los subárboles my/* y shop."
+
+#: lib/kiva_web/live/developer/dashboard_live.ex:44
+#, elixir-autogen, elixir-format
+msgid "Your applications, OAuth client IDs, and API keys."
+msgstr "Tus aplicaciones, client IDs de OAuth y claves de API."
+
+#: lib/kiva_web/live/developer/view.ex:30
+#, elixir-autogen, elixir-format
+msgid "Your client secret"
+msgstr "Tu secreto de cliente"
+
+#: lib/kiva_web/live/developer/view.ex:32
+#, elixir-autogen, elixir-format
+msgid "Your credential"
+msgstr "Tu credencial"
+
+#: lib/kiva_web/developer/docs.ex:167
+#, elixir-autogen, elixir-format
+msgid "Your data"
+msgstr "Tus datos"
+
+#: lib/kiva_web/developer/docs.ex:281
+#, elixir-autogen, elixir-format
+msgid "Your lender profile"
+msgstr "Tu perfil de prestamista"
+
+#: lib/kiva_web/developer/docs.ex:121
+#, elixir-autogen, elixir-format
+msgid "Your loans"
+msgstr "Tus préstamos"
+
+#: lib/kiva_web/developer/docs.ex:133
+#, elixir-autogen, elixir-format
+msgid "Your portfolio"
+msgstr "Tu portafolio"
+
+#: lib/kiva_web/live/developers_live.ex:78
+#, elixir-autogen, elixir-format
+msgid "agents.md"
+msgstr "agents.md"
+
+#: lib/kiva_web/live/developer/query_builder_component.ex:76
+#, elixir-autogen, elixir-format
+msgid "e.g. list fundraising loans from Kenya, in Spanish"
+msgstr "p. ej. listar préstamos en estado fundraising de Kenia, en español"
+
+#: lib/kiva_web/developer/docs.ex:235
+#, elixir-autogen, elixir-format
+msgid "fundraising | funded | all"
+msgstr "fundraising | funded | all"
+
+#: lib/kiva_web/developer/docs.ex:192
+#, elixir-autogen, elixir-format
+msgid "lend.loans"
+msgstr "lend.loans"
+
+#: lib/kiva_web/developer/docs.ex:236
+#, elixir-autogen, elixir-format
+msgid "male | female"
+msgstr "masculino | femenino"
+
+#: lib/kiva_web/developer/docs.ex:208
+#, elixir-autogen, elixir-format
+msgid "my.lender"
+msgstr "my.lender"
+
+#: lib/kiva_web/live/developer/app_live.ex:129
+#, elixir-autogen, elixir-format
+msgid "revoked"
+msgstr "revocada"
+
+#: lib/kiva_web/live/developer/view.ex:166
+#, elixir-autogen, elixir-format
+msgid "token"
+msgstr "token"
+
+#: lib/kiva_web/live/portfolio_live.ex:560
+#, elixir-autogen, elixir-format
+msgid "%{amount} ready to relend"
+msgstr "%{amount} listos para volver a prestar"
+
+#: lib/kiva_web/live/portfolio_live.ex:903
+#, elixir-autogen, elixir-format
+msgid "%{count} loan"
+msgid_plural "%{count} loans"
+msgstr[0] "%{count} préstamo"
+msgstr[1] "%{count} préstamos"
+
+#: lib/kiva_web/live/portfolio_live.ex:499
+#, elixir-autogen, elixir-format
+msgid "%{percent}% of what you lent has been repaid to you"
+msgstr "Se te ha reembolsado el %{percent}% de lo que prestaste"
+
+#: lib/kiva_web/live/loan_live/index.ex:59
+#, elixir-autogen, elixir-format
+msgid "Added %{amt} to your basket for %{name}."
+msgstr "Agregaste %{amt} a tu cesta para %{name}."
+
+#: lib/kiva_web/live/portfolio_live.ex:481
+#, elixir-autogen, elixir-format
+msgid "Borrowers reached"
+msgstr "Prestatarios alcanzados"
+
+#: lib/kiva_web/components/app_components.ex:270
+#, elixir-autogen, elixir-format
+msgid "Close"
+msgstr "Cerrar"
+
+#: lib/kiva_web/live/developer/query_builder_component.ex:95
+#, elixir-autogen, elixir-format
+msgid "Composing your request…"
+msgstr "Redactando tu solicitud…"
+
+#: lib/kiva_web/live/portfolio_live.ex:487
+#: lib/kiva_web/live/portfolio_live.ex:881
+#, elixir-autogen, elixir-format
+msgid "Countries reached"
+msgstr "Países alcanzados"
+
+#: lib/kiva_web/live/portfolio_live.ex:569
+#, elixir-autogen, elixir-format
+msgid "Find a borrower"
+msgstr "Encuentra un prestatario"
+
+#: lib/kiva_web/components/app_components.ex:339
+#, elixir-autogen, elixir-format
+msgid "How this money helps"
+msgstr "Cómo ayuda este dinero"
+
+#: lib/kiva_web/components/app_components.ex:262
+#, elixir-autogen, elixir-format
+msgid "Open full page"
+msgstr "Abrir página completa"
+
+#: lib/kiva_web/components/app_components.ex:404
+#, elixir-autogen, elixir-format
+msgid "Other"
+msgstr "Otro"
+
+#: lib/kiva_web/live/developer/query_builder_component.ex:51
+#, elixir-autogen, elixir-format
+msgid "Please try again."
+msgstr "Inténtalo de nuevo."
+
+#: lib/kiva_web/components/app_components.ex:317
+#, elixir-autogen, elixir-format
+msgid "Remaining"
+msgstr "Restantes"
+
+#: lib/kiva_web/live/portfolio_live.ex:565
+#, elixir-autogen, elixir-format
+msgid "Repayments have come back to you — put them to work for another borrower."
+msgstr "Los reembolsos han vuelto a ti — ponlos a trabajar para otro prestatario."
+
+#: lib/kiva_web/live/portfolio_live.ex:843
+#, elixir-autogen, elixir-format
+msgid "Sectors you support"
+msgstr "Sectores que apoyas"
+
+#: lib/kiva_web/live/developer/query_builder_component.ex:48
+#, elixir-autogen, elixir-format
+msgid "Something went wrong generating that request."
+msgstr "Algo salió mal al generar esa solicitud."
+
+#: lib/kiva_web/components/app_components.ex:432
+#: lib/kiva_web/components/app_components.ex:439
+#, elixir-autogen, elixir-format
+msgid "Support"
+msgstr "Apoyar"
+
+#: lib/kiva_web/components/app_components.ex:446
+#, elixir-autogen, elixir-format
+msgid "View full loan page"
+msgstr "Ver la página completa del préstamo"
+
+#: lib/kiva_web/live/portfolio_live.ex:460
+#, elixir-autogen, elixir-format
+msgid "Welcome back, %{name}"
+msgstr "Hola de nuevo, %{name}"
+
+#: lib/kiva_web/live/portfolio_live.ex:418
+#, elixir-autogen, elixir-format
+msgid "Your impact starts here"
+msgstr "Tu impacto empieza aquí"
+
+#: lib/kiva_web/components/app_components.ex:314
+#, elixir-autogen, elixir-format
+msgid "days"
+msgstr "días"
+
+#: lib/kiva_web/components/app_components.ex:326
+#, elixir-autogen, elixir-format
+msgid "to go"
+msgstr "restantes"
+
+#: lib/kiva_web/components/app_components.ex:380
+#: lib/kiva_web/live/loan_live/show.ex:323
+#, elixir-autogen, elixir-format
+msgid "Lending is closed for this loan."
+msgstr "Este préstamo ya no acepta financiación."
+
+#: lib/kiva_web/live/basket_live.ex:40
+#, elixir-autogen, elixir-format
+msgid "Lent to %{lent} of %{total} — %{skipped} stayed in your basket because those loans are no longer fundraising."
+msgstr "Prestaste a %{lent} de %{total}: %{skipped} se quedaron en tu cesta porque esos préstamos ya no están en recaudación."
+
+#: lib/kiva_web/live/portfolio_live.ex:1023
+#: lib/kiva_web/live/portfolio_live.ex:1053
+#, elixir-autogen, elixir-format
+msgid "%{count} lending"
+msgid_plural "%{count} lendings"
+msgstr[0] "%{count} aportación"
+msgstr[1] "%{count} aportaciones"
+
+#: lib/kiva_web/live/portfolio_live.ex:846
+#: lib/kiva_web/live/portfolio_live.ex:884
+#, elixir-autogen, elixir-format
+msgid "Across your whole portfolio — click to filter"
+msgstr "En toda tu cartera — haz clic para filtrar"
+
+#: lib/kiva_web/live/portfolio_live.ex:937
+#, elixir-autogen, elixir-format
+msgid "All countries"
+msgstr "Todos los países"
+
+#: lib/kiva_web/live/portfolio_live.ex:965
+#, elixir-autogen, elixir-format
+msgid "All partners"
+msgstr "Todos los socios"
+
+#: lib/kiva_web/live/portfolio_live.ex:927
+#, elixir-autogen, elixir-format
+msgid "All statuses"
+msgstr "Todos los estados"
+
+#: lib/kiva_web/live/portfolio_live.ex:604
+#, elixir-autogen, elixir-format
+msgid "Behind schedule"
+msgstr "Con retraso"
+
+#: lib/kiva_web/live/portfolio_live.ex:1020
+#: lib/kiva_web/live/portfolio_live.ex:1086
+#, elixir-autogen, elixir-format
+msgid "Clear all"
+msgstr "Borrar todo"
+
+#: lib/kiva_web/live/portfolio_live.ex:638
+#, elixir-autogen, elixir-format
+msgid "Cumulative repayment chart; the same numbers are in the table below."
+msgstr "Gráfico de reembolsos acumulados; las mismas cifras están en la tabla de abajo."
+
+#: lib/kiva_web/live/portfolio_live.ex:935
+#, elixir-autogen, elixir-format
+msgid "Filter by country"
+msgstr "Filtrar por país"
+
+#: lib/kiva_web/live/portfolio_live.ex:963
+#, elixir-autogen, elixir-format
+msgid "Filter by partner"
+msgstr "Filtrar por socio"
+
+#: lib/kiva_web/live/portfolio_live.ex:949
+#, elixir-autogen, elixir-format
+msgid "Filter by sector"
+msgstr "Filtrar por sector"
+
+#: lib/kiva_web/live/portfolio_live.ex:981
+#, elixir-autogen, elixir-format
+msgid "Group by"
+msgstr "Agrupar por"
+
+#: lib/kiva_web/live/portfolio_live.ex:579
+#, elixir-autogen, elixir-format
+msgid "Money coming back"
+msgstr "Dinero que regresa"
+
+#: lib/kiva_web/live/portfolio_live.ex:808
+#, elixir-autogen, elixir-format
+msgid "Month"
+msgstr "Mes"
+
+#: lib/kiva_web/live/portfolio_live.ex:593
+#, elixir-autogen, elixir-format
+msgid "Next 30 days"
+msgstr "Próximos 30 días"
+
+#: lib/kiva_web/live/portfolio_live.ex:830
+#, elixir-autogen, elixir-format
+msgid "No repayments are scheduled right now — money appears here once a loan you backed starts repaying."
+msgstr "No hay reembolsos programados por ahora — el dinero aparecerá aquí cuando un préstamo que apoyaste empiece a pagarse."
+
+#: lib/kiva_web/live/portfolio_live.ex:833
+#, elixir-autogen, elixir-format
+msgid "No scheduled repayments match your filters."
+msgstr "Ningún reembolso programado coincide con tus filtros."
+
+#: lib/kiva_web/live/portfolio_live.ex:986
+#, elixir-autogen, elixir-format
+msgid "None"
+msgstr "Ninguno"
+
+#: lib/kiva_web/live/portfolio_live.ex:790
+#: lib/kiva_web/live/portfolio_live.ex:810
+#, elixir-autogen, elixir-format
+msgid "Received"
+msgstr "Recibido"
+
+#: lib/kiva_web/live/portfolio_live.ex:629
+#, elixir-autogen, elixir-format
+msgid "Received so far"
+msgstr "Recibido hasta ahora"
+
+#: lib/kiva_web/live/portfolio_live.ex:1012
+#, elixir-autogen, elixir-format
+msgid "Remove filter"
+msgstr "Quitar filtro"
+
+#: lib/kiva_web/live/portfolio_live.ex:784
+#: lib/kiva_web/live/portfolio_live.ex:809
+#, elixir-autogen, elixir-format
+msgid "Scheduled"
+msgstr "Programado"
+
+#: lib/kiva_web/live/portfolio_live.ex:623
+#, elixir-autogen, elixir-format
+msgid "Scheduled (estimate)"
+msgstr "Programado (estimación)"
+
+#: lib/kiva_web/live/portfolio_live.ex:601
+#, elixir-autogen, elixir-format
+msgid "Show loans behind on payments"
+msgstr "Ver préstamos con pagos atrasados"
+
+#: lib/kiva_web/live/portfolio_live.ex:697
+#, elixir-autogen, elixir-format
+msgid "Today"
+msgstr "Hoy"
+
+#: lib/kiva_web/live/portfolio_live.ex:802
+#, elixir-autogen, elixir-format
+msgid "View as table"
+msgstr "Ver como tabla"
+
+#: lib/kiva_web/live/portfolio_live.ex:1037
+#, elixir-autogen, elixir-format
+msgid "View these loans"
+msgstr "Ver estos préstamos"
+
+#: lib/kiva_web/live/portfolio_live.ex:582
+#, elixir-autogen, elixir-format
+msgid "Cumulative repayments on loans currently repaying or behind schedule — estimates, not guarantees. The gap between the lines is repayment running behind schedule."
+msgstr "Reembolsos acumulados de préstamos que se están pagando o van con retraso — estimaciones, no garantías. El hueco entre las líneas es reembolso que va con retraso."
+
+#: lib/kiva_web/live/loan_live/show.ex:597
+#, elixir-autogen, elixir-format
+msgid "%{count} event"
+msgid_plural "%{count} events"
+msgstr[0] "%{count} evento"
+msgstr[1] "%{count} eventos"
+
+#: lib/kiva_web/live/loan_live/show.ex:623
+#, elixir-autogen, elixir-format
+msgid "%{count} machine translation"
+msgid_plural "%{count} machine translations"
+msgstr[0] "%{count} traducción automática"
+msgstr[1] "%{count} traducciones automáticas"
+
+#: lib/kiva_web/live/partner/repayments_live.ex:84
+#, elixir-autogen, elixir-format
+msgid "%{count} repayment due"
+msgid_plural "%{count} repayments due"
+msgstr[0] "%{count} reembolso pendiente"
+msgstr[1] "%{count} reembolsos pendientes"
+
+#: lib/kiva_web/live/loan_live/show.ex:612
+#, elixir-autogen, elixir-format
+msgid "%{count} unlinked hash"
+msgid_plural "%{count} unlinked hashes"
+msgstr[0] "%{count} hash sin vínculo"
+msgstr[1] "%{count} hashes sin vínculo"
+
+#: lib/kiva_web/live/loan_live/show.ex:574
+#, elixir-autogen, elixir-format
+msgid "Append-only trail of how this listing was produced. Demo — the history shown here is fabricated for demonstration."
+msgstr "Registro inmutable de cómo se produjo esta publicación. Demo — el historial mostrado aquí es ficticio, solo para demostración."
+
+#: lib/kiva_web/live/loan_live/show.ex:570
+#, elixir-autogen, elixir-format
+msgid "Authenticity & provenance"
+msgstr "Autenticidad y procedencia"
+
+#: lib/kiva_web/live/loan_live/show.ex:800
+#, elixir-autogen, elixir-format
+msgid "Consent recorded"
+msgstr "Consentimiento registrado"
+
+#: lib/kiva_web/live/loan_live/show.ex:658
+#, elixir-autogen, elixir-format
+msgid "Derived from a verified earlier artifact"
+msgstr "Derivado de un artefacto anterior verificado"
+
+#: lib/kiva_web/live/developer/dashboard_live.ex:54
+#, elixir-autogen, elixir-format
+msgid "GraphQL explorer"
+msgstr "Explorador GraphQL"
+
+#: lib/kiva_web/live/loan_live/show.ex:605
+#, elixir-autogen, elixir-format
+msgid "Hash chain verified"
+msgstr "Cadena de hashes verificada"
+
+#: lib/kiva_web/live/loan_live/show.ex:809
+#, elixir-autogen, elixir-format
+msgid "Human translated"
+msgstr "Traducción humana"
+
+#: lib/kiva_web/live/loan_live/show.ex:801
+#, elixir-autogen, elixir-format
+msgid "Identity verified"
+msgstr "Identidad verificada"
+
+#: lib/kiva_web/live/loan_live/show.ex:790
+#, elixir-autogen, elixir-format
+msgid "Identity, consent & site visit"
+msgstr "Identidad, consentimiento y visita"
+
+#: lib/kiva_web/live/loan_live/show.ex:814
+#, elixir-autogen, elixir-format
+msgid "Listing approved"
+msgstr "Publicación aprobada"
+
+#: lib/kiva_web/live/loan_live/show.ex:793
+#, elixir-autogen, elixir-format
+msgid "Listing decisions"
+msgstr "Decisiones de publicación"
+
+#: lib/kiva_web/live/loan_live/show.ex:813
+#, elixir-autogen, elixir-format
+msgid "Listing submitted"
+msgstr "Publicación enviada"
+
+#: lib/kiva_web/live/loan_live/show.ex:807
+#, elixir-autogen, elixir-format
+msgid "Machine translated"
+msgstr "Traducción automática"
+
+#: lib/kiva_web/live/loan_live/show.ex:583
+#, elixir-autogen, elixir-format
+msgid "No provenance recorded for this listing."
+msgstr "No hay procedencia registrada para esta publicación."
+
+#: lib/kiva_web/live/partner/repayments_live.ex:87
+#, elixir-autogen, elixir-format
+msgid "No repayments due."
+msgstr "No hay reembolsos pendientes."
+
+#: lib/kiva_web/live/partner/repayments_live.ex:121
+#, elixir-autogen, elixir-format
+msgid "Page"
+msgstr "Página"
+
+#: lib/kiva_web/live/loan_live/show.ex:789
+#, elixir-autogen, elixir-format
+msgid "Photo & capture"
+msgstr "Foto y captura"
+
+#: lib/kiva_web/live/loan_live/show.ex:798
+#, elixir-autogen, elixir-format
+msgid "Photo approved"
+msgstr "Foto aprobada"
+
+#: lib/kiva_web/live/loan_live/show.ex:631
+#, elixir-autogen, elixir-format
+msgid "Photo audience"
+msgstr "Audiencia de la foto"
+
+#: lib/kiva_web/live/loan_live/show.ex:799
+#, elixir-autogen, elixir-format
+msgid "Photo audience changed"
+msgstr "Audiencia de la foto cambiada"
+
+#: lib/kiva_web/live/loan_live/show.ex:795
+#, elixir-autogen, elixir-format
+msgid "Photo captured"
+msgstr "Foto capturada"
+
+#: lib/kiva_web/live/loan_live/show.ex:797
+#, elixir-autogen, elixir-format
+msgid "Photo reviewed"
+msgstr "Foto revisada"
+
+#: lib/kiva_web/live/loan_live/show.ex:796
+#, elixir-autogen, elixir-format
+msgid "Photo uploaded"
+msgstr "Foto subida"
+
+#: lib/kiva_web/live/partner/repayments_live.ex:78
+#, elixir-autogen, elixir-format
+msgid "Search by borrower or loan…"
+msgstr "Buscar por prestatario o préstamo…"
+
+#: lib/kiva_web/live/loan_live/show.ex:802
+#, elixir-autogen, elixir-format
+msgid "Site visit"
+msgstr "Visita al lugar"
+
+#: lib/kiva_web/live/loan_live/show.ex:665
+#, elixir-autogen, elixir-format
+msgid "Source hash does not match any earlier artifact"
+msgstr "El hash de origen no coincide con ningún artefacto anterior"
+
+#: lib/kiva_web/live/loan_live/show.ex:791
+#, elixir-autogen, elixir-format
+msgid "Story & authorship"
+msgstr "Historia y autoría"
+
+#: lib/kiva_web/live/loan_live/show.ex:617
+#, elixir-autogen, elixir-format
+msgid "Story AI-reworded"
+msgstr "Historia reescrita por IA"
+
+#: lib/kiva_web/live/loan_live/show.ex:806
+#, elixir-autogen, elixir-format
+msgid "Story approved"
+msgstr "Historia aprobada"
+
+#: lib/kiva_web/live/loan_live/show.ex:805
+#, elixir-autogen, elixir-format
+msgid "Story reviewed"
+msgstr "Historia revisada"
+
+#: lib/kiva_web/live/loan_live/show.ex:804
+#, elixir-autogen, elixir-format
+msgid "Story reworded by AI"
+msgstr "Historia reescrita por IA"
+
+#: lib/kiva_web/live/loan_live/show.ex:803
+#, elixir-autogen, elixir-format
+msgid "Story written"
+msgstr "Historia redactada"
+
+#: lib/kiva_web/live/loan_live/show.ex:808
+#, elixir-autogen, elixir-format
+msgid "Template translated"
+msgstr "Traducción por plantilla"
+
+#: lib/kiva_web/live/loan_live/show.ex:811
+#, elixir-autogen, elixir-format
+msgid "Translation approved"
+msgstr "Traducción aprobada"
+
+#: lib/kiva_web/live/loan_live/show.ex:812
+#, elixir-autogen, elixir-format
+msgid "Translation rejected"
+msgstr "Traducción rechazada"
+
+#: lib/kiva_web/live/loan_live/show.ex:810
+#, elixir-autogen, elixir-format
+msgid "Translation reviewed"
+msgstr "Traducción revisada"
+
+#: lib/kiva_web/live/loan_live/show.ex:660
+#, elixir-autogen, elixir-format
+msgid "chain"
+msgstr "cadena"
+
+#: lib/kiva_web/live/loan_live/show.ex:571
+#, elixir-autogen, elixir-format
+msgid "staff view"
+msgstr "vista de personal"
+
+#: lib/kiva_web/live/loan_live/show.ex:837
+#, elixir-autogen, elixir-format
+msgid "template"
+msgstr "plantilla"
+
+#: lib/kiva_web/live/loan_live/show.ex:667
+#, elixir-autogen, elixir-format
+msgid "unlinked"
+msgstr "sin vínculo"
+
+#: lib/kiva_web/live/loan_live/show.ex:589
+#, elixir-autogen, elixir-format
+msgid "Provenance could not be loaded for this listing — the trail may be incomplete. Check the server logs."
+msgstr "No se pudo cargar la procedencia de esta publicación — el registro puede estar incompleto. Revisa los registros del servidor."
+
+#: lib/kiva_web/developer/docs.ex:386
+#, elixir-autogen, elixir-format
+msgid "Kredo API — agent reference"
+msgstr "Kredo API: referencia para agentes"
+
+#: lib/kiva_web/components/layouts.ex:198
+#: lib/kiva_web/live/chat_live.ex:115
+#: lib/kiva_web/live/chat_live.ex:166
+#, elixir-autogen, elixir-format
+msgid "Kredo Assistant"
+msgstr "Asistente de Kredo"
+
+#: lib/kiva_web/controllers/page_html/home.html.heex:4
+#, elixir-autogen, elixir-format
+msgid "Kredo Demo"
+msgstr "Kredo Demo"
+
+#: lib/kiva_web/live/developers_live.ex:51
+#, elixir-autogen, elixir-format
+msgid "Kredo for developers"
+msgstr "Kredo para desarrolladores"
+
+#: lib/kiva_web/developer/docs.ex:307
+#, elixir-autogen, elixir-format
+msgid "The Kredo platform exposes three API surfaces. Pick the one that fits your integration:"
+msgstr "La plataforma Kredo expone tres superficies de API. Elige la que se ajuste a tu integración:"
+
+#: lib/kiva_web/live/portfolio_live.ex:543
+#, elixir-autogen, elixir-format
+msgid "Demo — repayments are simulated. Lending earns you no interest: the most that can come back is what you lent. In real lending, some of it would be lost to defaults."
+msgstr "Demo: los reembolsos son simulados. Prestar no te genera intereses: lo máximo que puede volver es lo que prestaste. En un préstamo real, parte se perdería por impagos."

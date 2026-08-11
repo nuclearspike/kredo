@@ -1,0 +1,53 @@
+version: 0.1.0
+supported_locales: [en, de, es, fr, nl]
+default_locale: en
+fallbacks:
+  de: [en]
+  es: [en]
+  fr: [en]
+  nl: [en]
+
+localizable_entities:
+  loans:
+    lc_table: loans_lc
+    fields: [title, short_description, borrower_story, loan_use, repayment_summary, risk_summary_public, partner_note_public]
+    hot_read_models: [localized_loan_cards, localized_loan_profiles]
+  borrowers:
+    lc_table: borrowers_lc
+    fields: [display_name, public_bio, business_summary]
+  partners:
+    lc_table: partners_lc
+    fields: [name, summary, profile]
+  lending_teams:
+    lc_table: lending_teams_lc
+    fields: [name, tagline, description, welcome_post_template]
+  team_posts:
+    lc_table: team_posts_lc
+    fields: [body]
+    translation_strategy: on_demand
+  messages:
+    lc_table: messages_lc
+    fields: [body]
+    translation_strategy: moderation_then_translate
+  sectors:
+    lc_table: sectors_lc
+    fields: [name, description]
+  activities:
+    lc_table: activities_lc
+    fields: [name, description]
+  tags:
+    lc_table: tags_lc
+    fields: [name]
+  faq_entries:
+    lc_table: faq_entries_lc
+    fields: [question, answer]
+
+translation_statuses:
+  - draft
+  - source_submitted
+  - machine_translated
+  - needs_review
+  - approved
+  - published
+  - stale
+  - rejected
