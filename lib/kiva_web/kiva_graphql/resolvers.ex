@@ -29,6 +29,7 @@ defmodule KivaWeb.KivaGraphql.Resolvers do
       country_codes: f[:country] || [],
       partner_ids: f[:partner] || [],
       q: args[:query_string],
+      locale: locale,
       sort_by: sort_by(args[:sort_by]),
       limit: clamp(args[:limit]),
       offset: max(args[:offset] || 0, 0)

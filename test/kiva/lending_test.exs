@@ -28,6 +28,58 @@ defmodule Kiva.LendingStageTest do
     assert slugs.("c") == slugs.("")
   end
 
+  # Matching every translation surfaced cards whose visible text contained none
+  # of the searched words. Search now reads the row the reader is shown.
+  test "search reads the language the reader is shown, including the English fallback" do
+    bilingual = loan_fixture(%{status: "fundraising"}).loan
+    put_lc(bilingual, "en", "Loom repairs", "Fixes her weaving loom.")
+    put_lc(bilingual, "es", "Reparacion de telar", "Arregla su telar.")
+
+    # This one's Spanish row is a draft, so a Spanish reader is shown English.
+    english_only = loan_fixture(%{status: "fundraising"}).loan
+    put_lc(english_only, "en", "Beekeeping starter hives", "Buys her first hives.")
+    put_lc(english_only, "es", "Colmenas para apicultura", "Compra colmenas.", "draft")
+
+    slugs = fn locale, q ->
+      locale
+      |> Kiva.Lending.list_localized_loans(%{status: "fundraising", q: q})
+      |> Enum.map(& &1.loan.slug)
+    end
+
+    # A word only present in Spanish is invisible to an English reader.
+    assert bilingual.slug in slugs.("es", "telar")
+    refute bilingual.slug in slugs.("en", "telar")
+
+    # ...and the reverse.
+    assert bilingual.slug in slugs.("en", "loom")
+    refute bilingual.slug in slugs.("es", "loom")
+
+    # With no usable Spanish row the reader sees English, so English is searched.
+    assert english_only.slug in slugs.("es", "beekeeping")
+    refute english_only.slug in slugs.("es", "colmenas")
+
+    # Counts are computed the same way, so they agree with the results.
+    counts = Kiva.Lending.status_counts("en", %{q: "telar"})
+    assert Map.get(counts, "fundraising", 0) == 0
+    assert Kiva.Lending.status_counts("es", %{q: "telar"})["fundraising"] == 1
+  end
+
+  defp put_lc(loan, locale, title, short_description, status \\ nil) do
+    Kiva.Lending.upsert_loan_lc(%{
+      loan_id: loan.id,
+      locale_code: locale,
+      is_source: locale == "en",
+      source_locale_code: "en",
+      title: title,
+      short_description: short_description,
+      borrower_story: short_description,
+      loan_use: "",
+      repayment_summary: "",
+      risk_summary_public: "",
+      translation_status: status || if(locale == "en", do: "published", else: "approved")
+    })
+  end
+
   defp search_loan_fixture(title, short_description) do
     %{loan: loan} = loan_fixture(%{status: "fundraising"})
 

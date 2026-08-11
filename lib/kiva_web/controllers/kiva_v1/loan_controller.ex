@@ -22,6 +22,7 @@ defmodule KivaWeb.KivaV1.LoanController do
       country_codes: country_codes(params),
       partner_ids: int_list(params["partner"]),
       q: params["q"],
+      locale: locale,
       sort_by: sort_by,
       limit: per_page,
       offset: Paging.offset(page, per_page)

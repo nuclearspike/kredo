@@ -134,7 +134,10 @@ defmodule KivaWeb.LoanLive.Index do
   defp assign_stats(socket), do: assign(socket, stats: Lending.browse_stats(%{}))
 
   defp assign_status_counts(socket),
-    do: assign(socket, status_counts: Lending.status_counts(socket.assigns.filters))
+    do:
+      assign(socket,
+        status_counts: Lending.status_counts(socket.assigns.locale, socket.assigns.filters)
+      )
 
   defp reset_page(socket), do: assign(socket, cursor: nil, cursor_stack: [])
 

@@ -334,7 +334,7 @@ finding finding.portfolio.uncapped_projection_implied_yield {
 policy policy.search.word_beginnings_only {
   label: "Loan search matches word beginnings, and one character is not a search"
   appliesTo: [@portfolio.impact, @loan.browse]
-  rule: "A search term matches where a WORD STARTS with it, across any of a loan's translations. A term buried inside a longer word does not match. Terms shorter than two characters are treated as no filter rather than as a search for everything. User input is regex-escaped before it reaches the pattern."
+  rule: "A search term matches where a WORD STARTS with it, in the ONE translation the reader is shown. A term buried inside a longer word does not match. Terms shorter than two characters are treated as no filter rather than as a search for everything. User input is regex-escaped before it reaches the pattern. Which row the reader is shown mirrors @Resolver: the requested locale when it has a display-eligible row, otherwise the English fallback; draft/rejected/stale rows are searched no more than they are displayed."
   rationale: "Substring matching cannot express what a searcher means. Someone typing toward 'catering' passes through 'cat', and ILIKE '%cat%' answers with every education loan because 'education' contains those letters — reported from the loans page 2026-08-11."
   enforcement: "Kiva.Lending.search_loans/2 (shared by the browse page, the status counts, and the compatibility API). Regression test: 'search matches word beginnings, not substrings buried in other words' (test/kiva/lending_test.exs), proven to fail before the fix."
   status: observed
@@ -351,13 +351,11 @@ policy policy.search.submit_preserves_the_search {
   confidence: 1.0
 }
 
-question question.search.locale_scope on @loan.browse {
-  questionType: open_question
-  question: "Should loan search match only the translations in the reader's own language, or continue matching across all five?"
-  whyItMatters: "Search currently matches any translation, so a Dutch or French phrasing can surface a loan whose visible English card shows none of the searched words. No such case exists in today's data, but the behaviour is a latent surprise and it also affects the compatibility API's q parameter."
-  blocks: []
-  status: asserted
+decision_record decision.search.scoped_to_readers_language {
+  label: "Search reads only the language the reader is shown"
+  status: observed
   confidence: 1.0
+  summary: "Loan search matches the resolved translation only, not all five. Searching an English word no longer returns a card whose visible text lacks it, and vice versa: 'tejido' answers a Spanish reader and nobody else. The English fallback is honoured, so a reader whose language has no display-eligible row searches the English text they are actually shown. Applies to the browse page, its status counts, and the compatibility API's q parameter, which now receives the caller's locale. The partner's repayment lookup is deliberately NOT scoped: it is an operational search for a known person, where matching a name in any translation is recall the partner wants. Ruling: owner, 2026-08-11 ('scope search to the reader's language'). Enforced by 'search reads the language the reader is shown, including the English fallback' (test/kiva/lending_test.exs), proven to fail against the unscoped query."
 }
 
 evidence evidence.portfolio.dashboard_query_budget {

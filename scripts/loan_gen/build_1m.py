@@ -5,6 +5,7 @@
 #
 #   python3 build_1m.py --count 1000000   # then: ./load_1m.sh
 import json, os, csv, random, argparse, subprocess, datetime as dt
+import re
 
 ap = argparse.ArgumentParser(description="Generate lean historical loan CSVs")
 ap.add_argument("--count", type=int, default=1_000_000)
@@ -56,6 +57,13 @@ if not BORR:
                      "optionally build_csv.py + load.sh), or run without --db to use borrowers_export.csv")
 print(f"{len(TPL)} templates, {len(BORR)} borrowers to reuse")
 
+# Templates carry the borrower placeholder in whichever language the LLM wrote
+# them in ({name}, {nombre}, {Naam}, {Nom}...). Substitute any of them, so no
+# card ever renders a literal brace token to a reader.
+PLACEHOLDER = re.compile(r"\{[A-Za-z_]+\}")
+def substitute_name(text, first):
+    return PLACEHOLDER.sub(first, text)
+
 START=dt.datetime(2013,1,1); SPAN=(dt.datetime(2022,12,31)-START).days
 def rdt(): return START+dt.timedelta(days=random.randint(0,SPAN), seconds=random.randint(0,86399))
 def ts(d): return d.strftime("%Y-%m-%d %H:%M:%S")
@@ -67,7 +75,7 @@ for i in range(N):
     lid=B_LOAN+i; d=rdt()
     bid,partner,country,sector,loc_src,name=random.choice(BORR)
     first=name.split()[0] if name else ""
-    t=random.choice(TPL); sub=lambda s:s.replace("{name}",first)
+    t=random.choice(TPL); sub=lambda s: substitute_name(s, first)
     status="defaulted" if random.random()<0.02 else "completed"
     amount=random.choice(AMOUNTS); term=random.choice(TERMS)
     disb=ts(d+dt.timedelta(days=random.randint(10,60)))
@@ -75,7 +83,7 @@ for i in range(N):
     for loc in LOCS:
         is_src=(loc==loc_src)
         st="published" if is_src else ("approved" if random.random()<0.85 else "machine")
-        wc.writerow([lc_id,lid,sub(t[loc]["title"]),t[loc]["short"],sub(t[loc]["story"]),t[loc]["short"],REPAY[loc].format(n=term),RISK[loc],loc,"t" if is_src else "f",loc_src,st,"",1,"",ts(d),ts(d)]); lc_id+=1
+        wc.writerow([lc_id,lid,sub(t[loc]["title"]),sub(t[loc]["short"]),sub(t[loc]["story"]),sub(t[loc]["short"]),REPAY[loc].format(n=term),RISK[loc],loc,"t" if is_src else "f",loc_src,st,"",1,"",ts(d),ts(d)]); lc_id+=1
     if (i+1)%200000==0: print(f"  ...{i+1} loans")
 fl.close(); fc.close()
 print(f"DONE. loans {B_LOAN}..{B_LOAN+N-1}, loans_lc {B_LC}..{lc_id-1}")

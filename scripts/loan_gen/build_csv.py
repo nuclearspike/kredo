@@ -10,6 +10,7 @@
 # Pass --db '' to skip psql and use built-in defaults that match a fresh
 # `mix ecto.setup` world.
 import json, os, csv, random, argparse, subprocess, datetime as dt
+import re
 
 ap = argparse.ArgumentParser(description="Generate demo-scale loan CSVs")
 ap.add_argument("--loans", type=int, default=100_000)
@@ -91,6 +92,13 @@ def tpl(sector):
     lst=pool.get(sector) or allt
     return random.choice(lst)
 
+# Templates carry the borrower placeholder in whichever language the LLM wrote
+# them in ({name}, {nombre}, {Naam}, {Nom}...). Substitute any of them, so no
+# card ever renders a literal brace token to a reader.
+PLACEHOLDER = re.compile(r"\{[A-Za-z_]+\}")
+def substitute_name(text, first):
+    return PLACEHOLDER.sub(first, text)
+
 START=dt.datetime(2023,6,1); SPAN=(dt.datetime(2026,6,20)-START).days
 def rand_dt(): return START+dt.timedelta(days=random.randint(0,SPAN), seconds=random.randint(0,86399))
 def ts(d): return d.strftime("%Y-%m-%d %H:%M:%S")
@@ -129,13 +137,13 @@ for i in range(N_LOANS):
     sector=random.choice(SECTOR_KEYS); t=tpl(sector)
     amount=random.choice(AMOUNTS); term=random.choice(TERMS); state=statuses[i]
     trust=random.choice(TRUST); img=LOAN_IMGS[i%len(LOAN_IMGS)]
-    sub=lambda s: s.replace("{name}", first)
+    sub=lambda s: substitute_name(s, first)
 
     # borrower + 5 lc
     W["borrowers"].writerow([bid,"",f"b{bid}",cc,src,PARTNER[cc],SECTOR[sector],"",f"/images/loans/{img}",ts(d),ts(d)])
     for j,loc in enumerate(LOCS):
         is_src=(loc==src)
-        W["borrowers_lc"].writerow([B["borrower_lc"]+i*5+j,bid,name,sub(t[loc]["story"]),t[loc]["short"],loc,"t" if is_src else "f",src,tstatus(is_src),"",1,"",ts(d),ts(d)])
+        W["borrowers_lc"].writerow([B["borrower_lc"]+i*5+j,bid,name,sub(t[loc]["story"]),sub(t[loc]["short"]),loc,"t" if is_src else "f",src,tstatus(is_src),"",1,"",ts(d),ts(d)])
 
     # state -> financials/schedule
     # Lending moves in whole $25 units (schema check constraints) — floor the
@@ -152,7 +160,7 @@ for i in range(N_LOANS):
     W["loans"].writerow([lid,f"l{lid}",state,PARTNER[cc],bid,cc,SECTOR[sector],"",trust,amount,funded,"USD",dstatus,disbursed_at,fr_s,fr_e,term,"monthly",src,ts(d),ts(d),""])
     for j,loc in enumerate(LOCS):
         is_src=(loc==src)
-        W["loans_lc"].writerow([B["loan_lc"]+i*5+j,lid,sub(t[loc]["title"]),t[loc]["short"],sub(t[loc]["story"]),t[loc]["short"],REPAY[loc].format(n=term),RISK[loc],loc,"t" if is_src else "f",src,tstatus(is_src),"",1,"",ts(d),ts(d)])
+        W["loans_lc"].writerow([B["loan_lc"]+i*5+j,lid,sub(t[loc]["title"]),sub(t[loc]["short"]),sub(t[loc]["story"]),sub(t[loc]["short"]),REPAY[loc].format(n=term),RISK[loc],loc,"t" if is_src else "f",src,tstatus(is_src),"",1,"",ts(d),ts(d)])
 
     # schedule + items (non-draft)
     if state!="draft":

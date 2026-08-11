@@ -23,7 +23,7 @@ defmodule Kiva.Lending do
     |> filter_sector(filters[:sector_id])
     |> filter_country(filters[:country_code])
     |> filter_trust(filters[:trust_model])
-    |> search_loans(filters[:q])
+    |> search_loans(filters[:q], locale)
     |> keyset_before(Kiva.Pagination.decode(filters[:cursor]))
     |> order_by([l], desc: l.inserted_at, desc: l.id)
     |> limit(^(Kiva.Pagination.page_limit(filters) + 1))
@@ -47,13 +47,13 @@ defmodule Kiva.Lending do
   Loan counts per browse status-filter value, honoring the sector/country/trust/search
   filters (but not status). One GROUP BY — cheap even at 100K.
   """
-  def status_counts(filters \\ %{}) do
+  def status_counts(locale, filters \\ %{}) do
     rows =
       Loan
       |> filter_sector(filters[:sector_id])
       |> filter_country(filters[:country_code])
       |> filter_trust(filters[:trust_model])
-      |> search_loans(filters[:q])
+      |> search_loans(filters[:q], locale)
       |> group_by([l], l.status)
       |> select([l], {l.status, count(l.id)})
       |> Repo.all()
@@ -86,39 +86,70 @@ defmodule Kiva.Lending do
   defp keyset_before(query, {ts, id}),
     do: where(query, [l], l.inserted_at < ^ts or (l.inserted_at == ^ts and l.id < ^id))
 
-  # Matches where a WORD STARTS with the term (`\m` is Postgres's
-  # start-of-word escape), across any of a loan's translations.
+  # Matches where a WORD STARTS with the term (`\m` is Postgres's start-of-word
+  # escape), in the one translation the reader is actually shown.
   #
-  # It deliberately does not match a term buried inside a longer word: someone
-  # typing their way to "catering" passes through "cat", and a plain
-  # `ILIKE '%cat%'` hands them every education loan, because "education"
-  # contains those letters.
+  # Two things it deliberately does not do.
+  #
+  # It does not match a term buried inside a longer word: someone typing their
+  # way to "catering" passes through "cat", and a plain `ILIKE '%cat%'` hands
+  # them every education loan, because "education" contains those letters.
+  #
+  # It does not search translations the reader cannot see, which would return
+  # cards whose visible text contains none of the searched words. Which row the
+  # reader sees is `Resolver`'s rule, mirrored here in SQL: the requested locale
+  # when it has a display-eligible row, otherwise the English fallback.
   #
   # A single character starts a word in nearly every loan, so it is treated as
   # no filter rather than as a search for everything.
-  defp search_loans(query, q) when is_binary(q) do
+  defp search_loans(query, q, locale) when is_binary(q) do
     term = String.trim(q)
 
     if String.length(term) < 2 do
       query
     else
       pattern = "\\m" <> escape_regex(term)
+      locale = Kiva.Localization.normalize(locale)
+      statuses = Resolver.display_statuses()
 
       where(
         query,
         [l],
         fragment(
-          "EXISTS (SELECT 1 FROM loans_lc lc WHERE lc.loan_id = ? AND (lc.title ~* ? OR lc.short_description ~* ? OR lc.borrower_story ~* ?))",
+          """
+          EXISTS (
+            SELECT 1 FROM loans_lc lc
+            WHERE lc.loan_id = ?
+              AND lc.translation_status = ANY(?)
+              AND (lc.title ~* ? OR lc.short_description ~* ? OR lc.borrower_story ~* ?)
+              AND (
+                lc.locale_code = ?
+                OR (
+                  lc.locale_code = 'en'
+                  AND NOT EXISTS (
+                    SELECT 1 FROM loans_lc alt
+                    WHERE alt.loan_id = lc.loan_id
+                      AND alt.locale_code = ?
+                      AND alt.translation_status = ANY(?)
+                  )
+                )
+              )
+          )
+          """,
           l.id,
+          ^statuses,
           ^pattern,
           ^pattern,
-          ^pattern
+          ^pattern,
+          ^locale,
+          ^locale,
+          ^statuses
         )
       )
     end
   end
 
-  defp search_loans(query, _), do: query
+  defp search_loans(query, _q, _locale), do: query
 
   # The search term becomes part of a regular expression, so neutralise the
   # operators a searcher may reasonably type ("co-op (2024)", "35+").
@@ -194,7 +225,7 @@ defmodule Kiva.Lending do
       |> kiva_filter_countries(opts[:country_codes])
       |> kiva_filter_partners(opts[:partner_ids])
       |> kiva_filter_gender(opts[:gender])
-      |> search_loans(opts[:q])
+      |> search_loans(opts[:q], opts[:locale] || "en")
 
     total = Repo.aggregate(base, :count, :id)
 
