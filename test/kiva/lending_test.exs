@@ -4,6 +4,52 @@ defmodule Kiva.LendingStageTest do
   use Kiva.DataCase, async: true
   import Kiva.LendingFixtures
 
+  # Typing toward "catering" passes through "cat", which is a substring of
+  # "education" — a plain ILIKE '%cat%' therefore surfaced education loans to
+  # someone searching for caterers. Search matches word beginnings instead.
+  test "search matches word beginnings, not substrings buried in other words" do
+    catering = search_loan_fixture("Ingredients for her catering", "Fulfils catering orders.")
+    education = search_loan_fixture("Books for Amina's future", "Support education essentials.")
+
+    slugs = fn q ->
+      "en"
+      |> Kiva.Lending.list_localized_loans(%{status: "fundraising", q: q})
+      |> Enum.map(& &1.loan.slug)
+    end
+
+    assert catering.slug in slugs.("catering")
+    refute education.slug in slugs.("catering")
+
+    # "cat" begins the word "catering" but is buried inside "education".
+    assert catering.slug in slugs.("cat")
+    refute education.slug in slugs.("cat")
+
+    # A single character matches nearly every loan; it is noise, not a search.
+    assert slugs.("c") == slugs.("")
+  end
+
+  defp search_loan_fixture(title, short_description) do
+    %{loan: loan} = loan_fixture(%{status: "fundraising"})
+
+    for locale <- ~w(en es de fr nl) do
+      Kiva.Lending.upsert_loan_lc(%{
+        loan_id: loan.id,
+        locale_code: locale,
+        is_source: locale == "en",
+        source_locale_code: "en",
+        title: title,
+        short_description: short_description,
+        borrower_story: short_description,
+        loan_use: "",
+        repayment_summary: "",
+        risk_summary_public: "",
+        translation_status: "published"
+      })
+    end
+
+    loan
+  end
+
   test "schedule items preload date-ordered regardless of physical row order" do
     base = loan_fixture(%{status: "repaying"})
     schedule = Kiva.Repo.preload(base.loan, :repayment_schedule).repayment_schedule

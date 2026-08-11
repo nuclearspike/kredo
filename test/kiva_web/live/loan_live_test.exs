@@ -1,3 +1,41 @@
+defmodule KivaWeb.LoanSearchLiveTest do
+  # Pressing Enter in the search box used to submit the form natively, which
+  # remounted the LiveView and threw away both the text and the search.
+  use KivaWeb.ConnCase, async: true
+  import Phoenix.LiveViewTest
+  import Kiva.LendingFixtures
+
+  test "submitting the search keeps the term and the filtered results", %{conn: conn} do
+    %{loan: loan} = loan_fixture(%{status: "fundraising"})
+
+    Kiva.Lending.upsert_loan_lc(%{
+      loan_id: loan.id,
+      locale_code: "en",
+      is_source: true,
+      source_locale_code: "en",
+      title: "Ingredients for her catering",
+      short_description: "Fulfils catering orders.",
+      borrower_story: "She caters events.",
+      loan_use: "",
+      repayment_summary: "",
+      risk_summary_public: "",
+      translation_status: "published"
+    })
+
+    {:ok, view, _html} = live(conn, ~p"/loans")
+
+    # The form carries phx-submit, so Enter is handled in place rather than
+    # triggering a full-page GET.
+    html =
+      view
+      |> element("#loan-search")
+      |> render_submit(%{"q" => "catering"})
+
+    assert html =~ "Ingredients for her catering"
+    assert html =~ ~s(value="catering")
+  end
+end
+
 defmodule KivaWeb.LoanLiveTest do
   use KivaWeb.ConnCase, async: true
 

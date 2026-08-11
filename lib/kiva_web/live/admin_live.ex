@@ -619,8 +619,9 @@ defmodule KivaWeb.AdminLive do
 
       <section class="mt-8">
         <h2 class="text-xl font-semibold">{gettext("Audit timeline")}</h2>
-        <form phx-change="filter_audit" class="mt-2">
+        <form id="audit-filter" phx-change="filter_audit" phx-submit="filter_audit" class="mt-2">
           <input
+            id="audit-filter-event-type"
             name="event_type"
             value={@event_filter}
             placeholder={gettext("Filter by event type…")}

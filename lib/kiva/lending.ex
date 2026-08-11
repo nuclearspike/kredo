@@ -86,23 +86,44 @@ defmodule Kiva.Lending do
   defp keyset_before(query, {ts, id}),
     do: where(query, [l], l.inserted_at < ^ts or (l.inserted_at == ^ts and l.id < ^id))
 
-  defp search_loans(query, q) when is_binary(q) and q != "" do
-    like = "%#{q}%"
+  # Matches where a WORD STARTS with the term (`\m` is Postgres's
+  # start-of-word escape), across any of a loan's translations.
+  #
+  # It deliberately does not match a term buried inside a longer word: someone
+  # typing their way to "catering" passes through "cat", and a plain
+  # `ILIKE '%cat%'` hands them every education loan, because "education"
+  # contains those letters.
+  #
+  # A single character starts a word in nearly every loan, so it is treated as
+  # no filter rather than as a search for everything.
+  defp search_loans(query, q) when is_binary(q) do
+    term = String.trim(q)
 
-    where(
-      query,
-      [l],
-      fragment(
-        "EXISTS (SELECT 1 FROM loans_lc lc WHERE lc.loan_id = ? AND (lc.title ILIKE ? OR lc.short_description ILIKE ? OR lc.borrower_story ILIKE ?))",
-        l.id,
-        ^like,
-        ^like,
-        ^like
+    if String.length(term) < 2 do
+      query
+    else
+      pattern = "\\m" <> escape_regex(term)
+
+      where(
+        query,
+        [l],
+        fragment(
+          "EXISTS (SELECT 1 FROM loans_lc lc WHERE lc.loan_id = ? AND (lc.title ~* ? OR lc.short_description ~* ? OR lc.borrower_story ~* ?))",
+          l.id,
+          ^pattern,
+          ^pattern,
+          ^pattern
+        )
       )
-    )
+    end
   end
 
   defp search_loans(query, _), do: query
+
+  # The search term becomes part of a regular expression, so neutralise the
+  # operators a searcher may reasonably type ("co-op (2024)", "35+").
+  defp escape_regex(term),
+    do: Regex.replace(~r/[.^$*+?()\[\]{}|\\]/, term, fn m -> "\\" <> m end)
 
   # Which loan statuses a browse query returns. Default = active/lendable public set;
   # an explicit filter can surface a single state (incl. delinquent/defaulted, which

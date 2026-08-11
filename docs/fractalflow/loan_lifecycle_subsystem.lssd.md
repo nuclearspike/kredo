@@ -331,6 +331,35 @@ finding finding.portfolio.uncapped_projection_implied_yield {
   confidence: 1.0
 }
 
+policy policy.search.word_beginnings_only {
+  label: "Loan search matches word beginnings, and one character is not a search"
+  appliesTo: [@portfolio.impact, @loan.browse]
+  rule: "A search term matches where a WORD STARTS with it, across any of a loan's translations. A term buried inside a longer word does not match. Terms shorter than two characters are treated as no filter rather than as a search for everything. User input is regex-escaped before it reaches the pattern."
+  rationale: "Substring matching cannot express what a searcher means. Someone typing toward 'catering' passes through 'cat', and ILIKE '%cat%' answers with every education loan because 'education' contains those letters — reported from the loans page 2026-08-11."
+  enforcement: "Kiva.Lending.search_loans/2 (shared by the browse page, the status counts, and the compatibility API). Regression test: 'search matches word beginnings, not substrings buried in other words' (test/kiva/lending_test.exs), proven to fail before the fix."
+  status: observed
+  confidence: 1.0
+}
+
+policy policy.search.submit_preserves_the_search {
+  label: "Running a search never clears it"
+  appliesTo: [@loan.browse]
+  rule: "Every filter form handled by phx-change also declares phx-submit, so pressing Enter is handled in place. A form without it is submitted natively by the browser, which remounts the LiveView and discards both the entered text and the results it produced."
+  rationale: "Reported 2026-08-11: pressing Enter on the loans page emptied the search box and returned the unfiltered list. The same omission was present on the audit filter, the partner repayment search, and the portfolio filters; all four were corrected together."
+  enforcement: "Regression test: 'submitting the search keeps the term and the filtered results' (test/kiva_web/live/loan_live_test.exs)."
+  status: observed
+  confidence: 1.0
+}
+
+question question.search.locale_scope on @loan.browse {
+  questionType: open_question
+  question: "Should loan search match only the translations in the reader's own language, or continue matching across all five?"
+  whyItMatters: "Search currently matches any translation, so a Dutch or French phrasing can surface a loan whose visible English card shows none of the searched words. No such case exists in today's data, but the behaviour is a latent surprise and it also affects the compatibility API's q parameter."
+  blocks: []
+  status: asserted
+  confidence: 1.0
+}
+
 evidence evidence.portfolio.dashboard_query_budget {
   kind: measurement
   occurredAt: "2026-08-11"

@@ -69,8 +69,9 @@ defmodule KivaWeb.Partner.RepaymentsLive do
       </div>
 
       <div :if={@partner_id}>
-        <form phx-change="search" class="mt-4">
+        <form id="repayments-search" phx-change="search" phx-submit="search" class="mt-4">
           <input
+            id="repayments-search-q"
             type="text"
             name="q"
             value={@q}

@@ -918,7 +918,7 @@ defmodule KivaWeb.PortfolioLive do
         </h2>
 
         <div class="flex flex-wrap items-center gap-2 mt-4">
-          <form phx-change="filter" class="contents">
+          <form id="portfolio-filters" phx-change="filter" phx-submit="filter" class="contents">
             <select
               name="status"
               class="select select-sm rounded-full w-auto border-base-300"

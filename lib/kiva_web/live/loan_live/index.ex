@@ -239,8 +239,12 @@ defmodule KivaWeb.LoanLive.Index do
         >
           {s.name}
         </button>
-        <form phx-change="search" class="ml-auto">
+        <%!-- phx-submit keeps Enter inside LiveView. Without it the browser
+             submits the form natively, remounting the page and wiping both the
+             box and the search the person just ran. --%>
+        <form id="loan-search" phx-change="search" phx-submit="search" class="ml-auto">
           <input
+            id="loan-search-q"
             name="q"
             value={@q}
             placeholder={gettext("Search")}
