@@ -437,10 +437,10 @@ intent intent.admin.whats_waiting for @actor.staff {
 # --- 2026-08-10: publication prep (GitHub feasibility follow-through) ----------
 
 decision_record decision.licence_noncommercial {
-  label: "Licensed PolyForm Noncommercial 1.0.0 \u2014 not for sale"
+  label: "PolyForm Noncommercial 1.0.0, with commercial rights gifted to Kiva Microfunds"
   status: observed
   confidence: 1.0
-  summary: "Relicensed from MIT on the owner's instruction that the code must not be sold. PolyForm Noncommercial 1.0.0 is the standard instrument for that: reading, running, modifying, and sharing stay free for any noncommercial purpose, including nonprofits, schools, and research and government institutions, while selling it or using it commercially is not licensed. Note the breadth: it forbids commercial USE, which is wider than forbidding sale alone; a narrower bespoke clause was rejected as legally ambiguous (is hosting a sale? is consulting?). The owner is sole author, so relicensing is his to make; the repository is private and has no other recipients, so no prior MIT grant is outstanding in practice."
+  summary: "Relicensed from MIT on the owner's instruction that the code must not be sold. The LICENSE is PolyForm Noncommercial 1.0.0 reproduced unmodified, plus a clearly separated additional grant \u2014 the base-licence-plus-additional-permission pattern, so the base terms are never misrepresented. Anyone may read, run, modify, and share for noncommercial purposes; no commercial use is licensed to anyone EXCEPT Kiva Microfunds, its successors, and organizations it controls, which hold a perpetual, worldwide, royalty-free, irrevocable commercial licence. That grant is automatic and needs no agreement or notice; the owner additionally offers to assign copyright outright at no charge. Owner ruling 2026-08-11, choosing noncommercial-for-all over an all-rights-reserved reading so the README's laptop setup instructions stay coherent with what readers are actually permitted to do. The grant names Kiva only as a beneficiary and both LICENSE and README restate the absence of any affiliation, so the gift cannot be read as endorsement. Not lawyer-reviewed."
 }
 
 decision_record decision.rebrand_kredo {

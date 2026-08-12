@@ -246,10 +246,25 @@ documents predate a late rename and still use the original working title.
 
 ## License
 
-[PolyForm Noncommercial 1.0.0](LICENSE) — read, run, modify, and share it
-freely for any noncommercial purpose, including study, hobby projects, and use
-by nonprofits, schools, and research or government institutions. **You may not
-sell it or use it commercially.**
+[PolyForm Noncommercial 1.0.0](LICENSE), plus one additional grant:
+
+- **Anyone** may read, run, modify, and share this for any **noncommercial**
+  purpose — study, hobby projects, and use by nonprofits, schools, and research
+  or government institutions. Running it on your own laptop, which is what the
+  setup instructions above are for, is squarely within that.
+- **No commercial use** is licensed to any individual, company, or organization,
+  with a single exception —
+- **Kiva Microfunds** may use it commercially, perpetually, for free.
+
+### If you're from Kiva
+
+This was built as an experiment, not a pitch, and there is no relationship
+between it and you. But if any of it is useful — the compatibility layer, the
+localization model, the generator, or the whole thing — it's yours. The license
+already grants you full commercial rights automatically, with nothing to sign.
+If you'd rather own it outright than hold a license to it, I'll assign the
+copyright and hand over the repository at no charge; open an issue or get in
+touch.
 
 All demo content (stories, translations, portraits) is AI-generated and depicts
 no real person.
