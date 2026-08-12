@@ -486,11 +486,30 @@ policy public_visibility on @loan.fund {
   rule: "Only loans whose status is in fundraising | funded | funded_disbursed | repaying | completed appear in the public localized search/profile."
 }
 
+constraint constraint.repay.one_schedule_per_loan {
+  constraintType: data
+  statement: "A loan has at most one repayment schedule, enforced by a unique index on repayment_schedules.loan_id."
+  appliesTo: [@loan.repay, @repayment_schedule.item_terms]
+  consequence: ["A second schedule would double what the borrower appears to owe and what lenders are shown as coming back, since both the portfolio projections and the partner's due list sum the items", "An attempted duplicate raises rather than being silently written"]
+  verification: ["priv/repo/migrations/20260812175557_add_unique_repayment_schedule_per_loan.exs, applied against 98,141 existing schedules with no duplicates to clean up first", "'the database refuses a loan a second repayment schedule' (test/kiva/runtime_repayment_test.exs)"]
+  knowledge: {
+    scope: ["every repayment schedule"]
+    evidence: [@evidence.repay.schedule_call_sites]
+    owner: "Paul Ericksen"
+    learnedAt: "2026-08-12"
+  }
+  status: observed
+  confidence: 1.0
+  metadata: {
+    note: "Loan declared has_one :repayment_schedule from the start, but the database allowed several. The disbursal and funding paths hold the loan row FOR UPDATE across their check-then-insert, so a duplicate was already unreachable through them; the index makes that structural instead of dependent on every future caller remembering the lock."
+  }
+}
+
 obligation obligation.repay.disbursal_produces_a_schedule on @loan.repay {
   label: "A disbursed loan owes a repayment schedule"
   trigger: "A loan's funds reach the borrower — Kiva.Lending.record_disbursal/1, whether run by a partner, by staff, or by advance_demo_time"
   requirement: "The loan must end that step with a repayment schedule and its items, because from that moment a borrower owes repayments, lenders are shown expected repayments, and the portfolio projections read from those rows."
-  completion: "Kiva.Lending.record_disbursal/1 and the funding-completion paths (Portfolio.lend/4, simulate_funding/1) each run inside a transaction holding the loan row FOR UPDATE, and call ensure_repayment_schedule/1 within it. That function is idempotent — a seeded loan keeps the schedule it already has — and otherwise builds one via create_principal_repayment_schedule/4, which writes the schedule and every item together or not at all. Held by test/kiva/runtime_repayment_test.exs — ten cases, every one proven to fail with the code or guard it covers removed."
+  completion: "Kiva.Lending.record_disbursal/1 and the funding-completion paths (Portfolio.lend/4, simulate_funding/1) each run inside a transaction holding the loan row FOR UPDATE, and call ensure_repayment_schedule/1 within it. That function is idempotent — a seeded loan keeps the schedule it already has — and otherwise builds one via create_principal_repayment_schedule/4, which writes the schedule and every item together or not at all, and cannot write a second one — @constraint.repay.one_schedule_per_loan. Held by test/kiva/runtime_repayment_test.exs — eleven cases, every one proven to fail with the code, guard, or constraint it covers removed."
   rationale: "Every loan in the demo has a schedule because the seeds give it one, which is exactly why the gap was invisible: it only appeared on a loan that lived its whole life at runtime."
   status: observed
   confidence: 1.0

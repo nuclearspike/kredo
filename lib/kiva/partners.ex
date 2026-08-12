@@ -25,7 +25,7 @@ defmodule Kiva.Partners do
 
   @doc "Kiva-compat: a page of partners (raw, with translations): `{partners, total}`."
   def kiva_list(limit, offset) do
-    total = Repo.aggregate(Partner, :count, :id)
+    total = Repo.aggregate(Partner, :count)
 
     rows =
       Partner

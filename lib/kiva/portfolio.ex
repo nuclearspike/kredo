@@ -193,7 +193,7 @@ defmodule Kiva.Portfolio do
       |> Enum.sort_by(&(-&1.count))
 
     %{
-      count: Repo.aggregate(base, :count, :id),
+      count: Repo.aggregate(base, :count),
       total_cents: Repo.aggregate(base, :sum, :amount_cents) || 0,
       returned_cents: returned,
       available_to_relend_cents: returned,

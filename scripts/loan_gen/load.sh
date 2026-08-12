@@ -4,7 +4,7 @@
 set -e
 DB="${KREDO_DB:-kiva_dev}"
 CSV="$(cd "$(dirname "$0")" && pwd)/csv"
-copy() { echo "  loading $1..."; t0=$(date +%s); psql $DB -q -c "\copy $1($2) FROM '$CSV/$1.csv' WITH (FORMAT csv)"; echo "    $(($(date +%s)-t0))s"; }
+copy() { echo "  loading $1..."; t0=$(date +%s); psql "$DB" -q -c "\copy $1($2) FROM '$CSV/$1.csv' WITH (FORMAT csv)"; echo "    $(($(date +%s)-t0))s"; }
 copy users "id,email,encrypted_password,display_name,role,default_locale_code,inserted_at,updated_at,managed_partner_id,avatar_url"
 copy borrowers "id,user_id,public_id,country_code,preferred_locale_code,partner_id,sector_id,activity_id,image_url,inserted_at,updated_at"
 copy borrowers_lc "id,borrower_id,display_name,public_bio,business_summary,locale_code,is_source,source_locale_code,translation_status,translated_from_lc_id,version,source_hash,inserted_at,updated_at"
@@ -21,6 +21,17 @@ echo "  recomputing team lifetime totals..."
 psql "$DB" -qc "UPDATE lending_teams SET total_lent_cents = COALESCE((SELECT SUM(l.amount_cents) FROM lendings l WHERE l.lending_team_id = lending_teams.id), 0)"
 echo "  resetting sequences..."
 for t in users borrowers borrowers_lc loans loans_lc repayment_schedules repayment_schedule_items lendings borrower_updates borrower_updates_lc notifications audit_events; do
-  psql $DB -qtAc "SELECT setval(pg_get_serial_sequence('$t','id'), (SELECT max(id) FROM $t))" >/dev/null
+  psql "$DB" -qtAc "SELECT setval(pg_get_serial_sequence('$t','id'), (SELECT max(id) FROM $t))" >/dev/null
+done
+
+# COPY leaves every page unmarked in the visibility map, and Postgres will not
+# use an index-only scan on a page it cannot prove is all-visible. Without this,
+# the paged API's exact-total count reads the whole 225 MB table instead of an
+# 8 MB index -- 62ms rather than 22ms. VACUUM sets the map; ANALYZE gives the
+# planner real row counts to choose the plan with. Do not reduce this to ANALYZE:
+# statistics alone leave the visibility map cold and the scan on the heap.
+echo "  vacuum + analyze (sets the visibility map so counts stay on the index)..."
+for t in users borrowers borrowers_lc loans loans_lc repayment_schedules repayment_schedule_items lendings borrower_updates borrower_updates_lc notifications audit_events lending_teams; do
+  psql "$DB" -qc "VACUUM (ANALYZE) $t"
 done
 echo "DONE"

@@ -66,7 +66,7 @@ job at file grain.
 
 | Label | Count | Means |
 |---|---|---|
-| `observed` | 312 | verified in the code as it exists |
+| `observed` | 313 | verified in the code as it exists |
 | `asserted` | 83 | declared or ruled, **not built yet** |
 | other | 28 | `confirmed`, `committed`, `unknown`, `retired`, `delivered`, `candidate` on specific record types |
 
@@ -86,7 +86,7 @@ excluding the `model` version header.
 | Contract | Nodes | Governs | What it models |
 |---|---|---|---|
 | [`kiva_future_demo_product.lssd.md`](kiva_future_demo_product.lssd.md) | 59 | *(root)* | **Start here.** The product model: capabilities, product-level outcomes, the initiative ledger of committed work, and the decision records behind the big rulings (rebrand, licence, the 0%-interest invariant, bulk collections, the risk-details page) |
-| [`loan_lifecycle_subsystem.lssd.md`](loan_lifecycle_subsystem.lssd.md) | 111 | `lending`, `loan_applications`, `portfolio`, the lender/partner LiveViews | The largest contract. Loan states, the repayment loop, lender and partner journeys with first-person stage records, the search and publishing policies, and the finding that lenders earn 0% |
+| [`loan_lifecycle_subsystem.lssd.md`](loan_lifecycle_subsystem.lssd.md) | 112 | `lending`, `loan_applications`, `portfolio`, the lender/partner LiveViews | The largest contract. Loan states, the repayment loop, lender and partner journeys with first-person stage records, the search and publishing policies, and the finding that lenders earn 0% |
 | [`messaging_reveal_subsystem.lssd.md`](messaging_reveal_subsystem.lssd.md) | 58 | `messaging`, `moderation`, `notifications` | Cross-language encouragement, the moderation pipeline, the borrower's portal journey, and the reveal layer — who gets told what, and where silence was never decided |
 | [`permissions_trust_subsystem.lssd.md`](permissions_trust_subsystem.lssd.md) | 40 | `permissions`, `trust`, `audit` | Permission groups and direct grants, the outlier dashboard, trustees, endorsements, and blockchain attestations |
 | [`lending_teams_subsystem.lssd.md`](lending_teams_subsystem.lssd.md) | 33 | `teams`, `basket`, team LiveViews | Lending teams, lend-on-behalf, the basket, and team message boards |

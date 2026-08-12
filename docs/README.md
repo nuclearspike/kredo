@@ -12,7 +12,7 @@ Four directories, in the order the work happened:
 | 1 | [**`prd/`**](prd/) | **Planned.** 18 documents specifying the product before any code existed — vision, subsystems, data model, API contracts, actor specs, roadmap. Preserved unedited; historical, not current. |
 | 2 | [**`fractalflow/`**](fractalflow/) | **Modelled.** Ten living contracts describing the system's actors, truths, commands, policies, and reveals — kept in sync with the code as a rule of the project. The semantic authority. |
 | 3 | [**`storytime/`**](storytime/) | **Audited.** Actor-journey reports: what the product actually delivers to each person who uses it, the features its own data is asking for, and the gaps nobody could see from inside. **Start here if you are browsing.** |
-| — | [**`screenshots/`**](screenshots/) | **Seen.** Twenty-four screens across visitor, lender, borrower, staff and developer, in all five languages. The quickest way to know what the thing actually is. |
+| — | [**`screenshots/`**](screenshots/README.md) | **Seen.** Twenty-four screens across visitor, lender, borrower, staff and developer, in all five languages. The quickest way to know what the thing actually is. |
 | — | [`kiva_api_compatibility.md`](kiva_api_compatibility.md) | How the Kiva-compatible API surfaces map to the real ones. |
 
 New to this methodology? [`storytime/README.md`](storytime/README.md) explains

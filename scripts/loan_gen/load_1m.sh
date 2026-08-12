@@ -11,4 +11,15 @@ echo "  resetting sequences..."
 for t in loans loans_lc; do
   psql "$DB" -qtAc "SELECT setval(pg_get_serial_sequence('$t','id'), (SELECT max(id) FROM $t))" >/dev/null
 done
+
+# COPY leaves every page unmarked in the visibility map, and Postgres will not
+# use an index-only scan on a page it cannot prove is all-visible. Without this,
+# the paged API's exact-total count reads the whole 225 MB table instead of an
+# 8 MB index -- 62ms rather than 22ms. VACUUM sets the map; ANALYZE gives the
+# planner real row counts to choose the plan with. Do not reduce this to ANALYZE:
+# statistics alone leave the visibility map cold and the scan on the heap.
+echo "  vacuum + analyze (sets the visibility map so counts stay on the index)..."
+for t in loans loans_lc; do
+  psql "$DB" -qc "VACUUM (ANALYZE) $t"
+done
 echo "DONE"

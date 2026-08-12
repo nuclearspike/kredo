@@ -132,7 +132,7 @@ defmodule Kiva.Teams do
           Team
       end
 
-    total = Repo.aggregate(base, :count, :id)
+    total = Repo.aggregate(base, :count)
 
     rows =
       base

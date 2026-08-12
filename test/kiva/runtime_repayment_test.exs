@@ -162,6 +162,18 @@ defmodule Kiva.RuntimeRepaymentTest do
            "lenders must not be told the money moved a second time"
   end
 
+  test "the database refuses a loan a second repayment schedule" do
+    base = unscheduled_funded_loan()
+    Lending.record_disbursal(base.loan.id)
+
+    assert_raise Ecto.ConstraintError, ~r/repayment_schedules_loan_id_index/, fn ->
+      Lending.create_principal_repayment_schedule(base.loan.id, ~D[2026-07-01], 6, 60_000)
+    end
+
+    assert length(reload(base.loan.id).repayment_schedule.items) == 8,
+           "the original schedule survives the rejected one"
+  end
+
   test "a backfilled schedule is dated from the disbursal, not from today" do
     disbursed_on = ~U[2026-07-01 00:00:00Z]
 

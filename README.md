@@ -47,9 +47,9 @@ findings about mistakes the same AI made days earlier, published unedited.
 
 ---
 
-[![The Kredo home page: “Loans that change lives — in every language”, above a row of borrowers currently fundraising](docs/screenshots/02-home.webp)](docs/screenshots/)
+[![The Kredo home page: “Loans that change lives — in every language”, above a row of borrowers currently fundraising](docs/screenshots/02-home.webp)](docs/screenshots/README.md)
 
-<sub>**[→ 24 more screens](docs/screenshots/)** — the lender's dashboard, the
+<sub>**[→ 24 more screens](docs/screenshots/README.md)** — the lender's dashboard, the
 borrower's portal in three languages, the staff and admin surfaces, and the
 developer API explorer.</sub>
 
@@ -117,21 +117,30 @@ on one developer laptop — a production build, Postgres on the same machine,
 
 | Endpoint | Median |
 |---|---|
-| `GET /v1/loans/search.json?per_page=100` (incl. exact total over 1.1M) | **78 ms** |
-| — the same page without the exact-count requirement | **~5 ms** |
-| `GET /v1/loans/{id}.json` (single loan detail) | **2.6 ms** |
-| `GET /api/v2/loans` (v2 list) | **3.0 ms** |
+| `GET /v1/loans/search.json?per_page=100` (incl. exact total over 1.1M) | **38 ms** |
+| — the same page with the count stubbed out | **11 ms** |
+| `GET /v1/loans/{id}.json` (single loan detail) | **2.7 ms** |
+| `GET /api/v2/loans` (v2 list) | **3.6 ms** |
 
-Two honest notes on that table, because they are the interesting part:
+Three honest notes on that table, because they are the interesting part:
 
-- The legacy endpoint's 78 ms is almost entirely **one exact `COUNT`** over 1.1M
-  rows (~68 ms), which the Kiva API contract requires in every paged response.
-  The page fetch underneath it is a few milliseconds. Caching or estimating that
-  total is the obvious next optimization and has not been done.
-- These numbers are only this good because of indexing work done while measuring
-  them: the default newest-first sort was sequential-scanning all 1.1M rows
-  (313 ms → 78 ms with one index). Assume other query paths still have
-  equivalent traps — the lender dashboard notably does.
+- Most of the legacy endpoint is still **one exact `COUNT`** over 1.1M rows
+  (~27 of the 38 ms), which the Kiva API contract requires in every paged
+  response. Caching or estimating that total would be the next win and has not
+  been done.
+- That count used to take ~68 ms, and neither fix was an index. First, the query
+  asked for `count(id)`. Naming a column forces Postgres onto an index wide
+  enough to carry it — 70 MB here — while `count(*)` needs no columns and can be
+  answered from the 8 MB status index alone. Second, an index-only scan is only
+  allowed on pages the **visibility map** marks all-visible, and a bulk `COPY`
+  leaves that map empty, so every count fell back to reading all 225 MB of heap.
+  `VACUUM` sets the map; the loader now runs it, and the planner picks the
+  index-only scan on its own. Between them: 62 ms → 22 ms on the query, 78 ms →
+  38 ms on the endpoint. Neither is visible in the code without an `EXPLAIN`.
+- These numbers also depend on indexing work done while first measuring them: the
+  default newest-first sort was sequential-scanning all 1.1M rows (313 ms → 78 ms
+  with one index). Assume other query paths still have equivalent traps — the
+  lender dashboard notably does.
 
 ---
 

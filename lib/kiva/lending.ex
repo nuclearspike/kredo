@@ -77,7 +77,7 @@ defmodule Kiva.Lending do
     base = from(l in Loan, where: l.status in ^status_set(filters[:status]))
 
     %{
-      count: Repo.aggregate(base, :count, :id),
+      count: Repo.aggregate(base, :count),
       raised_cents: Repo.aggregate(base, :sum, :funded_amount_cents) || 0
     }
   end
@@ -228,7 +228,10 @@ defmodule Kiva.Lending do
       |> kiva_filter_gender(opts[:gender])
       |> search_loans(opts[:q], opts[:locale] || "en")
 
-    total = Repo.aggregate(base, :count, :id)
+    # count(*), not count(id): naming a column forces the planner onto an index
+    # wide enough to carry it (70 MB here) instead of the 8 MB status index, and
+    # an exact total is required in every paged response.
+    total = Repo.aggregate(base, :count)
 
     loans =
       base

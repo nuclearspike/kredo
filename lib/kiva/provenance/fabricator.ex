@@ -127,7 +127,7 @@ defmodule Kiva.Provenance.Fabricator do
         build_events(loan, live_covered)
       end)
 
-    Repo.aggregate(from(e in Event, where: e.loan_id == ^loan.id), :count, :id)
+    Repo.aggregate(from(e in Event, where: e.loan_id == ^loan.id), :count)
   end
 
   defp build_events(loan, live_covered) do
