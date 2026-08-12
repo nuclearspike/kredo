@@ -20,6 +20,22 @@ If you arrived here from somewhere else and want the short version:
 **Nothing here was implemented.** These are findings, deliberately kept separate
 from fixes.
 
+### Two things to be clear about up front
+
+**All of this is AI-run.** The product was written by an AI agent. The audits
+were run by an AI agent. The lender compendium was enumerated by one and
+criticised by another in fresh context. A human directs the work, makes the
+product rulings, and corrects the record — but no human wrote this code, and no
+human wrote these reports. That is the experiment. Where the machine's judgement
+is the weakest link, the documents say so in the text rather than hoping you
+won't ask.
+
+**Kredo is not a finished product and these reports do not pretend otherwise.**
+It is a demo built in a handful of sittings, published deliberately unpolished.
+The audits are an honest inventory of what is missing from it — including things
+the same AI got wrong days earlier, published unedited. A report that only found
+small problems in its author's own work would not be worth reading.
+
 ---
 
 ## What LSSD is
@@ -41,8 +57,8 @@ It is used in five modes:
 | **Spec from scratch** | Turn an idea into a buildable specification, enumerated before any screen is drawn |
 | **Build** | Drive implementation from that specification, in story-sized slices |
 | **Add on** | Extend an existing product without tearing the existing journeys |
-| **Compendium** | Exhaustively enumerate every actor, journey, decision, and failure path in a domain |
-| **Audit** | Examine an existing product and codebase for gaps in the experience it actually delivers |
+| **Compendium** | Exhaustively enumerate every actor, journey, decision, and failure path in a domain — the main idea-generating mode |
+| **Audit** | Examine an existing product and codebase for gaps in the experience it delivers, and for the features its own data is already asking for |
 
 This folder is mostly the fifth mode, with one example of the fourth
 (`compendium_lenders/`).
@@ -53,11 +69,9 @@ need it to read these audits.
 
 ---
 
-## Why an outsider might care
+## What these reports produce
 
-The interesting property of this method is not that it finds bugs. It is
-**what kind** of thing it finds — and that it scales with the speed of the
-building.
+The method has two outputs, and the second is the one most people underestimate.
 
 Kredo took roughly 8.6 hours to build. Auditing it properly took another 7. That
 ratio is the point: when a working product can be assembled in a few sittings,
@@ -65,7 +79,62 @@ the binding constraint stops being construction and becomes **knowing what you
 actually built**. Tests tell you the code does what it says. They cannot tell you
 that a person's story ends halfway through.
 
-Everything in these reports coexisted with:
+---
+
+## Output 1 — features nobody had thought of
+
+This is the primary reason to run it. The audits in this folder produced **39
+concrete product proposals** and **19 open product questions**, almost none of
+which are bug fixes. A sample of what came out of a codebase its own author knew
+well:
+
+- **"Fourteen people in six countries have backed you."** A borrower waiting for
+  their loan to fund sees a progress bar. That sentence is computable from data
+  already loaded, and for the person whose livelihood is at stake it is the
+  difference between a metric and evidence that strangers chose them. Nobody had
+  considered showing it.
+- **Full repayment as a moment.** One lender in this database has had 655 loans
+  repaid in full and was never once told a story finished — each final payment
+  emits the same string as installment 3 of 14. That is 655 unspent emotional
+  payoffs per lender, and the fix is a distinct message with the borrower's photo
+  and a one-tap relend.
+- **"Your $25 buys the cloth for eight uniforms."** The loan-use text already
+  exists; the missing move is arithmetic against the lending increment.
+- **A "your borrowers" view.** The portfolio slices by country, status, sector,
+  and partner — every dimension except the human one that made someone lend.
+- **Edit-and-approve.** Translation review offers approve or reject. Most real
+  review work is *correction*, and the middle response did not exist as a concept
+  anywhere in the product.
+
+It also finds **whole categories of user nobody had modelled**. Enumerating the
+lender plane surfaced fourteen distinct lender types; several existed in the
+running product and in nobody's mental model:
+
+| Discovered actor | Why it was invisible |
+|---|---|
+| The lender **authorising a third-party app** | Conflated with the developer who *built* the app. Consent, denial, grant review, and revocation are all absent. |
+| The **third-party app itself** | Holds a token against someone's account, with no story for expiry, compromise, or what data it keeps afterwards. |
+| The **high-volume lender** | 1,408 lendings exists in the data; no journey is designed for it — no search, notifications capped at 30. |
+| The assistant being **confidently wrong** | Outages and refusals were handled. Being plausibly incorrect about someone's money was not. |
+
+### Why it generates ideas instead of just opinions
+
+Because it is a **combinatorial sweep, not a brainstorm**. Every actor is walked
+through seven life stages; every stage is examined for six categories of
+decision; every actor is then run against fourteen standard ways things go wrong.
+That grid has thousands of cells and any real product leaves most of them empty.
+
+An empty cell is one of two things: a deliberate decision, written down — or a
+feature nobody thought of. Forcing every cell to be one or the other is what
+produces the list. It is also why the ideas tend to be *cheap*: they surface
+where a truth the product already holds has no surface that shows it.
+
+---
+
+## Output 2 — gaps you cannot see from inside
+
+The other half is what the product asserts versus what it does. Everything in
+these reports coexisted with:
 
 - **309 passing tests** — not one of the 18 high-severity findings was visible to them
 - **a clean `--warnings-as-errors` compile**
@@ -274,6 +343,12 @@ work is meaningful.
 - It does not verify security, compliance, or financial claims.
 - It cannot replace talking to real users. Everything here is
   `practitioner_unvalidated` — derived from code and cold-reads, not from people.
+- **The feature proposals are hypotheses, not validated demand.** They are
+  well-grounded ones — each is traceable to a truth the product already holds and
+  a question a specific actor is provably left with — but "this person has no way
+  to learn X" is an argument, not evidence that shipping X will matter to them.
+  The method finds the candidate set fast and cheaply; deciding which ones are
+  worth building is still your job, and still needs users.
 - Its severity ratings are judgement, not measurement.
 
 The most useful output of the five audits in this folder was not a backlog. It
@@ -288,14 +363,22 @@ I'm **Paul Ericksen**. I build with this methodology and I run these audits on
 other people's products.
 
 - **Journey audits** — a report like the ones in this folder, for an existing
-  product and its codebase: where the experience breaks, what was declared and
-  never built, and which decisions are blocking the rest.
+  product and its codebase: the features your data is already asking for, where
+  the experience breaks, what was declared and never built, and which decisions
+  are blocking the rest.
+- **Feature discovery** — the compendium run against a product you already have,
+  to find the users and journeys nobody has modelled yet. This is usually the
+  highest-value engagement and the one people do not expect.
 - **Compendiums** — exhaustive enumeration of a domain's actors and journeys
-  before you build, so the expensive omissions are found on paper.
+  *before* you build, so the expensive omissions are found on paper.
 - **Spec and build** — new products, or additions to existing ones, developed
-  story-first.
+  story-first and implemented by AI under the same methodology that produced
+  this repository.
 - **Team enablement** — running the method with your own people so it outlives
   the engagement.
+
+The work is AI-executed and human-directed, which is what makes the economics
+unusual: the enumeration above cost hours, not weeks.
 
 Kredo itself, the repository this folder sits in, was built with these methods
 end to end and then audited by them — including findings about work I had done

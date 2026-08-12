@@ -24,6 +24,17 @@ messages, counting only gaps under 30 minutes as active, with overlapping
 parallel sessions merged so nothing is double-counted. It undercounts thinking
 done away from the keyboard and overcounts nothing.</sub>
 
+**Every line of this was written by AI.** The application, the five-language
+content, the API compatibility layer, the data generator, the tests, and the
+audits in `docs/storytime/` were all produced by an AI agent working under the
+[LSSD](docs/storytime/README.md) methodology. A human set direction, made the
+product decisions, and corrected the record — and wrote none of the code.
+
+**This is not a finished product, and it is published that way on purpose.**
+It runs end to end, and it has real holes. Rather than hide them, they were
+found systematically and written up: see the audits below, which include
+findings about mistakes the same AI made days earlier, published unedited.
+
 > **Unofficial and unaffiliated.** Kredo is an independent experiment inspired by
 > the Kiva model. It is **not affiliated with, endorsed by, or connected to Kiva**
 > (Kiva Microfunds). It ships a compatibility layer that emulates Kiva's
@@ -260,11 +271,16 @@ Probably the most interesting thing in this repository. After the build, Kredo
 was audited **as a set of human journeys** rather than as a set of features —
 one report per role, a synthesis, and a full enumeration of every lender type.
 
-Those audits found **18 high-severity gaps** in a codebase with **309 passing
-tests**, a clean `--warnings-as-errors` compile, and a prior performance pass
-behind it: eight mechanisms that were declared and never implemented, a
+They produced two things. **39 concrete product proposals** — features the
+codebase's own data was already asking for, including whole categories of user
+nobody had modelled. And **18 high-severity gaps** in a codebase with **309
+passing tests**, a clean `--warnings-as-errors` compile, and a prior performance
+pass behind it: eight mechanisms that were declared and never implemented, a
 notification layer that spoke in inverse proportion to what each person had at
 stake, and an unmodelled ending for every one of the five actors.
+
+Finding features is the part people underestimate. Finding what the code only
+*claims* to do is the part that is hard to get any other way.
 
 [`docs/storytime/README.md`](docs/storytime/README.md) explains the method and
 defines its vocabulary for readers new to LSSD; the
