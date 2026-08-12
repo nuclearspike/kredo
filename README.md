@@ -236,9 +236,26 @@ Elixir / Phoenix / LiveView / Ecto / PostgreSQL / Absinthe GraphQL.
 
 The project was built documentation-first. `docs/fractalflow/` holds living
 system contracts kept in sync with the code, `docs/prd/` is the original planning
-corpus, `docs/storytime/` holds actor-experience audits, and
-[`IMPLEMENTATION_LOG.md`](IMPLEMENTATION_LOG.md) is the build log. Those planning
-documents predate a late rename and still use the original working title.
+corpus, and [`IMPLEMENTATION_LOG.md`](IMPLEMENTATION_LOG.md) is the build log.
+Those planning documents predate a late rename and still use the original
+working title.
+
+### → [`docs/storytime/`](docs/storytime/) — the actor-journey audits
+
+Probably the most interesting thing in this repository. After the build, Kredo
+was audited **as a set of human journeys** rather than as a set of features —
+one report per role, a synthesis, and a full enumeration of every lender type.
+
+Those audits found **18 high-severity gaps** in a codebase with **309 passing
+tests**, a clean `--warnings-as-errors` compile, and a prior performance pass
+behind it: eight mechanisms that were declared and never implemented, a
+notification layer that spoke in inverse proportion to what each person had at
+stake, and an unmodelled ending for every one of the five actors.
+
+[`docs/storytime/README.md`](docs/storytime/README.md) explains the method and
+defines its vocabulary for readers new to LSSD; the
+[synthesis](docs/storytime/SYNTHESIS_five_actor_audit_2026-08-12.md) is the
+place to start.
 
 > The internal module namespace is still `Kiva.*` / `KivaWeb.*`. Renaming it
 > would churn every file for no behavioral gain, and the compatibility layer
