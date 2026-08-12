@@ -7,11 +7,15 @@ worth browsing even though the app itself is a demo.
 
 If you arrived here from somewhere else and want the short version:
 
-> Kredo is an experiment — how far can an AI coding agent get rebuilding a
-> Kiva-style micro-lending platform? These documents are what happened when the
-> finished thing was audited **as a set of human journeys** rather than as a set
-> of features. The tests were green and the compiler was clean throughout.
-> The audits found 18 high-severity gaps anyway.
+> Kredo is an experiment — how much working product can a handful of AI-assisted
+> sessions actually produce? The answer was **about 8.6 hours** for a
+> five-language lending platform with four API surfaces. These documents are what
+> happened when that thing was then audited **as a set of human journeys** rather
+> than as a set of features. The tests were green and the compiler was clean
+> throughout. The audits found 18 high-severity gaps anyway.
+>
+> Both halves matter. Software can now be produced faster than the methods we
+> normally use to check it. These reports are one answer to the second problem.
 
 **Nothing here was implemented.** These are findings, deliberately kept separate
 from fixes.
@@ -52,7 +56,14 @@ need it to read these audits.
 ## Why an outsider might care
 
 The interesting property of this method is not that it finds bugs. It is
-**what kind** of thing it finds.
+**what kind** of thing it finds — and that it scales with the speed of the
+building.
+
+Kredo took roughly 8.6 hours to build. Auditing it properly took another 7. That
+ratio is the point: when a working product can be assembled in a few sittings,
+the binding constraint stops being construction and becomes **knowing what you
+actually built**. Tests tell you the code does what it says. They cannot tell you
+that a person's story ends halfway through.
 
 Everything in these reports coexisted with:
 

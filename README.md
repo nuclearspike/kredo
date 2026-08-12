@@ -1,14 +1,28 @@
 # Kredo
 
-**An experiment: how far can AI get at rebuilding a Kiva-style microlending
-platform from scratch?**
+**An experiment: how much working product can a handful of AI-assisted sessions
+actually produce?**
 
-This repository is the answer to that question, not a product. It was built as a
-quick test of what an AI coding agent could produce when pointed at a genuinely
-non-trivial domain — one with multiple actors who need different things, money
-that has to add up, content that has to exist in five languages, and a public API
-with a real-world contract to match. The whole lending lifecycle is here and it
-runs end to end on a laptop.
+This repository is the answer to that question, not a product. The interesting
+constraint was never capability — given unlimited time you could build anything.
+It was **time**: what does a genuinely non-trivial domain look like after only a
+few sittings? Multiple actors who need different things, money that has to add
+up, content that has to exist in five languages, and a public API with a
+real-world contract to match. The whole lending lifecycle is here and it runs end
+to end on a laptop.
+
+**It took about 8.6 hours.**
+
+| | |
+|---|---|
+| Building everything below | **~8.6 h** at the keyboard, in four sittings between 27 Jun and 28 Jul |
+| Rebranding, publishing, and auditing it (see `docs/storytime/`) | ~7.2 h across three more days |
+| Total | **~15.8 h** |
+
+<sub>Measured from Claude Code session transcripts: time between consecutive
+messages, counting only gaps under 30 minutes as active, with overlapping
+parallel sessions merged so nothing is double-counted. It undercounts thinking
+done away from the keyboard and overcounts nothing.</sub>
 
 > **Unofficial and unaffiliated.** Kredo is an independent experiment inspired by
 > the Kiva model. It is **not affiliated with, endorsed by, or connected to Kiva**
