@@ -21,7 +21,7 @@ below); the staff journey here is `practitioner_unvalidated`.
 ```lssd
 model kiva_future_demo@0.3.0 {
   namespace: "kiva.future_demo"
-  revision: "2026-08-10"
+  revision: "2026-08-11"
   sourceSnapshot: { user_request: "chat-2026-06-26" }
   status: observed
   confidence: 0.9

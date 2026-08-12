@@ -117,6 +117,21 @@ truth provenance.event_audience {
   metadata: { default: "admin", note: "Only the staff/admin surface renders provenance today; the field exists so opening visibility later is a policy change, not a migration." }
 }
 
+provenance_record provenance.listing_lineage {
+  label: "The lineage a listing carries — sources, hands, transformations, custody, integrity"
+  subject: @provenance.content_chain
+  sources: ["borrower photograph (subject_ref photo:<image_url>)", "borrower consent record", "identity check", "field site visit", "the borrower's story as first authored", "loans_lc rows — the real localized content, not a stand-in"]
+  activities: ["photo.captured → uploaded → reviewed → approved → visibility_changed", "consent.recorded", "identity.verified", "site.visited", "story.authored → ai_reworded → reviewed → approved", "translation.machine|template|human → reviewed → approved|rejected", "listing.submitted → approved"]
+  agents: ["@actor.field_officer", "@actor.partner_staff", "@actor.staff_auditor", "@actor.ai_model", "@actor.human_translator", "the system itself — actor_kind is one of human|ai|system on every row"]
+  transformations: ["rewording of an authored story by a model", "machine, template, or human translation from source_locale to target_locale", "review and approval decisions that change visibility"]
+  chainOfCustody: ["Each derived event names the content_hash of the event it came from in its own source_hash", "Kiva.Provenance.chain_status/1 walks the loan's events in order and marks each one origin (no source_hash), linked (source_hash already seen), or broken (source_hash never produced)", "Linkage is loan-global on purpose: a translation and a listing decision both derive from the story, so custody legitimately crosses subject types"]
+  integrity: { sha256: "lowercase hex sha256 of the actual content, via Kiva.Provenance.sha/1", verification: "Non-text artifacts are hashed under a domain prefix (photo:<url>, consent:<public_id>) so a photo and a paragraph cannot collide. Rows are immutable by construction — no updated_at column, and the provenance_events_guard trigger raises on UPDATE and on DELETE of any row not marked details.fabricated=true." }
+  capturedAt: "per event: occurred_at, backdated by the fabricator for pre-runtime history and set at command time for live events"
+  limitations: ["Most history is fabricated: deterministic per loan, structurally faithful, and hash-verifiable, but the people, devices, GPS fixes, and places in a seeded row are invented — @demo_fabrication_disclosure", "Only events born inside a command (submit_loan_for_review, approve_loan_listing, approve_translation, reject_translation) describe something that actually happened", "Provenance writes are best-effort: a failure logs and lets its command succeed, so absence of an event is not proof the activity did not occur", "chain_status reports broken for an event whose source_hash was never produced, which is indistinguishable from an event whose predecessor was simply never recorded"]
+  status: observed
+  confidence: 0.95
+}
+
 # --- Policies ---------------------------------------------------------
 policy append_only on @provenance.event {
   effect: require

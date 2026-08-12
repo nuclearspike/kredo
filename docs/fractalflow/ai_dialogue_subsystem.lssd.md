@@ -5,7 +5,7 @@ Status: ACTIVE
 
 # FractalFlow — AI Dialogue Subsystem
 
-Models the implemented page-aware chat substrate: a deterministic mock-LLM assistant that **asks** via role-scoped GraphQL and **commands** only through the registered preview/confirm path, with every turn, tool call, and action preview persisted for admin reconstruction.
+Models the implemented page-aware chat substrate: an assistant that **asks** via role-scoped GraphQL and **commands** only through the registered preview/confirm path, with every turn, tool call, and action preview persisted for admin reconstruction. Conversational turns are answered by a real model when the reader has connected one, and by a deterministic offline script when they have not; commands never touch the model.
 
 2026-08-10: grammar upgrade + doc-fidelity: the chat surface is
 KivaWeb.ChatLive (replaced ChatComponent in commit 044f9b2 — stale mentions
@@ -14,10 +14,24 @@ live_render(ChatLive) commented out in root.html.heex (audit H1). The owner
 ruled that a regression, not a decision: @decision.restore_chat_launcher
 below, mandating @product.restore_chat.
 
+2026-08-12: this contract described the assistant as a deterministic mock with
+"no external provider in v1". That stopped being true when the real-model path
+(Kiva.AI.LLM) was restored, and the gap went unrecorded through several
+sessions — including one that changed the credential vocabulary. The backend,
+its configuration truth, what it sends off-machine, and the setup reveal are
+modelled below: @ai.model_endpoint declares the boundary itself, with
+@ai.llm_backend as its in-process caller, @ai.llm_configuration as the truth
+that decides whether it is reachable, @constraint.ai.no_traffic_without_explicit_configuration
+on what may cross it, two obligations (@obligation.ai.model_failure_degrades_to_script,
+@obligation.ai.unconfigured_copy_explains_setup), @ai.chat_assistant as the
+agent surface, and @evidence.ai.llm_path_drift / @finding.ai.contract_understated_egress
+on how the gap survived. The missing node kind was the mechanism: with no
+`interface` declared, no part of the graph contradicted the prose.
+
 ```lssd
-model kiva.ai_dialogue@0.3.0 {
+model kiva.ai_dialogue@0.4.0 {
   namespace: "kiva.ai_dialogue"
-  revision: "2026-08-10"
+  revision: "2026-08-12"
   status: observed
   confidence: 0.9
 }
@@ -27,9 +41,9 @@ module ai.dialogue {
   status: observed
   confidence: 0.95
   metadata: {
-    engine: "Kiva.AI.Assistant (deterministic rule-based mock LLM, no external provider in v1)",
+    engine: "Kiva.AI.Assistant — routes conversational turns to @ai.llm_backend when a model is connected, and to its own deterministic offline script otherwise; commands never reach the model",
     modes: ["ask", "command"],
-    boundary: "reads through KivaWeb.Schema (role-scoped GraphQL); writes only through Kiva.Commands"
+    boundary: "reads through KivaWeb.Schema (role-scoped GraphQL); writes only through Kiva.Commands; the only egress is @ai.model_endpoint, and only when explicitly configured"
   }
 }
 
@@ -56,6 +70,38 @@ system ai.graphql_surface {
     staff_admin_fields: ["staffReviewQueueCount", "loanReviewQueue"],
     admin_fields: ["auditEvents", "permissionOutliers"],
     gate: "KivaWeb.Schema.Middleware.Authorize"
+  }
+}
+
+interface ai.model_endpoint {
+  label: "External chat-completions service — the subsystem's only egress"
+  status: observed
+  confidence: 0.95
+  reads: [@ai.llm_configuration]
+  metadata: {
+    protocol: "OpenAI-compatible POST /v1/chat/completions",
+    resolution: ["KIVA_LLM_ENDPOINT if set", "the hosted provider if OPENAI_API_KEY is set", "otherwise http://127.0.0.1:1234 — loopback, a model on the same machine"],
+    model: "gpt-4o-mini by default; OPENAI_MODEL overrides",
+    crosses_outbound: ["assembled system prompt: role additions + moderation contract + page label + locale + demo disclaimer", "the last 10 user/assistant turns of this conversation"],
+    crosses_inbound: ["one assistant message, or nothing usable"],
+    authentication: "Bearer credential when one is configured; no authorization header at all when none is",
+    never_crosses: ["command execution — the model cannot mutate; it is not given tools and its reply is never parsed as an action"],
+    off_machine_only_when: "@constraint.ai.no_traffic_without_explicit_configuration is satisfied by a deliberate act"
+  }
+}
+
+system ai.llm_backend {
+  label: "In-process client for the model endpoint (Kiva.AI.LLM)"
+  status: observed
+  confidence: 0.95
+  calls: [@ai.model_endpoint]
+  reads: [@ai.llm_configuration, @ai.page_context, @ai.actor_role, @ai.message]
+  writes: [@ai.tool_call]
+  obligations: [@obligation.ai.model_failure_degrades_to_script]
+  metadata: {
+    module: "Kiva.AI.LLM",
+    scope: "conversational ask turns and the API-docs query only — set_locale and lend stay on the deterministic preview/confirm path",
+    audited: "every attempt writes an ai_tool_calls row (tool_type llm, schema_surface llm, operation chat.completions), successes and failures alike"
   }
 }
 
@@ -137,7 +183,7 @@ truth ai.tool_call {
   confidence: 0.95
   metadata: {
     schema: "Kiva.AI.ToolCall",
-    tool_types: ["graphql_query", "command_preview"],
+    tool_types: ["graphql_query", "command_preview", "llm"],
     fields: ["schema_surface", "operation_name", "allowed(boolean)", "denial_reason", "request", "response_summary"],
     note: "Both allowed AND denied calls are logged (allowed:false + denial_reason)",
     admin_inspector: "Kiva.AI.recent_tool_calls/1"
@@ -188,6 +234,23 @@ truth ai.command_spec {
   metadata: {
     per_command: ["risk", "actors", "required", "preview_required", "confirmation_required", "eligibility", "side_effects"],
     mirrors: "schemas/command_registry.yaml"
+  }
+}
+
+truth ai.llm_configuration {
+  label: "Whether this copy has a model connected, and where it lives"
+  lifetime: run
+  authority: { mode: human, ref: @ai.llm_backend }
+  visibility: [system, admin]
+  status: observed
+  confidence: 0.95
+  metadata: {
+    source_of_truth: "the process environment, read at call time — never persisted, never settable from any surface",
+    configured_when: "any of OPENAI_API_KEY, KIVA_LLM_ENDPOINT, LLM_API_TOKEN, LLM_API_TOKEN_FILE is set and non-empty",
+    credential_precedence: ["OPENAI_API_KEY", "LLM_API_TOKEN", "LLM_API_TOKEN_FILE — a file holding the raw token or an API_TOKEN=... line"],
+    unconfigured_behaviour: "no authorization header is sent at all, which is what a model on the same machine expects",
+    kill_switch: "config :kiva, :ai_llm_enabled, false — a deliberate off, held distinct from an unconfigured copy so tests and demos are not told to go set a key",
+    three_states: ["configured — the model answers", "unconfigured — the script answers and explains setup", "switched off — the script answers and says nothing"]
   }
 }
 
@@ -313,11 +376,18 @@ flow ai.ask_mode {
   terminal: answer_returned
 
   state actor_question
+  state model_attempted
   state intent_classified
   state graphql_run
   state answer_returned
   state out_of_scope
+  state setup_explained
 
+  step ask_model {
+    actor: @ai.assistant
+    reads: [@ai.llm_configuration, @ai.page_context, @ai.actor_role, @ai.message]
+    writes: [@ai.tool_call]
+  }
   step classify {
     actor: @ai.assistant
     reads: [@ai.page_context, @ai.actor_role]
@@ -329,15 +399,29 @@ flow ai.ask_mode {
     writes: [@ai.tool_call]
   }
 
-  transition actor_question -> intent_classified on intent_detected do [classify]
+  transition actor_question -> model_attempted on conversational_turn do [ask_model]
+  transition model_attempted -> answer_returned on model_replied
+  transition model_attempted -> intent_classified on model_absent_or_failed do [classify]
   transition intent_classified -> graphql_run on loans_or_faq_intent do [run_scoped_graphql]
   transition intent_classified -> graphql_run on portfolio_intent do [run_scoped_graphql]
   transition graphql_run -> answer_returned on data_summarized
   transition intent_classified -> out_of_scope on lender_only_intent_without_role
   transition out_of_scope -> answer_returned on prompt_sign_in
+  transition intent_classified -> setup_explained on no_scripted_intent_and_no_model_connected
+  transition setup_explained -> answer_returned on setup_instructions_returned
 }
 
 # --- 2026-08-10: product ruling owned by this subsystem ------------------
+
+obligation obligation.commands.execute_regates_and_audits on @ai.command_registry {
+  label: "Every execute re-runs every gate and leaves an audit row"
+  trigger: "Any call to Kiva.Commands.execute/4, from any surface — UI button, chat confirmation, bulk action, or API"
+  requirement: "Re-run check_role, check_required, and check_eligibility before the handler, treating whatever preview said as advisory rather than trusted, and write an Audit.record on success carrying actor, role, event_type command.<key>, target, redacted params, and the command's declared side_effects."
+  completion: "Kiva.Commands.execute/4 — a single `with` chain where the audit write is unreachable unless all three gates and the handler succeeded, so a passing command cannot skip its record."
+  rationale: "Preview runs against state that may have moved by the time someone confirms, and a chat confirmation can arrive minutes later. Re-gating is what makes preview safe to show widely; the audit row is what makes the mutation reconstructable afterwards. Both were true in code but lived only in a metadata string, where nothing would notice their loss."
+  status: observed
+  confidence: 0.95
+}
 
 policy policy.commands.unknown_gate_is_refused {
   label: "An eligibility check that does not exist refuses the command"
@@ -416,6 +500,91 @@ decision_record decision.restore_chat_launcher {
   metadata: { ruling: "owner, 2026-08-10 (unaware the launcher was dark); audit Q4 + H1" }
 }
 
+# --- 2026-08-12: the real-model path, modelled ---------------------------
+
+constraint constraint.ai.no_traffic_without_explicit_configuration {
+  constraintType: privacy
+  statement: "Nothing leaves the machine unless the reader has set an environment variable that names somewhere to send it. A copy with nothing configured makes no outbound request — it does not probe, retry, or fall back to a hosted provider."
+  appliesTo: [@ai.llm_backend, @ai.llm_configuration]
+  consequence: ["Conversation text and page context reach a third party only on a deliberate act (OPENAI_API_KEY, or KIVA_LLM_ENDPOINT pointed off-machine)", "The default endpoint is loopback, so the out-of-the-box path cannot leave the laptop even when a local model is running"]
+  verification: ["Kiva.AI.LLM.answer/1 returns nil before any transport when configured?/0 is false (code read 2026-08-12)"]
+  knowledge: {
+    scope: ["every conversational turn"]
+    evidence: [@evidence.ai.llm_path_drift]
+    owner: "Paul Ericksen"
+    learnedAt: "2026-08-12"
+  }
+  status: observed
+  confidence: 0.95
+}
+
+obligation obligation.ai.model_failure_degrades_to_script on @ai.llm_backend {
+  label: "A model that is missing, off, or broken never costs the reader their turn"
+  trigger: "Any conversational turn where the model is switched off, unconfigured, unreachable, erroring, or returns something unusable"
+  requirement: "Answer nil for every one of those failure modes alike and let Kiva.AI.Assistant continue into its deterministic script. No failure may surface as an error, a spinner, or a dead turn, and the attempt is still written to ai_tool_calls with its denial_reason."
+  completion: "Kiva.AI.LLM.answer/1 guards on enabled?/0; do_answer/1 maps {:error, reason} to nil after recording. Not yet held by a test that fails when the fallback is removed — @question.ai.fallback_has_no_biting_test."
+  rationale: "The assistant is a demo surface on someone else's laptop, so no model at all is the normal state rather than an exception — and the deterministic command path deliberately sits above the model, keeping preview/confirm independent of whether one answers."
+  status: observed
+  confidence: 0.95
+}
+
+obligation obligation.ai.unconfigured_copy_explains_setup on @ai.respond {
+  label: "A copy with no model says how to connect one, once the script runs out"
+  trigger: "A turn falls past every scripted intent while needs_setup?/0 is true"
+  requirement: "Reply with the concrete setup text — the exact variables, one command, and what changes — rather than repeating the capability menu the reader just fell off the end of. A copy switched off deliberately (ai_llm_enabled false) is not told to go set a key."
+  completion: "Kiva.AI.Assistant.fallback/1 + setup_instructions/0; ChatLive assigns needs_setup at mount and @floating_chat_widget reveals it."
+  rationale: "Anyone running this is running it locally, where the honest answer to 'why is the assistant dumb' is a missing key. Repeating the menu reads as the product being broken rather than unconfigured."
+  status: observed
+  confidence: 0.95
+}
+
+agent_surface ai.chat_assistant for @ai.respond {
+  label: "The embedded page-aware assistant"
+  mode: embedded
+  status: observed
+  confidence: 0.95
+  reads: [@ai.page_context, @ai.actor_role, @ai.message, @ai.llm_configuration]
+  commands: [@ai.command_spec]
+  obligations: [@obligation.ai.unconfigured_copy_explains_setup]
+  metadata: {
+    scoped_context: "one conversation, the current page, the signed-in role, the active locale, and the last 10 turns — nothing from other users or other conversations",
+    canonical_binding: "reads only through KivaWeb.Schema under the role gate; mutates only through Kiva.Commands preview/confirm",
+    creates_no_alternate_semantics: "the model is given no tools and its reply is never parsed into an action; command intent is matched deterministically before the model is consulted at all",
+    external_exposure: "none — there is no external agent/tool endpoint for this surface"
+  }
+}
+
+question question.ai.fallback_has_no_biting_test on @ai.llm_backend {
+  questionType: open_question
+  question: "Should the degrade-to-script path carry a test that fails when it is removed — a stubbed backend that raises or returns an error, asserting the reader still gets a scripted answer?"
+  whyItMatters: "It is the path almost every reader of this repo will take, and it is currently held up by a code shape rather than by anything that would notice if a refactor let a provider error escape."
+  blocks: []
+  status: asserted
+  confidence: 1.0
+}
+
+evidence evidence.ai.llm_path_drift {
+  kind: observation
+  occurredAt: "2026-08-12"
+  subject: @ai.dialogue
+  method: "Asked whether the contract still matched the code after a session that renamed the LLM client's configuration vocabulary; read Kiva.AI.LLM, Kiva.AI.Assistant, Kiva.AI.DocsAssistant and ChatLive against every node in this contract."
+  observation: "The contract carried no representation of the real-model path at all. Its module metadata asserted 'deterministic rule-based mock LLM, no external provider in v1' while Kiva.AI.LLM had been talking to an OpenAI-compatible endpoint for some time; ai.tool_call declared two tool_types where the code writes three; the ask_mode flow began at intent classification, skipping the model attempt that actually runs first; and neither the configuration truth nor the setup reveal existed. The stale claim was the load-bearing one — a reader auditing this subsystem for data egress would have concluded from the contract that there was none."
+  provenance: { doc: "session 2026-08-12, owner asked whether FractalFlow obligations had been met" }
+  scope: ["lib/kiva/ai"]
+  status: observed
+  confidence: 1.0
+}
+
+finding finding.ai.contract_understated_egress {
+  label: "The contract denied an egress the code had"
+  derivedFrom: [@evidence.ai.llm_path_drift]
+  claim: "Between the restoration of the real-model path and 2026-08-12, this contract asserted that the subsystem had no external provider while the code was posting conversation history and page context to a chat-completions endpoint. The absence of an @interface node was the mechanism: with no explicit boundary declared, nothing in the graph contradicted the module metadata's claim, and the drift survived several sessions — including one that renamed the very configuration it failed to model."
+  limitations: ["Only lib/kiva/ai was re-read against its contract; the other nine contracts were checked for stale revision stamps and for this session's features, not line-by-line against their code"]
+  invalidatedWhen: "A boundary check runs in CI — asserting every outbound HTTP call site in lib/ traces to a declared @interface node — and passes"
+  status: observed
+  confidence: 0.95
+}
+
 # --- views ----------------------------------------------------------
 
 view floating_chat_widget for @ai.respond {
@@ -423,8 +592,9 @@ view floating_chat_widget for @ai.respond {
   status: observed
   confidence: 0.95
   affordances: [toggle_open, message_input, send, confirm_button]
-  reveals: [@ai.message, @ai.action_preview, @ai.page_context, @ai.actor_role]
+  reveals: [@ai.message, @ai.action_preview, @ai.page_context, @ai.actor_role, @ai.llm_configuration]
   commands: [send, confirm_command, toggle]
+  obligations: [@obligation.ai.unconfigured_copy_explains_setup]
   metadata: {
     placement: "fixed bottom-4 right-4 z-50 floating bubble + card",
     confirm: "phx-click confirm_command with preview-id -> Commands.execute",

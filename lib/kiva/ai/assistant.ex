@@ -51,10 +51,10 @@ defmodule Kiva.AI.Assistant do
     result
   end
 
-  # Conversational turns go to the real LLM (Kiva.AI.LLM, gpt-5-mini) when enabled;
-  # if it's disabled or the call fails, fall back to the deterministic mock answers.
-  # Deterministic commands (set_locale/lend) stay above so the safe preview+confirm
-  # path is never at the mercy of the model.
+  # Conversational turns go to Kiva.AI.LLM when a model is connected; nil back from
+  # it (switched off, unconfigured, or a failed call) falls through to the scripted
+  # answers below. Commands (set_locale/lend) are matched above this and never reach
+  # the model, so the preview+confirm path does not depend on one being available.
   defp answer(ctx, norm) do
     case Kiva.AI.LLM.answer(ctx) do
       reply when is_binary(reply) and reply != "" ->
