@@ -4,7 +4,13 @@ defmodule Kiva.LendingFixtures do
   alias Kiva.{Taxonomy, Partners, Lending, Repo}
   alias Kiva.Borrowers.{Borrower, BorrowerLc}
 
-  def loan_fixture(attrs \\ %{}) do
+  @doc """
+  A seeded loan, complete with a repayment schedule.
+
+  Pass `schedule: false` for a loan that has never been given one — the state a
+  loan is in when it is created and disbursed at runtime rather than seeded.
+  """
+  def loan_fixture(attrs \\ %{}, opts \\ []) do
     sector = Taxonomy.upsert_sector("arts")
 
     Taxonomy.upsert_sector_lc(%{
@@ -115,7 +121,9 @@ defmodule Kiva.LendingFixtures do
       translation_status: "approved"
     })
 
-    Lending.create_repayment_schedule(loan.id, ~D[2026-07-01], 8, 12_500)
+    if Keyword.get(opts, :schedule, true) do
+      Lending.create_repayment_schedule(loan.id, ~D[2026-07-01], 8, 12_500)
+    end
 
     %{loan: loan, sector: sector, partner: partner, borrower: borrower}
   end

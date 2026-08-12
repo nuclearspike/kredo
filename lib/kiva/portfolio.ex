@@ -8,32 +8,46 @@ defmodule Kiva.Portfolio do
   alias Kiva.{Audit, Pagination}
 
   def lend(user, loan_id, amount_cents, team_id \\ nil) do
-    loan = Repo.get!(Loan, loan_id)
+    # The loan row is locked for the whole read-decide-write: the last dollar and a
+    # concurrent disbursal both decide the loan's next status from what they read,
+    # and whichever ran on a stale copy would strand a funded, disbursed loan
+    # outside repayment.
+    {:ok, {lend, loan, crossed_to_funded?}} =
+      Repo.transaction(fn ->
+        loan = Repo.one!(from l in Loan, where: l.id == ^loan_id, lock: "FOR UPDATE")
 
-    unless Loan.lendable?(loan) do
-      raise ArgumentError,
-            "cannot lend to loan #{loan.id} (#{loan.slug}): status #{loan.status} is not fundraising"
-    end
+        unless Loan.lendable?(loan) do
+          raise ArgumentError,
+                "cannot lend to loan #{loan.id} (#{loan.slug}): status #{loan.status} is not fundraising"
+        end
 
-    lend =
-      %Lend{}
-      |> Lend.changeset(%{
-        user_id: uid(user),
-        loan_id: loan_id,
-        amount_cents: amount_cents,
-        lending_team_id: team_id
-      })
-      |> Repo.insert!()
+        lend =
+          %Lend{}
+          |> Lend.changeset(%{
+            user_id: uid(user),
+            loan_id: loan_id,
+            amount_cents: amount_cents,
+            lending_team_id: team_id
+          })
+          |> Repo.insert!()
 
-    new_funded = min(loan.loan_amount_cents, loan.funded_amount_cents + amount_cents)
-    status = if new_funded >= loan.loan_amount_cents, do: "funded", else: loan.status
+        new_funded = min(loan.loan_amount_cents, loan.funded_amount_cents + amount_cents)
+        fully_funded? = new_funded >= loan.loan_amount_cents
 
-    loan
-    |> Ecto.Changeset.change(funded_amount_cents: new_funded, status: status)
-    |> Repo.update!()
+        status =
+          if fully_funded?,
+            do: Kiva.Lending.status_on_full_funding(loan),
+            else: loan.status
+
+        loan
+        |> Ecto.Changeset.change(funded_amount_cents: new_funded, status: status)
+        |> Repo.update!()
+
+        {lend, loan, fully_funded? and loan.funded_amount_cents < loan.loan_amount_cents}
+      end)
 
     # Reveal: tell every lender of this loan when it crosses to fully funded.
-    if status == "funded" and loan.status != "funded" do
+    if crossed_to_funded? do
       Kiva.Notifications.notify_loan_lenders(
         loan_id,
         "loan_funded",

@@ -10,6 +10,7 @@ defmodule Kiva.Lending do
   alias Kiva.Taxonomy
   alias Kiva.Lending.{Loan, LoanLc, RepaymentSchedule, RepaymentScheduleItem}
   alias Kiva.Audit
+  require Logger
 
   @public_statuses ~w(fundraising funded funded_disbursed repaying completed)
 
@@ -440,9 +441,18 @@ defmodule Kiva.Lending do
   end
 
   defp simulate_funding(loan) do
-    loan
-    |> Ecto.Changeset.change(funded_amount_cents: loan.loan_amount_cents, status: "funded")
-    |> Repo.update!()
+    # Same lock as a real lend: this decides the loan's status from what it reads,
+    # and the preloaded struct it was handed may already be stale.
+    Repo.transaction(fn ->
+      locked = Repo.one!(from l in Loan, where: l.id == ^loan.id, lock: "FOR UPDATE")
+
+      locked
+      |> Ecto.Changeset.change(
+        funded_amount_cents: locked.loan_amount_cents,
+        status: status_on_full_funding(locked)
+      )
+      |> Repo.update!()
+    end)
 
     Kiva.Notifications.notify_loan_lenders(
       loan.id,
@@ -459,40 +469,149 @@ defmodule Kiva.Lending do
   defp next_scheduled?(_), do: false
 
   @doc """
+  The status a loan takes when its last dollar is lent.
+
+  A loan the partner already disbursed goes straight into repayment; one still
+  awaiting disbursal waits at funded. The already-disbursed case has to check for
+  a schedule of its own rather than trusting disbursal to have left one, because a
+  loan disbursed before schedules were created at disbursal still has none.
+  """
+  def status_on_full_funding(%Loan{} = loan) do
+    cond do
+      not enters_repayment?(loan) -> loan.status
+      is_nil(loan.disbursed_at) -> "funded"
+      ensure_repayment_schedule(loan) == :no_term -> "funded"
+      true -> "repaying"
+    end
+  end
+
+  # A loan enters repayment once it is disbursed, fully funded, and holds the
+  # schedule it will repay against. A field partner may disburse while the crowd
+  # is still lending (disbursal_status direct_disbursal_pending), and that loan
+  # must stay fundraising so the remaining lenders can still reach it —
+  # Portfolio.lend/4 moves it on when the last dollar lands. Only fundraising and
+  # funded advance: a retry against an already completed or defaulted loan leaves
+  # it where it is rather than walking its lifecycle backwards.
+  defp status_after_disbursal(%Loan{} = loan, scheduling) do
+    fully_funded? = loan.funded_amount_cents >= loan.loan_amount_cents
+
+    if enters_repayment?(loan) and fully_funded? and
+         scheduling in [:scheduled, :already_scheduled] do
+      "repaying"
+    else
+      loan.status
+    end
+  end
+
+  # The only statuses from which a loan may enter repayment. A completed,
+  # defaulted or delinquent loan stays where it is: a repeated disbursal or a
+  # stray lend must not walk its lifecycle backwards, or hand it fresh
+  # obligations it has already discharged.
+  defp enters_repayment?(%Loan{status: status}), do: status in ["fundraising", "funded"]
+
+  @doc """
+  Give a loan the repayment schedule it owes, if it has none.
+
+  Returns `:already_scheduled`, `:scheduled`, or `:no_term`. Idempotent — a loan
+  that already has a schedule (every seeded loan does) keeps it untouched. Callers
+  must not move a loan into repayment on `:no_term`: a loan with no term cannot be
+  given a schedule, and a repaying loan without one can never complete.
+
+  Call this inside a transaction holding the loan row; the check-then-insert is
+  only safe against a concurrent disbursal while that lock is held.
+  """
+  def ensure_repayment_schedule(%Loan{} = loan) do
+    cond do
+      Repo.exists?(from s in RepaymentSchedule, where: s.loan_id == ^loan.id) ->
+        :already_scheduled
+
+      is_nil(loan.repayment_term_months) or loan.repayment_term_months < 1 ->
+        Logger.warning(
+          "loan #{loan.id} disbursed with no repayment term; it has no repayment schedule and cannot repay"
+        )
+
+        :no_term
+
+      true ->
+        # Repayments are anchored to the disbursal, so a loan whose funds went out
+        # earlier gets the due dates it should have had, not dates counted from
+        # whenever the schedule happened to be written.
+        starts_on =
+          if loan.disbursed_at, do: DateTime.to_date(loan.disbursed_at), else: Date.utc_today()
+
+        create_principal_repayment_schedule(
+          loan.id,
+          starts_on,
+          loan.repayment_term_months,
+          loan.loan_amount_cents
+        )
+
+        :scheduled
+    end
+  end
+
+  @doc """
   Record that a loan's funds reached the borrower (a partner/staff action).
   Advances `disbursal_status`, stamps `disbursed_at`, and reveals to lenders.
   """
   def record_disbursal(loan_id) do
-    loan = Repo.get!(Loan, loan_id)
+    # One transaction with the loan row locked: a second disbursal of the same
+    # loan waits here rather than racing ensure_repayment_schedule/1 into a
+    # duplicate schedule, and a failure anywhere rolls the whole step back
+    # instead of leaving a repaying loan with a half-written schedule.
+    {:ok, {loan, outcome}} =
+      Repo.transaction(fn ->
+        loan = Repo.one!(from l in Loan, where: l.id == ^loan_id, lock: "FOR UPDATE")
 
-    new_status =
-      case loan.disbursal_status do
-        "direct_disbursal_pending" -> "direct_disbursed"
-        _ -> "post_disbursed"
-      end
+        if loan.disbursed_at do
+          # Money only leaves once. A repeat call keeps the original disbursal
+          # date and status rather than restamping them, so a retry cannot turn a
+          # direct disbursal into a post-disbursal or re-date a schedule already
+          # anchored to the first one.
+          {loan, :already_disbursed}
+        else
+          # A loan past repayment is not given a fresh set of obligations by a
+          # late disbursal.
+          scheduling =
+            if enters_repayment?(loan), do: ensure_repayment_schedule(loan), else: :closed
 
-    loan =
-      loan
-      |> Ecto.Changeset.change(
-        disbursal_status: new_status,
-        disbursed_at: DateTime.utc_now() |> DateTime.truncate(:second)
+          new_status =
+            case loan.disbursal_status do
+              "direct_disbursal_pending" -> "direct_disbursed"
+              _ -> "post_disbursed"
+            end
+
+          loan =
+            loan
+            |> Ecto.Changeset.change(
+              disbursal_status: new_status,
+              status: status_after_disbursal(loan, scheduling),
+              disbursed_at: DateTime.utc_now() |> DateTime.truncate(:second)
+            )
+            |> Repo.update!()
+
+          {loan, :disbursed}
+        end
+      end)
+
+    # Only a disbursal that actually happened is recorded and revealed — a repeat
+    # call must not tell every lender their money moved a second time.
+    if outcome == :disbursed do
+      Audit.record(%{
+        event_type: "loan.disbursed",
+        target_type: "loan",
+        target_id: to_string(loan_id),
+        summary: "Loan ##{loan_id} disbursed (#{loan.disbursal_status})"
+      })
+
+      Kiva.Notifications.notify_loan_lenders(
+        loan_id,
+        "disbursal",
+        "Your loan reached the borrower 💸",
+        "The funds you helped provide were disbursed.",
+        "/loans/#{loan.slug}"
       )
-      |> Repo.update!()
-
-    Audit.record(%{
-      event_type: "loan.disbursed",
-      target_type: "loan",
-      target_id: to_string(loan_id),
-      summary: "Loan ##{loan_id} disbursed (#{new_status})"
-    })
-
-    Kiva.Notifications.notify_loan_lenders(
-      loan_id,
-      "disbursal",
-      "Your loan reached the borrower 💸",
-      "The funds you helped provide were disbursed.",
-      "/loans/#{loan.slug}"
-    )
+    end
 
     loan
   end
@@ -1017,6 +1136,58 @@ defmodule Kiva.Lending do
         conflict_target: [:loan_id, :locale_code, :version]
       )
 
+  @doc """
+  A monthly schedule whose items sum to exactly `total_cents`.
+
+  The division remainder is spread one cent at a time across the earliest items
+  rather than dropped or piled onto the last one. It does not take a flat
+  per-month amount like `create_repayment_schedule/4` does, because a lender's
+  expected-repayment total is summed from these rows: a term that does not
+  divide the principal evenly would otherwise schedule more or less than the
+  borrower actually owes.
+  """
+  def create_principal_repayment_schedule(loan_id, starts_on, term_months, total_cents)
+      when is_integer(term_months) and term_months >= 1 and is_integer(total_cents) and
+             total_cents >= 0 do
+    # The schedule and every one of its items land together or not at all. A
+    # partially written schedule would look complete to ensure_repayment_schedule/1
+    # forever after, since that only checks whether a schedule row exists.
+    {:ok, schedule} =
+      Repo.transaction(fn ->
+        schedule =
+          Repo.insert!(%RepaymentSchedule{
+            loan_id: loan_id,
+            starts_on: starts_on,
+            term_months: term_months,
+            frequency: "monthly"
+          })
+
+        base = div(total_cents, term_months)
+        remainder = rem(total_cents, term_months)
+
+        for m <- 1..term_months do
+          Repo.insert!(%RepaymentScheduleItem{
+            repayment_schedule_id: schedule.id,
+            due_on: Date.add(starts_on, 30 * m),
+            amount_cents: base + if(m <= remainder, do: 1, else: 0),
+            status: "scheduled"
+          })
+        end
+
+        schedule
+      end)
+
+    schedule
+  end
+
+  @doc """
+  A monthly schedule of `term_months` items of `monthly_cents` each.
+
+  Used by the seeds and fixtures, where the per-month figure is the given
+  quantity. When what you have is a principal to divide, use
+  `create_principal_repayment_schedule/4` instead — the items here total
+  `term_months * monthly_cents`, which need not equal the loan amount.
+  """
   def create_repayment_schedule(loan_id, starts_on, term_months, monthly_cents) do
     schedule =
       Repo.insert!(%RepaymentSchedule{

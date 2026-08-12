@@ -28,7 +28,7 @@ schedule item terms) are filed backward as schema needs.
 ```lssd
 model kiva.loan_lifecycle@0.4.0 {
   namespace: "kiva.loan_lifecycle"
-  revision: "2026-08-10"
+  revision: "2026-08-11"
   status: observed
   confidence: 0.9
 }
@@ -366,6 +366,19 @@ evidence evidence.listing.unreviewed_translations_went_live {
   confidence: 1.0
 }
 
+capability loan.browse {
+  label: "Find a loan worth backing (KivaWeb.LoanLive.Index)"
+  status: observed
+  confidence: 0.9
+  refines: @loan.fund
+  metadata: {
+    surface: "lib/kiva_web/live/loan_live/index.ex",
+    affordances: ["free-text search", "sector chips", "country filter", "sort", "cursor pagination"],
+    locale_scoped: "results are matched against the reader's own language rows — @decision.search.scoped_to_readers_language",
+    note: "Declared 2026-08-12. Two search policies had pointed at @loan.browse since they were written, but the capability itself was never defined — the dangling reference was the only trace of it."
+  }
+}
+
 policy policy.search.word_beginnings_only {
   label: "Loan search matches word beginnings, and one character is not a search"
   appliesTo: [@portfolio.impact, @loan.browse]
@@ -418,7 +431,7 @@ finding finding.portfolio.tier2_aggregates_block_tier1 {
   confidence: 0.9
 }
 
-question question.lending.model_partner_interest on @repayment.schedule {
+question question.lending.model_partner_interest on @repayment_schedule.item_terms {
   questionType: open_question
   question: "Should the demo model the field partner's interest explicitly — a borrower schedule of principal + a stated rate, with the surfaces explaining that the overage sustains the partner and never reaches the lender — or should schedules total exactly the principal (0% everywhere, simplest)?"
   whyItMatters: "Today's over-scheduling is accidental (the generator's max(1000, amount/term) floor), not a designed rate, yet it is closer to real microfinance than a flat 0% schedule. Modeling it deliberately would let the product explain the single most misunderstood fact about this kind of lending: the borrower pays interest, the lender does not. Flattening is a two-line generator change."
@@ -471,6 +484,46 @@ policy public_visibility on @loan.fund {
   status: observed
   confidence: 0.95
   rule: "Only loans whose status is in fundraising | funded | funded_disbursed | repaying | completed appear in the public localized search/profile."
+}
+
+obligation obligation.repay.disbursal_produces_a_schedule on @loan.repay {
+  label: "A disbursed loan owes a repayment schedule"
+  trigger: "A loan's funds reach the borrower — Kiva.Lending.record_disbursal/1, whether run by a partner, by staff, or by advance_demo_time"
+  requirement: "The loan must end that step with a repayment schedule and its items, because from that moment a borrower owes repayments, lenders are shown expected repayments, and the portfolio projections read from those rows."
+  completion: "Kiva.Lending.record_disbursal/1 and the funding-completion paths (Portfolio.lend/4, simulate_funding/1) each run inside a transaction holding the loan row FOR UPDATE, and call ensure_repayment_schedule/1 within it. That function is idempotent — a seeded loan keeps the schedule it already has — and otherwise builds one via create_principal_repayment_schedule/4, which writes the schedule and every item together or not at all. Held by test/kiva/runtime_repayment_test.exs — ten cases, every one proven to fail with the code or guard it covers removed."
+  rationale: "Every loan in the demo has a schedule because the seeds give it one, which is exactly why the gap was invisible: it only appeared on a loan that lived its whole life at runtime."
+  status: observed
+  confidence: 1.0
+}
+
+finding finding.repay.runtime_loans_never_repay {
+  label: "A loan born and disbursed at runtime stalls forever, silently"
+  derivedFrom: [@evidence.repay.schedule_call_sites]
+  claim: "A loan that goes through its whole life at runtime — submitted, approved, funded, disbursed — never acquires a repayment schedule, and therefore never repays. record_repayment/1 refuses it with {:error, :no_schedule}. advance_demo_time/0 does not even reach that refusal: advance_one/1 tests next_scheduled?(loan), which answers false for a loan with no schedule, so the loan falls through to :none and the tick reports nothing happening. The loan sits in repaying-eligible status permanently, its lenders keep an expected repayment that will never arrive, and no error is raised, logged, or revealed to anyone."
+  limitations: ["Not reproduced end-to-end in a test; established by reading every call site of create_repayment_schedule/4 and the advance_one/1 cond", "Invisible in the seeded dataset, where every loan is given a schedule at seed time"]
+  invalidatedWhen: "record_disbursal/1 creates the schedule, or another runtime path does, and a test drives submit → approve → fund → disburse → repay to completion without touching a fixture"
+  status: retired
+  confidence: 1.0
+  metadata: { retired: "2026-08-12, by @decision.repay.disbursal_owns_the_schedule — the invalidation condition above was met in the same session the finding was written. Kept rather than deleted because the shape of the miss is worth remembering: two seeded fixtures made a whole runtime path look exercised." }
+}
+
+decision_record decision.repay.disbursal_owns_the_schedule {
+  label: "Disbursal creates the repayment schedule, and it totals exactly the principal"
+  status: observed
+  confidence: 1.0
+  summary: "WHERE: the schedule is created at disbursal rather than at approval or first repayment, because disbursal is the moment the borrower actually owes anything — and, for a loan disbursed while the crowd was still lending, again on the last dollar, since a loan disbursed before this rule existed has no schedule for disbursal to have created. Its due dates are anchored to disbursed_at, not to the day the schedule was written. HOW MUCH: the items total exactly the loan principal, spreading the division remainder one cent at a time across the earliest months — the flat per-month figure the seeds use can total more or less than the loan, which is the accidental over-scheduling @question.lending.model_partner_interest is about. That question stays open: choosing exact principal for runtime loans does not decide whether the demo should model partner interest deliberately, and it changes nothing about seeded data. WHAT STATUS: only a fundraising or funded loan enters repayment, and only once it is fully funded AND holds a schedule. A partner disbursing early leaves the loan fundraising so the remaining lenders can still reach it; a loan whose term is missing stays funded rather than claiming a repayment it cannot make; and a completed or defaulted loan neither changes status nor receives fresh obligations from a repeated disbursal. Disbursal itself is idempotent — a repeat call keeps the original date and status and tells no one a second time. Three of these five rules exist only because adversarial review of the first draft found each of them missing."
+}
+
+evidence evidence.repay.schedule_call_sites {
+  kind: observation
+  occurredAt: "2026-08-12"
+  subject: @loan.repay
+  method: "Grepped every reference to create_repayment_schedule/4, RepaymentSchedule, and RepaymentScheduleItem across lib/, priv/, and test/; read record_disbursal/1, record_repayment/1, advance_one/1, and next_scheduled?/1."
+  observation: "create_repayment_schedule/4 has four callers: priv/repo/seeds_loans.exs:221, priv/repo/seeds.exs:700, test/support/lending_fixtures.ex:118, test/kiva/partner_ops_test.exs:73. None is in lib/. Nothing in the runtime lifecycle constructs a RepaymentSchedule. record_repayment/1 opens by returning {:error, :no_schedule} when the preload comes back nil, and next_scheduled?/1 has a catch-all clause returning false for the same case."
+  provenance: { doc: "session 2026-08-12, node-kind coverage pass" }
+  scope: ["lib/kiva/lending.ex"]
+  status: observed
+  confidence: 1.0
 }
 
 policy repayment_actor_restricted on @loan.repay {
@@ -547,7 +600,8 @@ flow loan.fund_to_completion {
 
   step record_disbursal {
     actor: @actor.partner
-    writes: [@loan.disbursal_status]
+    reads: [@loan.amount_cents, @loan.funded_amount_cents]
+    writes: [@loan.disbursal_status, @loan.status, @repayment_schedule.item_terms, @repayment_schedule.item_status]
   }
 
   step record_repayment {
@@ -558,8 +612,9 @@ flow loan.fund_to_completion {
 
   transition fundraising -> fundraising on complete_demo_lend do [lend]
   transition fundraising -> funded on complete_demo_lend do [lend]
-  transition funded -> funded on record_disbursal do [record_disbursal]
-  transition funded -> repaying on first_repayment_recorded
+  transition fundraising -> fundraising on early_disbursal do [record_disbursal]
+  transition fundraising -> repaying on funding_completes_after_disbursal do [lend]
+  transition funded -> repaying on record_disbursal do [record_disbursal]
   transition funded -> completed on record_repayment do [record_repayment]
   transition repaying -> repaying on record_repayment do [record_repayment]
   transition repaying -> completed on last_item_paid do [record_repayment]
