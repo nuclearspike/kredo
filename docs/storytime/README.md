@@ -225,8 +225,34 @@ it does against what its code and data actually do for each person involved.
 | `partner_loan_submission_audit_2026-08-12.md` | The field partner entering and submitting a loan |
 | `staff_review_queues_audit_2026-08-12.md` | Staff working the review queues |
 | `dashboard_first_person_audit_2026-08-10.md` | The four logged-in dashboards, audited together |
-| `compendium_lenders/` | A full Book II enumeration of every lender type and journey — 14 actors, 67 stages, 28 walks |
-| `grammar_upgrade_report_2026-08-10.md` | Internal: bringing the contract layer up to current LSSD grammar |
+| [`compendium_lenders/`](compendium_lenders/) | A full enumeration of every lender type and journey — 14 actors, 67 stages, 28 walks, 19 open questions. The **idea-generating** mode rather than the audit mode |
+| [`grammar_upgrade_report_2026-08-10.md`](grammar_upgrade_report_2026-08-10.md) | Internal: bringing the contract layer up to current LSSD grammar |
+
+The five actor audits share a structure: the actor's journey, their first-person
+question stack, findings by severity with code citations, a story-debt summary,
+**what would make it compelling**, and what already works and should not
+regress. The synthesis reads them together.
+
+Inside [`compendium_lenders/`](compendium_lenders/):
+
+| File | Contents |
+|---|---|
+| [`00_scope_and_cast.md`](compendium_lenders/00_scope_and_cast.md) | The 14-plane sweep and the 14 lender actors it named or ruled out |
+| [`01_ladders.md`](compendium_lenders/01_ladders.md) | Every actor's life stages across seven bands |
+| [`02_stage_records.md`](compendium_lenders/02_stage_records.md) | 18 full stage records with interior monologues and question stacks |
+| [`03_walks_and_storm.md`](compendium_lenders/03_walks_and_storm.md) | 28 consequence walks and the 14-family failure storm |
+| [`04_reveals_artifacts_details.md`](compendium_lenders/04_reveals_artifacts_details.md) | Reveal edges, the communication catalog, artifact and detail stories |
+| [`05_matrices_counts_gates.md`](compendium_lenders/05_matrices_counts_gates.md) | Matrices, the count block, the gate report, and 19 open questions |
+
+---
+
+## The other documentation directories
+
+| Directory | What it holds |
+|---|---|
+| [`../fractalflow/`](../fractalflow/) | **The living contracts** — ten documents modelling the system's actors, truths, commands, policies, and reveals, kept in sync with the code. These audits are projected from them. |
+| [`../prd/`](../prd/) | **The original planning corpus** — 18 documents written before any code existed. Preserved unedited; superseded by the contracts. Reading them beside these audits shows the full arc: planned → built in ~8.6 hours → audited → gaps found. |
+| [`../kiva_api_compatibility.md`](../kiva_api_compatibility.md) | How the Kiva-compatible API surfaces map to the real ones |
 
 ---
 
