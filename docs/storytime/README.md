@@ -117,17 +117,52 @@ running product and in nobody's mental model:
 | The **high-volume lender** | 1,408 lendings exists in the data; no journey is designed for it — no search, notifications capped at 30. |
 | The assistant being **confidently wrong** | Outages and refusals were handled. Being plausibly incorrect about someone's money was not. |
 
+Some of what it proposes is **net-new product** — capabilities the system has no
+data for, no model of, and no code near:
+
+- **Telling a borrower anything at all.** The reveal layer has no borrower plane;
+  the function to notify one does not exist. Building it is a new channel, not a
+  new screen.
+- **A thank-you path.** A borrower cannot reply to the stranger who funded them.
+  That is a new command, a new artifact, a new moderation question, and a new
+  reveal edge — none of which the product contains.
+- **An ending for a loan that never funds.** 3,989 loans sit past a deadline
+  nothing enforces. Giving that an outcome means new states, a new policy, a
+  scheduler that does not exist, and reveals to three different actors.
+- **Currency-exchange loss.** The lender risk breakdown wants it. The product is
+  all-USD and has no concept of it whatsoever — the feature would introduce a
+  domain concept, not surface a hidden column.
+- **Recurring lending.** Surfaced as an entire missing actor: nobody had asked
+  whether a lender might want to commit monthly.
+
 ### Why it generates ideas instead of just opinions
 
-Because it is a **combinatorial sweep, not a brainstorm**. Every actor is walked
-through seven life stages; every stage is examined for six categories of
-decision; every actor is then run against fourteen standard ways things go wrong.
-That grid has thousands of cells and any real product leaves most of them empty.
+Two mechanisms, and they pull in opposite directions on purpose.
 
-An empty cell is one of two things: a deliberate decision, written down — or a
-feature nobody thought of. Forcing every cell to be one or the other is what
-produces the list. It is also why the ideas tend to be *cheap*: they surface
-where a truth the product already holds has no surface that shows it.
+**A combinatorial sweep, not a brainstorm.** Every actor is walked through seven
+life stages; every stage is examined for six categories of decision; every actor
+is then run against fourteen standard ways things go wrong. That grid has
+thousands of cells and any real product leaves most of them empty. An empty cell
+is one of two things: a deliberate decision, written down — or a feature nobody
+thought of. Forcing every cell to be one or the other is what produces the list.
+
+**The story forces the schema.** The method writes what an actor should
+experience *before* checking whether the system can support it — in the actor's
+own voice, as a scene. When a sentence in that scene needs a fact the product
+does not have, the sentence wins: the missing fact is filed backward as a
+requirement. This is a formal step, not a happy accident, and it is how the
+method escapes the gravity of the existing database.
+
+Three truths in this repository's contracts exist **only** because a scene
+demanded them and the schema did not have them: a lender-controlled
+`profile_public` flag (so a borrower can learn who backed them), per-loan loss
+attribution, and arrears aging. None were in anyone's data model. All three are
+now specified requirements because someone wrote what the moment should feel
+like and the moment needed them.
+
+The combination is what matters. The sweep guarantees coverage — you will not
+miss an actor or a failure mode. The screenplay guarantees ambition — you are not
+limited to rearranging what you already store.
 
 ---
 
@@ -343,12 +378,13 @@ work is meaningful.
 - It does not verify security, compliance, or financial claims.
 - It cannot replace talking to real users. Everything here is
   `practitioner_unvalidated` — derived from code and cold-reads, not from people.
-- **The feature proposals are hypotheses, not validated demand.** They are
-  well-grounded ones — each is traceable to a truth the product already holds and
-  a question a specific actor is provably left with — but "this person has no way
-  to learn X" is an argument, not evidence that shipping X will matter to them.
-  The method finds the candidate set fast and cheaply; deciding which ones are
-  worth building is still your job, and still needs users.
+- **The feature proposals are hypotheses, not validated demand.** Each is
+  grounded — it answers a question a specific actor is provably left with — and
+  they range from surfacing something you already store to building a capability
+  from nothing. But "this person has no way to learn X" is an argument, not
+  evidence that shipping X will matter to them. The method finds the candidate
+  set fast and cheaply, and sizes nothing; deciding which ones are worth building
+  is still your job, and still needs users.
 - Its severity ratings are judgement, not measurement.
 
 The most useful output of the five audits in this folder was not a backlog. It
