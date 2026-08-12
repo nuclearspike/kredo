@@ -9,7 +9,7 @@ a contract/ruling but not built · `inferred` = reasoned, unproven.
 
 **Method note:** the pipeline fans out one subagent per actor. This run was
 executed inline by a single session at the owner's standing instruction; the
-completeness critic (Pass 9) was run in fresh context via the local model hub.
+completeness critic (Pass 9) was run in fresh context by a separate local model.
 
 ---
 

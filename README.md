@@ -211,8 +211,8 @@ key. To connect a real model, point it at any OpenAI-compatible endpoint:
 | Variable | Meaning | Default |
 |---|---|---|
 | `KIVA_LLM_ENDPOINT` | Chat-completions URL | `http://127.0.0.1:1234/v1/chat/completions` |
-| `OPENAI_MODEL` | Model id | `gpt-5.5` |
-| `LLM_API_TOKEN` | Bearer token for that endpoint | `changeme` |
+| `OPENAI_MODEL` | Model id | `gpt-4o-mini` |
+| `LLM_API_TOKEN` | Bearer token, if the endpoint wants one | *(none sent)* |
 
 ---
 

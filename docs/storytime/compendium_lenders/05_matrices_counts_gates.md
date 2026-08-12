@@ -71,7 +71,7 @@ open questions ........ 19
 | **G4** walks 1:1 with decisions | ✅ PASS | every mutating decision walked; 8 registry gaps + 7 absent commands recorded as findings rather than skipped |
 | **G5** storm folded back | ✅ PASS | 14 families; yielded 2 new stages and 1 withdrawn claim — a storm that moved the enumeration |
 | **G6** reveals + artifacts + details | ✅ PASS | 13 edges, 15 artifacts, 13 details, all with state labels |
-| **critic** two consecutive dry rounds | ⚠️ **NOT MET — bounded stop** | 4 rounds run in fresh context via the hub; hits 10 → 8 → 6 → 3, all folded back. The skill bounds the loop at 4 rounds rather than looping unbounded, so this run **stops with the critic still yielding**. A 5th round would likely yield 1–3 more. |
+| **critic** two consecutive dry rounds | ⚠️ **NOT MET — bounded stop** | 4 rounds run in fresh context by a separate local model; hits 10 → 8 → 6 → 3, all folded back. The skill bounds the loop at 4 rounds rather than looping unbounded, so this run **stops with the critic still yielding**. A 5th round would likely yield 1–3 more. |
 
 **This run stops at enumeration.** G7–G9, journey optimization (prominence,
 presets, adaptive actions), derivations, and surfaces belong to the pipeline

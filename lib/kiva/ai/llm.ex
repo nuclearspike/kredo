@@ -1,9 +1,9 @@
 defmodule Kiva.AI.LLM do
   @moduledoc """
-  Real-LLM backend for the page-aware assistant. Routes through a local OpenAI-compatible
-  endpoint — which owns provider keys, model selection, and capacity
-  — with a role + page + locale aware system prompt assembled from the contracts in
-  `prompts/chatbot_system_prompt_templates.md`.
+  Real-LLM backend for the page-aware assistant. Talks to any OpenAI-compatible
+  chat-completions endpoint — a hosted provider, or a model running on the same
+  machine — with a role + page + locale aware system prompt assembled from the
+  contracts in `prompts/chatbot_system_prompt_templates.md`.
 
   Returns `nil` on any failure (disabled, no key, provider/parse error) so
   `Kiva.AI.Assistant` transparently degrades to its deterministic mock. The
@@ -13,13 +13,11 @@ defmodule Kiva.AI.LLM do
   require Logger
   alias Kiva.AI
 
-  # Route through a local OpenAI-compatible endpoint so the server owns the
-  # provider keys and routing. `gpt-5.5` is a model id that currently resolves
-  # to OpenAI's 5-series mini model (there is no `gpt-5.5-mini` id upstream) and
-  # will track a real 5.5 when the endpoint exposes one.
+  # With nothing configured, try a model on this machine: LM Studio, Ollama's
+  # OpenAI-compatible port, or anything else speaking the same protocol. Override
+  # the address with KIVA_LLM_ENDPOINT and the model id with OPENAI_MODEL.
   @local_endpoint "http://127.0.0.1:1234/v1/chat/completions"
-  @default_model "gpt-5.5"
-  @client_pattern "kiva-assistant"
+  @default_model "gpt-4o-mini"
 
   # --- System prompt contracts (source: prompts/chatbot_system_prompt_templates.md) ---
   @global """
@@ -107,11 +105,7 @@ defmodule Kiva.AI.LLM do
   end
 
   defp do_answer(ctx) do
-    case chat_completion(
-           [%{role: "system", content: system_prompt(ctx)} | history(ctx)],
-           2000,
-           @client_pattern
-         ) do
+    case chat_completion([%{role: "system", content: system_prompt(ctx)} | history(ctx)], 2000) do
       {:ok, content} ->
         record_call(ctx, true, nil)
         String.trim(content)
@@ -207,7 +201,7 @@ defmodule Kiva.AI.LLM do
   defp do_docs_query(req) do
     user = %{role: "user", content: docs_user_prompt(req)}
 
-    case chat_completion([%{role: "system", content: @docs_system}, user], 2000, "kiva-docs") do
+    case chat_completion([%{role: "system", content: @docs_system}, user], 2000) do
       {:ok, content} -> parse_docs(content, req)
       {:error, reason} -> {:error, reason}
     end
@@ -261,11 +255,11 @@ defmodule Kiva.AI.LLM do
   end
 
   # --- transport ----------------------------------------------------------
-  defp chat_completion(messages, max_tokens, pattern) do
+  defp chat_completion(messages, max_tokens) do
     body = %{model: model(), messages: messages, max_tokens: max_tokens, stream: false}
 
     case Req.post(endpoint(),
-           headers: auth_headers(pattern),
+           headers: auth_headers(),
            json: body,
            receive_timeout: 45_000,
            retry: false
@@ -279,7 +273,7 @@ defmodule Kiva.AI.LLM do
         {:error, :provider}
 
       other ->
-        Logger.warning("AI.LLM error: #{inspect(other) |> String.slice(0, 200)}")
+        Logger.warning("AI.LLM transport error: #{inspect(other) |> String.slice(0, 200)}")
         {:error, :provider}
     end
   rescue
@@ -288,12 +282,13 @@ defmodule Kiva.AI.LLM do
       {:error, :exception}
   end
 
-  defp auth_headers(pattern) do
-    [
-      {"authorization", "Bearer #{api_token()}"},
-      {"x-client-app", "kiva"},
-      {"x-client-pattern", pattern}
-    ]
+  # A model running locally usually needs no credential at all; only send the
+  # header when there is something to send.
+  defp auth_headers do
+    case api_token() do
+      nil -> []
+      token -> [{"authorization", "Bearer #{token}"}]
+    end
   end
 
   defp endpoint do
@@ -306,14 +301,12 @@ defmodule Kiva.AI.LLM do
 
   defp model, do: System.get_env("OPENAI_MODEL") || @default_model
 
-  # The endpoint owns the provider keys; the app just presents a bearer token.
-  # Configure via LLM_API_TOKEN (the token itself) or LLM_API_TOKEN_FILE (a file
-  # holding either the raw token or a `API_TOKEN=...` line). The default
-  # matches the default local development token.
+  # Credential for the endpoint, if it wants one. OPENAI_API_KEY for a hosted
+  # provider, LLM_API_TOKEN for anything else, or LLM_API_TOKEN_FILE pointing at a
+  # file holding the raw token or an `API_TOKEN=...` line. Nil means send none,
+  # which is what a model on this machine usually expects.
   defp api_token,
-    do:
-      System.get_env("OPENAI_API_KEY") || System.get_env("LLM_API_TOKEN") || file_token() ||
-        "changeme"
+    do: System.get_env("OPENAI_API_KEY") || System.get_env("LLM_API_TOKEN") || file_token()
 
   defp file_token do
     with path when is_binary(path) <- System.get_env("LLM_API_TOKEN_FILE"),
