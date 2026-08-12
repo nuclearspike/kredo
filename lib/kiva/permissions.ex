@@ -28,6 +28,22 @@ defmodule Kiva.Permissions do
     )
   end
 
+  @doc """
+  Whether a permission is held by this user as a DIRECT grant.
+
+  Permissions also arrive through a role's group. Those are not revocable one
+  user at a time, so revoking one is a no-op that reads to the reviewer as if it
+  worked.
+  """
+  def direct_grant?(user_id, permission_key) do
+    Repo.exists?(
+      from up in "user_permissions",
+        join: p in "permissions",
+        on: p.id == up.permission_id,
+        where: up.user_id == ^user_id and p.key == ^permission_key
+    )
+  end
+
   @doc "Revoke a direct per-user permission grant (clears an outlier). Returns {:ok, count}."
   def revoke_direct(user_id, permission_key) do
     case Repo.get_by(Permission, key: permission_key) do

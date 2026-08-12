@@ -18,6 +18,7 @@ defmodule Kiva.Partners.Partner do
     p
     |> cast(attrs, [:slug, :country_code, :default_locale_code, :status, :trust_model, :image_url])
     |> validate_required([:slug])
+    |> validate_inclusion(:status, ~w(active suspended))
     |> unique_constraint(:slug)
   end
 end

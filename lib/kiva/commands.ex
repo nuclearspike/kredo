@@ -20,7 +20,7 @@ defmodule Kiva.Commands do
       required: ~w(locale_code),
       preview_required: false,
       confirmation_required: false,
-      eligibility: [],
+      eligibility: ~w(locale_supported),
       side_effects: ~w(update_session_locale maybe_update_user_preference)
     },
     "create_lending_team" => %{
@@ -29,7 +29,7 @@ defmodule Kiva.Commands do
       required: ~w(name source_locale_code visibility),
       preview_required: true,
       confirmation_required: true,
-      eligibility: [],
+      eligibility: ~w(team_visibility_valid),
       side_effects: ~w(create_team create_team_lc_source create_translation_requests audit_event)
     },
     "add_loan_to_basket" => %{
@@ -56,7 +56,7 @@ defmodule Kiva.Commands do
       required: ~w(loan_id),
       preview_required: false,
       confirmation_required: false,
-      eligibility: [],
+      eligibility: ~w(loan_has_repayment_due),
       side_effects: ~w(mark_item_paid maybe_complete_loan audit_event)
     },
     "post_team_message" => %{
@@ -65,7 +65,7 @@ defmodule Kiva.Commands do
       required: ~w(team_id body source_locale_code),
       preview_required: false,
       confirmation_required: false,
-      eligibility: [],
+      eligibility: ~w(team_exists),
       side_effects: ~w(create_post run_moderation audit_event)
     },
     "submit_encouragement_message" => %{
@@ -74,7 +74,7 @@ defmodule Kiva.Commands do
       required: ~w(loan_id body source_locale_code),
       preview_required: true,
       confirmation_required: true,
-      eligibility: [],
+      eligibility: ~w(loan_exists),
       side_effects:
         ~w(create_message run_moderation create_translations_if_approved notify_borrower_if_visible audit_event)
     },
@@ -94,7 +94,7 @@ defmodule Kiva.Commands do
       required: ~w(partner_id status),
       preview_required: false,
       confirmation_required: false,
-      eligibility: [],
+      eligibility: ~w(partner_exists org_status_valid),
       side_effects: ~w(update_partner_status audit_event)
     },
     "set_trustee_status" => %{
@@ -103,7 +103,7 @@ defmodule Kiva.Commands do
       required: ~w(trustee_id status),
       preview_required: false,
       confirmation_required: false,
-      eligibility: [],
+      eligibility: ~w(trustee_exists org_status_valid),
       side_effects: ~w(update_trustee_status audit_event)
     },
     "record_disbursal" => %{
@@ -112,7 +112,7 @@ defmodule Kiva.Commands do
       required: ~w(loan_id),
       preview_required: false,
       confirmation_required: false,
-      eligibility: [],
+      eligibility: ~w(loan_awaiting_disbursal),
       side_effects:
         ~w(advance_disbursal_status stamp_disbursed_at notify_loan_lenders audit_event)
     },
@@ -122,7 +122,7 @@ defmodule Kiva.Commands do
       required: ~w(loan_id body source_locale_code),
       preview_required: false,
       confirmation_required: false,
-      eligibility: [],
+      eligibility: ~w(loan_exists),
       side_effects: ~w(create_borrower_update notify_loan_lenders audit_event)
     },
     "create_borrower" => %{
@@ -131,7 +131,7 @@ defmodule Kiva.Commands do
       required: ~w(name),
       preview_required: false,
       confirmation_required: false,
-      eligibility: [],
+      eligibility: ~w(actor_manages_partner),
       side_effects: ~w(create_borrower create_borrower_lc_source)
     },
     "start_loan_application" => %{
@@ -140,7 +140,7 @@ defmodule Kiva.Commands do
       required: [],
       preview_required: false,
       confirmation_required: false,
-      eligibility: [],
+      eligibility: ~w(actor_manages_partner partner_owns_borrower),
       side_effects: ~w(create_or_resume_draft)
     },
     "save_loan_draft" => %{
@@ -177,7 +177,7 @@ defmodule Kiva.Commands do
       required: ~w(lc_entity_type lc_id),
       preview_required: false,
       confirmation_required: false,
-      eligibility: [],
+      eligibility: ~w(translation_awaiting_review),
       side_effects: ~w(mark_translation_approved rebuild_read_model audit_event)
     },
     "approve_message" => %{
@@ -186,7 +186,7 @@ defmodule Kiva.Commands do
       required: ~w(message_id),
       preview_required: false,
       confirmation_required: false,
-      eligibility: [],
+      eligibility: ~w(message_awaiting_moderation),
       side_effects: ~w(override_moderation translate_to_borrower deliver audit_event)
     },
     "reject_message" => %{
@@ -195,7 +195,7 @@ defmodule Kiva.Commands do
       required: ~w(message_id),
       preview_required: false,
       confirmation_required: false,
-      eligibility: [],
+      eligibility: ~w(message_awaiting_moderation),
       side_effects: ~w(confirm_block audit_event)
     },
     "request_loan_changes" => %{
@@ -204,7 +204,7 @@ defmodule Kiva.Commands do
       required: ~w(loan_id),
       preview_required: false,
       confirmation_required: false,
-      eligibility: [],
+      eligibility: ~w(partner_review_complete),
       side_effects: ~w(change_status_to_changes_requested audit_event)
     },
     "reject_translation" => %{
@@ -213,7 +213,7 @@ defmodule Kiva.Commands do
       required: ~w(lc_entity_type lc_id),
       preview_required: false,
       confirmation_required: false,
-      eligibility: [],
+      eligibility: ~w(translation_awaiting_review),
       side_effects: ~w(mark_translation_rejected audit_event)
     },
     "approve_loan_listing" => %{
@@ -231,7 +231,7 @@ defmodule Kiva.Commands do
       required: ~w(user_id permission_key),
       preview_required: true,
       confirmation_required: true,
-      eligibility: [],
+      eligibility: ~w(direct_grant_exists),
       side_effects: ~w(remove_permission audit_event invalidate_sessions_if_needed)
     }
   }

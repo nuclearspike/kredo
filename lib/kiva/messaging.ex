@@ -116,6 +116,18 @@ defmodule Kiva.Messaging do
     end
   end
 
+  @doc """
+  Whether a message is still held for a moderation decision: `:held` while it is
+  blocked or flagged, `:decided` once staff have approved or upheld the block.
+  """
+  def moderation_state(message_id) do
+    case Repo.get(EncouragementMessage, message_id) do
+      nil -> :missing
+      %{moderation_status: s} when s in ~w(blocked flagged) -> :held
+      _ -> :decided
+    end
+  end
+
   @doc "Held encouragement messages (blocked/flagged) awaiting a staff moderation decision."
   def list_moderation_queue(_locale) do
     EncouragementMessage

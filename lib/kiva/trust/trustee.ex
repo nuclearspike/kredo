@@ -14,6 +14,7 @@ defmodule Kiva.Trust.Trustee do
     t
     |> cast(attrs, [:slug, :country_code, :status])
     |> validate_required([:slug])
+    |> validate_inclusion(:status, ~w(active suspended))
     |> unique_constraint(:slug)
   end
 end

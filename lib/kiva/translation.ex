@@ -136,6 +136,27 @@ defmodule Kiva.Translation do
   defp snippet(nil), do: ""
   defp snippet(s) when is_binary(s), do: String.slice(s, 0, 90)
 
+  @doc """
+  Whether a language-content row is still waiting on a reviewer.
+
+  `:awaiting` for machine output and rows flagged for review, `:decided` once a
+  reviewer has approved or rejected it. Approving something twice is not a
+  second approval, it is a reviewer acting on a stale queue.
+  """
+  def review_state(entity_type, lc_id) do
+    case Map.get(@lc_schemas, entity_type) do
+      nil ->
+        :unknown_entity_type
+
+      schema ->
+        case Repo.get(schema, lc_id) do
+          nil -> :missing
+          %{translation_status: s} when s in ~w(machine needs_review) -> :awaiting
+          _ -> :decided
+        end
+    end
+  end
+
   @doc "Approve a machine/needs_review LC row (any tracked entity type)."
   def approve(entity_type, lc_id, reviewer_id \\ nil) do
     schema = Map.fetch!(@lc_schemas, entity_type)

@@ -356,9 +356,35 @@ finding finding.commands.state_gates_are_sparse {
   supports: ["Commands whose handlers mutate without asking whether the target is in a legal state: record_repayment, record_disbursal, approve_translation, approve_message, set_trustee_status"]
   contradicts: []
   limitations: ["Which states are legal for each command is a product decision and was NOT invented here. The audit fixed the mechanism (unknown checks refuse) and left the coverage question open."]
-  invalidatedBy: ["A pass that decides and declares the legal precondition for each ungated command, or records that it genuinely has none"]
+  invalidatedBy: ["Resolved 2026-08-11 by @policy.commands.state_preconditions_declared: 17 of the 18 gained state gates, and the 18th is recorded as genuinely having none."]
   strength: conclusive
+  status: retired
+  confidence: 1.0
+}
+
+policy policy.commands.state_preconditions_declared {
+  label: "A command declares the state its target must be in, or records that it has none"
+  appliesTo: [@ai.command_registry]
+  rule: "Every command in the registry declares eligibility covering: the target exists, the values it is given are ones the domain accepts, the target is in a state where the action means something, and the actor stands in the right relationship to it. A command with genuinely no state precondition says so explicitly rather than leaving an empty list that cannot be told apart from an oversight."
+  rationale: "Eighteen of twenty-four commands declared nothing. Role and required-input checks still ran, so this was never an authorisation hole, but a stale id from a queue somebody else had already cleared either mutated something or crashed the handler on Repo.get!, and set_partner_status would persist any string at all into a status column with no validate_inclusion behind it."
+  enforcement: "test/kiva/command_state_gates_test.exs \u2014 nine cases, every one of which fails when the eligibility lists are emptied. Partner and Trustee changesets additionally gained validate_inclusion on status, so the schema refuses a bad value even if a future caller skips the command layer."
   status: observed
+  confidence: 1.0
+}
+
+decision_record decision.commands.disbursal_does_not_require_full_funding {
+  label: "Disbursal is gated on not-yet-disbursed, not on being fully funded"
+  status: observed
+  confidence: 1.0
+  summary: "The first draft of loan_awaiting_disbursal refused to disburse a loan that had not finished raising. A test caught it, and the test was right: field partners routinely disburse before the crowd finishes funding and are repaid afterwards, which is why the model carries direct_disbursal_pending at all, and the loan page offers the action on exactly one condition \u2014 nothing disbursed yet. The gate now quotes that condition instead of inventing a stricter one. Recorded because the stricter rule looks more careful and is wrong."
+}
+
+question question.commands.advance_demo_time_precondition on @ai.command_registry {
+  questionType: open_question
+  question: "advance_demo_time is the one command with no state precondition. Should it have one \u2014 for instance refusing to run outside a demo environment, or when a previous advance is still settling?"
+  whyItMatters: "It is declared high risk and steps every active loan through its lifecycle in one call. Nothing about the target's state makes it illegal today, so no gate was invented; the honest answer may be that it needs an environment guard rather than a state guard."
+  blocks: []
+  status: asserted
   confidence: 1.0
 }
 
