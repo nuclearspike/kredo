@@ -47,6 +47,14 @@ findings about mistakes the same AI made days earlier, published unedited.
 
 ---
 
+[![The Kredo home page: “Loans that change lives — in every language”, above a row of borrowers currently fundraising](docs/screenshots/02-home.webp)](docs/screenshots/)
+
+<sub>**[→ 24 more screens](docs/screenshots/)** — the lender's dashboard, the
+borrower's portal in three languages, the staff and admin surfaces, and the
+developer API explorer.</sub>
+
+---
+
 ## What it actually does
 
 The complete loan lifecycle, with a different logged-in experience per actor:
