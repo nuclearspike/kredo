@@ -39,7 +39,8 @@ Non-negotiables:
   through `Kiva.Localization.Resolver` (fallback `requested -> en`, honest fallback badges).
 - **Reveals:** cross-actor state changes notify the affected actor via `Kiva.Notifications`; silence
   is a deliberate decision.
-- Fake/demo data only — the LLM, translator, moderation, and blockchain are mocks behind clean seams.
+- Fake/demo data only. The assistant supports an optional real-model backend and an offline scripted fallback; tests disable the real backend. Translation, moderation and blockchain attestations remain demo implementations. Do not imply AI-generated implementation means every runtime feature uses a real model.
+- Public portfolio entry points are `docs/DEMO.md` and `docs/PORTFOLIO.md`; dated verification and release limits live in `docs/RELEASE-READINESS.md`. Keep their claims tied to observed evidence. Repository visibility/public deployment require a separate owner release decision.
 
 ### Phoenix v1.8 guidelines
 

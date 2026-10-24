@@ -43,6 +43,30 @@ artifact dashboard_first_person_audit {
   metadata: { note: "Code read + rendered cold-reads of /portal, /portfolio, /partner, /admin; carries the derived question stacks, severity findings H1-H6/M1-M6/L1-L4, and the owner's Q1-Q4 rulings. Seed source for every 2026-08-10 first-person contract entry." }
 }
 
+# --- Public engineering demonstration (2026-10-23) ---------------------
+actor actor.portfolio_reader {
+  label: "Prospective client or developer evaluating Paul's engineering work"
+  status: observed
+  confidence: 1.0
+}
+
+outcome outcome.portfolio.evidence_understood {
+  label: "Understand the prototype, Paul's role and its limits, then inspect evidence"
+  steps_max: 3
+  vocabulary: actor
+  summary: "README overview -> three-minute demo -> source and dated verification. If the local app or private source is unavailable, the screenshot walkthrough remains usable. This is a source-release preparation; public visibility and Internet deployment require separate owner decisions."
+  status: asserted
+  confidence: 1.0
+}
+
+artifact artifact.portfolio.guided_demo {
+  kind: "Three-step engineering walkthrough and portfolio case study"
+  path: "docs/DEMO.md"
+  status: observed
+  confidence: 1.0
+  metadata: { related: ["docs/PORTFOLIO.md", "docs/RELEASE-READINESS.md"], boundaries: ["Synthetic people and financial activity", "Historical screenshots and benchmarks are labeled", "Offline assistant differs from optional real-model backend", "Existing noncommercial license is preserved", "No production lending or security certification"] }
+}
+
 # --- Product-pillar outcomes (2026-08-10) -------------------------------
 outcome outcome.actor.native_language_everywhere {
   label: "Every actor reads and is read in their own language, with honest badges when a machine or fallback stands in"

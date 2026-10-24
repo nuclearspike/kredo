@@ -1,28 +1,41 @@
 # Kredo
 
-**An experiment: how much working product can a handful of AI-assisted sessions
-actually produce?**
+**A multilingual lending-platform prototype built with AI, directed by Paul Ericksen.**
 
-This repository is the answer to that question, not a product. The interesting
-constraint was never capability — given unlimited time you could build anything.
-It was **time**: what does a genuinely non-trivial domain look like after only a
-few sittings? Multiple actors who need different things, money that has to add
-up, content that has to exist in five languages, and a public API with a
-real-world contract to match. The whole lending lifecycle is here and it runs end
-to end on a laptop.
+Kredo demonstrates role-based workflows, five-language content, API compatibility
+and auditable commands in an Elixir/Phoenix application. All people, loans and
+financial activity are simulated. It is an independent engineering experiment,
+unaffiliated with Kiva, and separate from my KivaLens product.
 
-**It took about 8.6 hours.**
+**Start here:** [three-minute demo](docs/DEMO.md) ·
+[portfolio case study](docs/PORTFOLIO.md) ·
+[run locally](#running-it) · [known limitations](#-what-this-is-not).
+
+The demo shows what is implemented and names the boundaries. The source is
+available under the existing noncommercial license; see [LICENSE](LICENSE).
+
+## The experiment
+
+How much working product can a handful of AI-assisted sessions produce?
+
+This repository explores that question through a working prototype: multiple
+actors with different needs, simulated lending, content in five languages and
+an API compatibility layer. It runs locally, with documented gaps. This is an
+engineering example, not a service for real borrowers or lenders.
+
+**Historical session-time estimate, through August 2026:**
 
 | | |
 |---|---|
 | Building everything below | **~8.6 h** at the keyboard, in four sittings between 27 Jun and 28 Jul |
-| Rebranding, publishing, and auditing it (see `docs/storytime/`) | ~7.2 h across three more days |
+| Rebranding, release preparation, and auditing it (see `docs/storytime/`) | ~7.2 h across three more days |
 | Total | **~15.8 h** |
 
 <sub>Measured from Claude Code session transcripts: time between consecutive
 messages, counting only gaps under 30 minutes as active, with overlapping
-parallel sessions merged so nothing is double-counted. It undercounts thinking
-done away from the keyboard and overcounts nothing.</sub>
+parallel sessions merged. This is an approximate activity measure, not total
+engineering effort or a delivery estimate. It excludes later review and release
+preparation; the transcripts are private and are not part of this release.</sub>
 
 **Every line of this was written by AI.** The application, the five-language
 content, the API compatibility layer, the data generator, the tests, and the
@@ -30,10 +43,9 @@ audits in `docs/storytime/` were all produced by an AI agent working under the
 [LSSD](docs/storytime/README.md) methodology. A human set direction, made the
 product decisions, and corrected the record — and wrote none of the code.
 
-**This is not a finished product, and it is published that way on purpose.**
-It runs end to end, and it has real holes. Rather than hide them, they were
-found systematically and written up: see the audits below, which include
-findings about mistakes the same AI made days earlier, published unedited.
+**This is an unfinished prototype.** The actor-journey audits document gaps
+alongside the working implementation. The current [release check](docs/RELEASE-READINESS.md)
+distinguishes fresh verification from historical audit findings.
 
 > **Unofficial and unaffiliated.** Kredo is an independent experiment inspired by
 > the Kiva model. It is **not affiliated with, endorsed by, or connected to Kiva**
@@ -49,7 +61,7 @@ findings about mistakes the same AI made days earlier, published unedited.
 
 [![The Kredo home page: “Loans that change lives — in every language”, above a row of borrowers currently fundraising](docs/screenshots/02-home.webp)](docs/screenshots/README.md)
 
-<sub>**[→ 24 more screens](docs/screenshots/README.md)** — the lender's dashboard, the
+<sub>**[→ 24-screen gallery](docs/screenshots/README.md)** — the lender's dashboard, the
 borrower's portal in three languages, the staff and admin surfaces, and the
 developer API explorer.</sub>
 
@@ -241,13 +253,15 @@ work before it could function as one.** Known gaps, honestly:
 - **No real money.** Lending, repayment, disbursal, and currency are all
   simulated. There is no payment processor, no ledger, no reconciliation, and no
   accounting of currency-exchange loss.
-- **The AI, translator, moderator, and blockchain attestations are mocks** behind
-  clean interfaces. The machine translator is a glossary substitution, not a
-  translation engine.
-- **The logged-in dashboards need a redesign.** An audit of all four
-  ([`docs/storytime/`](docs/storytime/)) found that three of them answer none of
-  the questions their actor actually arrives with, one registered command has no
-  surface at all, and the chat launcher is currently disabled at the layout level.
+- **The assistant has an offline scripted fallback and an optional real-model
+  backend.** The October 2026 walkthrough uses offline mode; no hosted model was
+  called. Command preview/confirmation is separate from model answers. The
+  translator, moderator and blockchain attestations remain demo implementations;
+  the translator uses glossary substitution.
+- **The actor-journey audits identify unfinished workflows.** The August reports
+  in [`docs/storytime/`](docs/storytime/) are historical findings, not a fresh
+  certification of every current screen. The assistant launcher now opens in
+  the October walkthrough; that does not close the other audit findings.
 - **Performance work is unfinished.** See the notes under the table above; the
   lender dashboard misses its budget at generated scale.
 - **Security and abuse handling are demo-grade.** Weak passwords by design,
