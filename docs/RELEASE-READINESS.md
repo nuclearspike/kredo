@@ -1,14 +1,14 @@
-# Kredo public-release preparation
+# Kredo source-release record
 
 Prepared October 23, 2026 (America/Denver). Owner: Paul Ericksen.
 
 ## Intended release
 
-Publish an accurately framed engineering prototype with a short demo and
-portfolio case study. The source and history would become public; the local
-Phoenix service would remain bound to localhost. No hosted lending service is
-part of this release. Repository visibility is still private pending the
-owner's exact release decision.
+Paul authorized public source publication and the Freelancer portfolio entry
+on October 23, 2026. This release presents an engineering prototype with a short
+demo and case study. The source and history become public; the local Phoenix
+service remains bound to localhost. No hosted lending service is part of this
+release. The existing noncommercial license and additional grant are unchanged.
 
 Primary reader: a prospective client or developer. Desired outcome: understand
 what Paul directed, see working examples and inspect supporting evidence in

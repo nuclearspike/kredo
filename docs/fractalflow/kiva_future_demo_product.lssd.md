@@ -54,7 +54,7 @@ outcome outcome.portfolio.evidence_understood {
   label: "Understand the prototype, Paul's role and its limits, then inspect evidence"
   steps_max: 3
   vocabulary: actor
-  summary: "README overview -> three-minute demo -> source and dated verification. If the local app or private source is unavailable, the screenshot walkthrough remains usable. This is a source-release preparation; public visibility and Internet deployment require separate owner decisions."
+  summary: "README overview -> three-minute demo -> source and dated verification. If local setup is unavailable, the screenshot walkthrough remains usable. Paul approved public source publication and the Freelancer portfolio entry on 2026-10-23. Internet deployment of the application requires a separate owner decision."
   status: asserted
   confidence: 1.0
 }

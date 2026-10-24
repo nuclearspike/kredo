@@ -31,7 +31,7 @@ maintain. Kredo's existing [PolyForm Noncommercial license and additional grant]
 remain unchanged; describe this repository as source-available, not as
 unrestricted commercial open source.
 
-## Freelancer entry prepared for release
+## Freelancer case study copy
 
 **Title:** Kredo: AI-Assisted Platform Demo
 
@@ -61,6 +61,7 @@ reviewable.
 **Suggested tags:** Elixir, Phoenix, PostgreSQL, API integration, GraphQL,
 localization, automated testing.
 
-**Release gate:** keep this entry in draft until the owner approves the exact
-repository release and the public source/demo links can be checked signed out.
-No new Freelancer item or public deployment is created by this document.
+**Publication boundary:** Paul approved the source release and this portfolio
+entry on October 23, 2026. Verify the public source and demo links signed out
+before publishing the entry. Internet deployment of the application is a
+separate decision.
